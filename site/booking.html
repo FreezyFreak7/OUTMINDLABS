@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a Call — OneMindStudio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Cursor -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <span>ONEMIND</span><span>STUDIO</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="booking.html" class="active">Demander un devis</a></li>
+  </ul>
+  <div class="nav-lang">
+    <span class="lang-active">FR</span>
+    <span class="lang-sep">/</span>
+    <span class="lang-inactive">EN</span>
+  </div>
+</nav>
+
+<!-- BOOKING HERO -->
+<section class="booking-hero">
+  <div class="container">
+    <p class="section-label">Strategy Call</p>
+    <h1 class="booking-h1">
+      Book your <span class="text-gradient">20-min strategy call.</span>
+    </h1>
+    <p class="booking-lead">
+      We'll review your current site, your goals, and the friction points costing you customers. No jargon. No hard pitch.
+    </p>
+  </div>
+</section>
+
+<!-- BOOKING FORM -->
+<section class="booking-section">
+  <div class="container booking-grid">
+
+    <!-- Form -->
+    <div class="booking-form-card fade-up" id="form-wrap">
+      <h2 class="booking-form-title">Tell me a bit more before the call.</h2>
+      <form id="booking-form" novalidate>
+        <div class="form-field">
+          <label class="form-label" for="name">Your name</label>
+          <input class="form-input" type="text" id="name" name="name" placeholder="Noah" required>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="url">Current website</label>
+          <input class="form-input" type="url" id="url" name="url" placeholder="https://yoursite.com">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="type">Project type</label>
+          <select class="form-select" id="type" name="type">
+            <option>Landing Page</option>
+            <option>Premium Marketing Site</option>
+            <option>Full System</option>
+            <option>Retainer / Ongoing</option>
+          </select>
+        </div>
+        <div class="form-field" style="margin-bottom:28px;">
+          <label class="form-label" for="goal">Your goal</label>
+          <textarea class="form-textarea" id="goal" name="goal" rows="4" placeholder="Increase leads, full redesign..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary">Send Request</button>
+      </form>
+    </div>
+
+    <!-- What to expect -->
+    <div class="fade-up" style="transition-delay:.1s">
+      <h3 class="booking-expect-title">What to expect.</h3>
+      <div class="expect-steps">
+        <div class="expect-step">
+          <div class="expect-num">1</div>
+          <div>
+            <div class="expect-step-title">Rapid Audit</div>
+            <div class="expect-step-desc">A quick look at your current site and where it is leaking money.</div>
+          </div>
+        </div>
+        <div class="expect-step">
+          <div class="expect-num">2</div>
+          <div>
+            <div class="expect-step-title">3–5 Recommendations</div>
+            <div class="expect-step-desc">Concrete, actionable fixes for leads and sales.</div>
+          </div>
+        </div>
+        <div class="expect-step">
+          <div class="expect-num">3</div>
+          <div>
+            <div class="expect-step-title">No Pressure</div>
+            <div class="expect-step-desc">If the fit is right, we talk project. If not, you leave with a free action plan.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<section class="contact-section" style="padding-top:64px;padding-bottom:64px;">
+  <div class="contact-blob"></div>
+  <div class="footer-bar" style="margin-top:0;border-top:none;">
+    <div class="footer-logo">
+      <span class="w1">ONEMIND</span><span class="w2">STUDIO</span>
+    </div>
+    <div class="footer-copy">© 2025 OneMindStudio · Digital Experience Agency</div>
+  </div>
+</section>
+
+<script src="js/main.js"></script>
+<script>
+  document.getElementById('booking-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const wrap = document.getElementById('form-wrap');
+    wrap.innerHTML = `
+      <div class="booking-success">
+        <div class="success-icon"><i class="fa-solid fa-check"></i></div>
+        <h3 class="success-title">Request Sent!</h3>
+        <p class="success-body">Noah will get back to you within 24h to confirm your strategy call slot.</p>
+      </div>
+    `;
+  });
+</script>
+</body>
+</html>
