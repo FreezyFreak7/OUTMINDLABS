@@ -48,3 +48,20 @@
     observer.observe(el);
   });
 })();
+
+// ── Booking form ─────────────────────────────────────
+(function() {
+  const form = document.getElementById('booking-form');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const wrap = document.getElementById('form-wrap');
+    wrap.innerHTML = `
+      <div class="booking-success">
+        <div class="success-icon"><i class="fa-solid fa-check"></i></div>
+        <h3 class="success-title">Demande Envoyée !</h3>
+        <p class="success-body">Noah vous recontactera sous 24h pour confirmer votre créneau d'appel stratégique.</p>
+      </div>
+    `;
+  });
+})();
