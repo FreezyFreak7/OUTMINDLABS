@@ -132,7 +132,7 @@
   if (window.matchMedia('(hover: none)').matches) return;
 
   const ctx = canvas.getContext('2d');
-  const SPACING = 30;                 // grid gap between dots
+  const SPACING = 50;                 // grid gap between dots
   const CONNECT = SPACING * 1.5;      // max line length
   const CONNECT2 = CONNECT * CONNECT;
   const mouse = { x: null, y: null, radius: 150 };
@@ -159,9 +159,9 @@
           return;
         }
       }
-      // ease back home
-      if (this.x !== this.baseX) this.x -= (this.x - this.baseX) / 22;
-      if (this.y !== this.baseY) this.y -= (this.y - this.baseY) / 22;
+      // ease back home (higher divisor = slower return)
+      if (this.x !== this.baseX) this.x -= (this.x - this.baseX) / 45;
+      if (this.y !== this.baseY) this.y -= (this.y - this.baseY) / 45;
     }
   }
 
@@ -237,7 +237,7 @@
     ctx.fillStyle = 'rgba(0,196,154,0.55)';
     for (const p of particles) {
       ctx.beginPath();
-      ctx.arc(p.x, p.y, 1.3, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, 2.6, 0, Math.PI * 2);
       ctx.fill();
     }
     drawLines();
