@@ -26,7 +26,7 @@
   --ease-smooth:   cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   font-family: var(--font-body);
@@ -790,8 +790,7 @@ body.cursor-hover #cursor-ring {
 }
 
 .project-cta {
-  display: none;
-  margin-top: 20px;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
   background: #000;
@@ -803,10 +802,33 @@ body.cursor-hover #cursor-ring {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   width: fit-content;
+  /* Hidden by default, revealed with a smooth grow so the card
+     does not jump in height the instant you hover */
+  opacity: 0;
+  max-height: 0;
+  margin-top: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  transform: translateY(8px);
+  overflow: hidden;
+  pointer-events: none;
+  transition: opacity 0.35s ease,
+              transform 0.35s ease,
+              max-height 0.4s var(--ease-smooth),
+              margin-top 0.4s var(--ease-smooth),
+              padding 0.4s var(--ease-smooth);
 }
 
 .project-cta i { color: var(--accent); }
-.project-row:hover .project-cta { display: inline-flex; }
+.project-row:hover .project-cta {
+  opacity: 1;
+  max-height: 60px;
+  margin-top: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  transform: translateY(0);
+  pointer-events: auto;
+}
 .project-row.flip:hover .project-cta { margin-left: auto; }
 
 /* ── TESTIMONIALS ───────────────────────────────────── */

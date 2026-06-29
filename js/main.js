@@ -1,4 +1,4 @@
-/* OneMindStudio — Shared JS */
+/* OutMindLabs — Shared JS */
 
 // ── Custom cursor ─────────────────────────────────────
 (function() {
