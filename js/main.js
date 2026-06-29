@@ -65,3 +65,57 @@
     `;
   });
 })();
+
+// ── Nav shrinks on scroll ────────────────────────────
+(function() {
+  const nav = document.querySelector('.nav');
+  if (!nav) return;
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
+// ── Scroll-spy: highlight the nav link of the section in view
+(function() {
+  const map = { home: 'home', services: 'services', booking: 'booking' };
+  const links = document.querySelectorAll('.nav-links a');
+  const sections = ['home', 'services', 'booking']
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+  if (!sections.length) return;
+
+  const setActive = id => {
+    links.forEach(a => {
+      const href = a.getAttribute('href') || '';
+      a.classList.toggle('active', href === '#' + id);
+    });
+  };
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && map[e.target.id]) setActive(e.target.id);
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+})();
+
+// ── Magnetic buttons ─────────────────────────────────
+(function() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia('(hover: none)').matches) return;
+  const magnets = document.querySelectorAll('.btn-primary, .btn-ghost');
+  const strength = 0.4;
+
+  magnets.forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      const mx = e.clientX - (r.left + r.width / 2);
+      const my = e.clientY - (r.top + r.height / 2);
+      btn.style.transform = `translate(${mx * strength}px, ${my * strength}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+    });
+  });
+})();
