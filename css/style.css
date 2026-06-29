@@ -1453,8 +1453,6 @@ body.cursor-hover #cursor-ring {
   box-shadow: 0 8px 30px -12px rgba(0,0,0,0.18);
 }
 
-/* ── Marquee pauses on hover so you can read it ─────── */
-.marquee-wrap:hover .marquee-track { animation-play-state: paused; }
 
 /* ── Pulsing live indicators ────────────────────────── */
 @keyframes pulseGlow {
