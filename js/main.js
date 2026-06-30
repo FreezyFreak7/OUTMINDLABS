@@ -269,7 +269,7 @@
   const hero = document.querySelector('.hero');
   const h1 = hero && hero.querySelector('h1');
   if (!h1) return;
-  const MAX = 14; // max tilt in degrees
+  const MAX = 8; // max tilt in degrees
 
   hero.addEventListener('mousemove', e => {
     const r = h1.getBoundingClientRect();
@@ -279,10 +279,10 @@
     ny = Math.max(-1, Math.min(1, ny));
     const ry = nx * MAX;   // hover left  -> right edge comes forward
     const rx = -ny * MAX;  // hover top   -> bottom edge comes forward
-    h1.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+    h1.style.transform = `perspective(1300px) rotateX(${rx}deg) rotateY(${ry}deg)`;
   });
 
   hero.addEventListener('mouseleave', () => {
-    h1.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg)';
+    h1.style.transform = 'perspective(1300px) rotateX(0deg) rotateY(0deg)';
   });
 })();
