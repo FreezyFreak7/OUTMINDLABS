@@ -549,6 +549,14 @@ body.cursor-hover #cursor-ring {
   gap: 8px;
 }
 
+/* Vertically center content in the right-hand impact cards, which the
+   grid stretches to match the tall strategy card on the left */
+.impact-cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .stat-num {
   font-family: var(--font-display);
   font-weight: 800;
