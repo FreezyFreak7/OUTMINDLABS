@@ -132,10 +132,10 @@
   if (window.matchMedia('(hover: none)').matches) return;
 
   const ctx = canvas.getContext('2d');
-  const SPACING = 50;                 // grid gap between dots
+  const SPACING = 68;                 // grid gap between dots
   const CONNECT = SPACING * 1.5;      // max line length
   const CONNECT2 = CONNECT * CONNECT;
-  const mouse = { x: null, y: null, radius: 150 };
+  const mouse = { x: null, y: null, radius: 240 };
   let clientX = null, clientY = null; // raw cursor (viewport space)
   let cssW = 0, cssH = 0, particles = [], rect = null;
   const buckets = new Map();
@@ -211,7 +211,7 @@
             const d2 = dx * dx + dy * dy;
             if (d2 < CONNECT2) {
               const op = 1 - Math.sqrt(d2) / CONNECT;
-              ctx.strokeStyle = 'rgba(0,196,154,' + (op * 0.55) + ')';
+              ctx.strokeStyle = 'rgba(0,196,154,' + (op * 0.45) + ')';
               ctx.beginPath();
               ctx.moveTo(p.x, p.y);
               ctx.lineTo(q.x, q.y);
@@ -237,7 +237,7 @@
     ctx.fillStyle = 'rgba(0,196,154,0.55)';
     for (const p of particles) {
       ctx.beginPath();
-      ctx.arc(p.x, p.y, 2.6, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, 1.3, 0, Math.PI * 2);
       ctx.fill();
     }
     drawLines();
