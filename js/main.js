@@ -174,10 +174,15 @@
     canvas.height = Math.round(cssH * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
+    // Keep the top margin clear of the fixed header so it stays visible
+    const nav = document.querySelector('.nav');
+    const topOffset = (nav ? nav.offsetHeight : 0) + 12;
+    const usableH = cssH - topOffset;
+
     particles = [];
     let idx = 0;
     const startX = ((cssW % SPACING) + SPACING) / 2;
-    const startY = ((cssH % SPACING) + SPACING) / 2;
+    const startY = topOffset + (((usableH % SPACING) + SPACING) / 2);
     for (let y = startY; y < cssH; y += SPACING) {
       for (let x = startX; x < cssW; x += SPACING) {
         particles.push(new Particle(x, y, idx++));
@@ -253,4 +258,31 @@
 
   build();
   loop();
+})();
+
+// ── 3D magnetic tilt on the hero headline ────────────
+// Hover the left side and the right edge leans toward you, and
+// vice-versa — a perspective tilt that follows the cursor.
+(function() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia('(hover: none)').matches) return;
+  const hero = document.querySelector('.hero');
+  const h1 = hero && hero.querySelector('h1');
+  if (!h1) return;
+  const MAX = 14; // max tilt in degrees
+
+  hero.addEventListener('mousemove', e => {
+    const r = h1.getBoundingClientRect();
+    let nx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
+    let ny = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
+    nx = Math.max(-1, Math.min(1, nx));
+    ny = Math.max(-1, Math.min(1, ny));
+    const ry = nx * MAX;   // hover left  -> right edge comes forward
+    const rx = -ny * MAX;  // hover top   -> bottom edge comes forward
+    h1.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+  });
+
+  hero.addEventListener('mouseleave', () => {
+    h1.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg)';
+  });
 })();
