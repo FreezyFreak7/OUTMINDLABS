@@ -105,7 +105,7 @@
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (window.matchMedia('(hover: none)').matches) return;
   const magnets = document.querySelectorAll('.btn-primary, .btn-ghost');
-  const strength = 0.4;
+  const strength = 0.12;
 
   magnets.forEach(btn => {
     btn.addEventListener('mousemove', e => {
@@ -260,29 +260,17 @@
   loop();
 })();
 
-// ── 3D magnetic tilt on the hero headline ────────────
-// Hover the left side and the right edge leans toward you, and
-// vice-versa — a perspective tilt that follows the cursor.
+// ── Signal wire powers on when the protocol enters view
 (function() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (window.matchMedia('(hover: none)').matches) return;
-  const hero = document.querySelector('.hero');
-  const h1 = hero && hero.querySelector('h1');
-  if (!h1) return;
-  const MAX = 8; // max tilt in degrees
-
-  hero.addEventListener('mousemove', e => {
-    const r = h1.getBoundingClientRect();
-    let nx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
-    let ny = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
-    nx = Math.max(-1, Math.min(1, nx));
-    ny = Math.max(-1, Math.min(1, ny));
-    const ry = nx * MAX;   // hover left  -> right edge comes forward
-    const rx = -ny * MAX;  // hover top   -> bottom edge comes forward
-    h1.style.transform = `perspective(1300px) rotateX(${rx}deg) rotateY(${ry}deg)`;
-  });
-
-  hero.addEventListener('mouseleave', () => {
-    h1.style.transform = 'perspective(1300px) rotateX(0deg) rotateY(0deg)';
-  });
+  const steps = document.querySelector('.strategy-steps');
+  if (!steps) return;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        steps.classList.add('lit');
+        io.disconnect();
+      }
+    });
+  }, { threshold: 0.35 });
+  io.observe(steps);
 })();
