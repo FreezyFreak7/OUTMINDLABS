@@ -3,201 +3,269 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OutMindLabs — Agence d'Expérience Digitale</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>OutMindLabs — Laboratoire &amp; Archive de Design</title>
+  <meta name="description" content="OutMindLabs — laboratoire et archive de design. Un conservateur, deux disciplines : le web qui rapporte, l'image qui marque.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- Cursor -->
-<div id="cursor-dot"></div>
-<div id="cursor-ring"></div>
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
 
-<!-- NAV -->
-<nav class="nav">
-  <a href="#home" class="nav-logo">
-    <span>OUTMIND</span><span>LABS</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#home" class="active">Accueil</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#booking">Demander un devis</a></li>
-  </ul>
-  <div class="nav-lang">
-    <span class="lang-active">FR</span>
-    <span class="lang-sep">/</span>
-    <span class="lang-inactive">EN</span>
+<!-- ═══ NAV ═══ -->
+<nav class="nav nav--dark" id="nav">
+  <a href="#vitrine" class="nav-brand"><span>OUTMIND</span><b>LABS</b></a>
+  <div class="nav-menu" id="navMenu">
+    <a href="#conservateur">001 Conservateur</a>
+    <a href="#classification">002 Classification</a>
+    <a href="#collection">003 Collection</a>
+    <a href="#prelevements">005 Prélèvements</a>
+    <a href="#demande">007 Accès</a>
   </div>
+  <span class="nav-status"><span class="led"></span>Disponible</span>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">Index</button>
 </nav>
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <!-- Interactive particle constellation -->
-  <canvas id="hero-canvas"></canvas>
+<!-- ═══ 000 · VITRINE / HERO ═══ -->
+<header class="hero" id="vitrine" data-nav="dark">
+  <canvas id="mesh"></canvas>
+  <div class="hero-frame"></div>
+  <div class="reticle" id="reticle"><span class="rx"></span><span class="ry"></span></div>
 
-  <div style="position:relative;z-index:1;">
-    <h1>
-      <div>SITES WEB</div>
-      <div>BÂTIS POUR</div>
-      <div><span class="text-gradient">LE PROFIT</span></div>
-    </h1>
-
-    <div class="hero-sub">
-      <span class="plain">CRÉÉS POUR</span>
-      <span class="hero-pill hero-pill-pink" style="transform:rotate(-2deg)">ATTIRER</span>
-      <span class="plain">,</span>
-      <span class="hero-pill hero-pill-pink" style="transform:rotate(2deg)">CONVERTIR</span>
-      <span class="plain">ET</span>
-      <span class="hero-pill hero-pill-black" style="transform:rotate(-1deg)">GÉNÉRER DES REVENUS</span>
+  <div class="hero-inner">
+    <div class="hero-plate corner">
+      <span class="mono">FONDS <b>OUTMINDLABS</b></span>
+      <span class="mono">CONSERVATEUR : <b>NOAH</b></span>
+      <span class="mono">DISCIPLINES : <b>WEB + IMAGE</b></span>
+      <span class="mono">STATUT : <b>OUVERT AUX VISITEURS</b></span>
+      <span class="mono">EST. 2019</span>
     </div>
 
-    <a href="#booking" class="btn-primary">DÉMARRER UN PROJET</a>
-  </div>
-</section>
+    <h1 class="h-xl">
+      <span class="line">ENTRÉE : LE CHAOS.</span>
+      <span class="line">SORTIE : <span class="redact" aria-label="information rédigée">███████</span>.</span>
+    </h1>
 
-<!-- MARQUEE -->
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <span>VOS CONCURRENTS SONT MOCHES</span><span class="dot">•</span>
-    <span>FAIT PAR UN HUMAIN</span><span class="dot">•</span>
-    <span>CTRL+Z C'EST POUR LES LÂCHES</span><span class="dot">•</span>
-    <span>NERD PROFESSIONNEL</span><span class="dot">•</span>
-    <span>JE RÉPARE LES MAUVAISES VIBES</span><span class="dot">•</span>
-    <span>VOS CONCURRENTS SONT MOCHES</span><span class="dot">•</span>
-    <span>FAIT PAR UN HUMAIN</span><span class="dot">•</span>
-    <span>CTRL+Z C'EST POUR LES LÂCHES</span><span class="dot">•</span>
-    <span>NERD PROFESSIONNEL</span><span class="dot">•</span>
-    <span>JE RÉPARE LES MAUVAISES VIBES</span><span class="dot">•</span>
+    <p class="lead hero-sub">
+      Laboratoire &amp; archive de design. Un conservateur, deux disciplines&nbsp;:
+      le web qui rapporte, et l'image qui marque.
+    </p>
+
+    <div class="hero-cta">
+      <a href="#collection" class="btn btn-outline">Entrer dans l'archive</a>
+      <a href="#demande" class="link-ghost">ou demander un spécimen →</a>
+    </div>
+  </div>
+
+  <div class="hero-readout" id="readout">
+    SPÉCIMEN 000 · L'ORGANISME VIVANT<br>
+    LAT <b id="lat">46.20</b> · LON <b id="lon">06.14</b> · N=<b id="nodes">000</b> NŒUDS
+  </div>
+</header>
+
+<!-- ═══ SCELLÉ · label tape ═══ -->
+<div class="scelle" data-nav="dark" aria-hidden="true">
+  <div class="scelle-track" id="scelle">
+    <!-- filled by JS (duplicated for seamless loop) -->
   </div>
 </div>
 
-<!-- ABOUT -->
-<section class="about-section">
-  <div class="container about-grid">
-    <!-- Left: Text -->
-    <div class="fade-up">
-      <p class="section-label">00 · LE LABO</p>
-      <h2 class="about-heading">
-        Ce n'est pas de la<br><span class="text-gradient">Science-Fiction.</span><br>C'est de la Magie.
-      </h2>
-      <p class="about-body">
-        Je n'utilise pas de mots compliqués. Je crée juste des choses cool qui fonctionnent. Pas de templates, pas de blabla.
-        Juste du code et de la magie. Et quand je dis « Nous », je parle de vous et moi — votre vision, mon exécution. C'est ça, l'esprit OutMindLabs.
-      </p>
-    </div>
-
-    <!-- Right: Cards -->
-    <div class="about-cards fade-up" style="transition-delay:.1s">
-      <!-- Author pill -->
-      <div class="author-pill">
-        <div class="author-avatar">
-          <img class="author-avatar-inner" src="https://media.licdn.com/dms/image/v2/D4E03AQHVdThLe8L96Q/profile-displayphoto-crop_800_800/B4EZ7VRCd4KAAI-/0/1781694475133?e=1784160000&v=beta&t=P5pzf5wjZxPUCnUIua4cOZd3Tu4Jrk9XcfYfxWUAHPQ" alt="Noah">
-          <div class="author-badge-dot"></div>
-        </div>
-        <div>
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px;">
-            <span class="author-name">NOAH</span>
-            <span class="author-tag">Disponible</span>
-          </div>
-          <p class="author-quote">« Je fais une obsession sur les pixels pour que vous n'ayez pas à le faire. »</p>
+<!-- ═══ 001 · LE CONSERVATEUR ═══ -->
+<section class="section section--light" id="conservateur" data-nav="light">
+  <div class="wrap">
+    <span class="module reveal">001 · LE CONSERVATEUR</span>
+    <div class="cons-grid">
+      <div class="cons-photo corner reveal">
+        <img src="https://media.licdn.com/dms/image/v2/D4E03AQHVdThLe8L96Q/profile-displayphoto-crop_800_800/B4EZ7VRCd4KAAI-/0/1781694475133?e=1784160000&v=beta&t=P5pzf5wjZxPUCnUIua4cOZd3Tu4Jrk9XcfYfxWUAHPQ" alt="Noah, conservateur">
+        <div class="cap">
+          <span class="mono">SUJET : NOAH · STATUT : CAFÉINÉ</span>
+          <span class="status"><span class="led"></span>Disponible</span>
         </div>
       </div>
-
-      <div class="card-light">
-        <div class="card-light-label">01. Performance</div>
-        <div class="card-light-title">Rapide Comme L'Éclair</div>
-        <div class="card-light-body">Des temps de chargement en millisecondes, parce qu'un site lent fait fuir l'argent.</div>
-      </div>
-
-      <div class="card-light">
-        <div class="card-light-label">02. UX/UI</div>
-        <div class="card-light-title">Design de Conversion</div>
-        <div class="card-light-body">Des parcours sans friction qui mènent droit au paiement.</div>
-      </div>
-
-      <div class="card-light">
-        <div class="card-light-label">03. Ventes</div>
-        <div class="card-light-title">Machines à Cash</div>
-        <div class="card-light-body">Des vitrines digitales optimisées pour extraire du revenu de chaque clic.</div>
-      </div>
-
-      <div class="card-light">
-        <div class="card-light-label">04. Stratégie</div>
-        <div class="card-light-title">Signaux de Confiance</div>
-        <div class="card-light-body">Un branding qui crie « premium » pour que vous puissiez facturer ce que vous valez.</div>
+      <div class="cons-body reveal">
+        <h2 class="h-md" style="margin-bottom:22px;">Un seul cerveau.<br>Deux obsessions.</h2>
+        <p>Je fais une obsession sur les pixels pour que vous n'ayez pas à le faire. Studio solo, résultats de grand studio — sans le grand studio, ni sa facture.</p>
+        <p>Ce n'est pas de la Science-Fiction. C'est de la Magie. « Nous » ? Vous et moi, co-signataires du dossier.</p>
+        <ul class="field-list">
+          <li><span>Fonction</span><span>Conservateur unique</span></li>
+          <li><span>Disciplines</span><span>Web + Image</span></li>
+          <li><span>Fuseau</span><span>CET (Genève)</span></li>
+          <li><span>Latence de réponse</span><span>&lt; 24 h</span></li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- IMPACT -->
-<section class="impact-section lab-grid">
-  <div class="container">
-    <p class="section-label fade-up">01 · LE PROTOCOLE</p>
-    <h2 class="impact-heading fade-up">
-      BÂTI POUR <span class="text-gradient">PERFORMER.</span>
-    </h2>
-    <div class="impact-grid">
-      <!-- Strategy card - spans 2 rows -->
-      <div class="card-dark fade-up" style="grid-row:1/3;">
-        <div class="card-dark-accent-top"></div>
-        <div class="strategy-logo">
-          <span class="word1">OUTMIND</span><span class="word2">LABS</span>
+<!-- ═══ 002 · CLASSIFICATION ═══ -->
+<section class="section section--mint" id="classification" data-nav="mint">
+  <div class="wrap">
+    <div class="class-head reveal">
+      <span class="module">002 · CLASSIFICATION</span>
+      <h2 class="h-lg">Deux disciplines.<br>Une seule obsession du détail.</h2>
+    </div>
+    <div class="class-grid reveal">
+      <div class="discipline corner">
+        <span class="tag">Discipline A</span>
+        <h3>Expériences Web</h3>
+        <ul class="taxo">
+          <li>Sites vitrines</li>
+          <li>Landing pages</li>
+          <li>E-commerce</li>
+          <li>Sites produit</li>
+          <li>Expériences interactives</li>
+        </ul>
+        <p class="one">Des sites bâtis pour convertir, pas pour décorer.</p>
+      </div>
+      <div class="discipline corner">
+        <span class="tag">Discipline B</span>
+        <h3>Image &amp; Design Graphique</h3>
+        <ul class="taxo">
+          <li>Logos &amp; logotypes</li>
+          <li>Identité complète</li>
+          <li>Réseaux sociaux</li>
+          <li>Print &amp; édition</li>
+          <li>Direction artistique</li>
+        </ul>
+        <p class="one">Une image qui marque avant qu'on lise un mot.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 003 · LA COLLECTION ═══ -->
+<section class="section section--light" id="collection" data-nav="light">
+  <div class="wrap">
+    <div class="coll-top">
+      <div class="reveal">
+        <span class="module">003 · LA COLLECTION</span>
+        <h2 class="h-lg">Spécimens.</h2>
+      </div>
+      <div class="filters reveal" id="filters">
+        <button class="filter active" data-filter="all">Tout</button>
+        <button class="filter" data-filter="web">Web</button>
+        <button class="filter" data-filter="image">Image</button>
+      </div>
+    </div>
+
+    <div class="spec-grid" id="specGrid">
+      <article class="spec reveal" data-discipline="image">
+        <div class="spec-img corner">
+          <img src="https://images.unsplash.com/photo-1600508774634-4e11d34730e2?q=80&w=800&auto=format&fit=crop" alt="Spécimen identité">
+          <span class="spec-idx">SPÉC. 014</span><span class="spec-tag">Identité</span>
         </div>
-        <div class="strategy-title">
-          Un site web n'est rien sans <span class="hl">stratégie.</span>
+        <div class="spec-body">
+          <h3>Grain de café</h3>
+          <p class="spec-find">Un logotype qui tient sur un grain de café — et qu'on reconnaît quand même.</p>
+          <div class="spec-client"><span class="redact" aria-label="client rédigé">███████</span> · Sous NDA</div>
         </div>
-        <div class="strategy-steps">
-          <div class="strategy-step">
-            <div class="step-dot"></div>
-            <div>
-              <div class="step-label">Audit Approfondi</div>
-              <div class="step-desc">Comprendre les failles de votre marché et vos objectifs précis.</div>
-            </div>
-          </div>
-          <div class="strategy-step">
-            <div class="step-dot"></div>
-            <div>
-              <div class="step-label">Identifier les Canaux</div>
-              <div class="step-desc">Trouver où se cache réellement votre argent.</div>
-            </div>
-          </div>
-          <div class="strategy-step">
-            <div class="step-dot"></div>
-            <div>
-              <div class="step-label">Lancer &amp; Scaler</div>
-              <div class="step-desc">Déployer une stratégie web rentable (SEO, Contenu, UX).</div>
-            </div>
-          </div>
+      </article>
+
+      <article class="spec reveal" data-discipline="web">
+        <div class="spec-img corner">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop" alt="Spécimen web">
+          <span class="spec-idx">SPÉC. 021</span><span class="spec-tag">Web</span>
         </div>
-        <a href="#booking" class="btn-ghost">C'est ce qu'il me faut</a>
+        <div class="spec-body">
+          <h3>Tunnel</h3>
+          <p class="spec-find">Tunnel refondu, panier moyen en hausse — mesuré, tenu au secret.</p>
+          <div class="spec-client"><span class="redact" aria-label="client rédigé">███████</span> · Sous NDA</div>
+        </div>
+      </article>
+
+      <article class="spec reveal" data-discipline="image">
+        <div class="spec-img corner">
+          <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?q=80&w=800&auto=format&fit=crop" alt="Spécimen social">
+          <span class="spec-idx">SPÉC. 008</span><span class="spec-tag">Social</span>
+        </div>
+        <div class="spec-body">
+          <h3>Système social</h3>
+          <p class="spec-find">Un système de posts déclinable à l'infini, zéro effort.</p>
+          <div class="spec-client"><span class="redact" aria-label="client rédigé">███████</span> · Sous NDA</div>
+        </div>
+      </article>
+
+      <article class="spec reveal" data-discipline="image">
+        <div class="spec-img corner">
+          <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=800&auto=format&fit=crop" alt="Spécimen print">
+          <span class="spec-idx">SPÉC. 031</span><span class="spec-tag">Print</span>
+        </div>
+        <div class="spec-body">
+          <h3>Plein la rue</h3>
+          <p class="spec-find">Une affiche qu'on lit de l'autre bout de la rue.</p>
+          <div class="spec-client"><span class="redact" aria-label="client rédigé">███████</span> · Sous NDA</div>
+        </div>
+      </article>
+
+      <article class="spec reveal" data-discipline="web">
+        <div class="spec-img corner">
+          <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=800&auto=format&fit=crop" alt="Spécimen e-commerce">
+          <span class="spec-idx">SPÉC. 027</span><span class="spec-tag">Web</span>
+        </div>
+        <div class="spec-body">
+          <h3>Caddie</h3>
+          <p class="spec-find">E-commerce refait, taux de rebond mis au régime.</p>
+          <div class="spec-client"><span class="redact" aria-label="client rédigé">███████</span> · Sous NDA</div>
+        </div>
+      </article>
+
+      <article class="spec reveal" data-discipline="image">
+        <div class="spec-img corner">
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop" alt="Spécimen charte">
+          <span class="spec-idx">SPÉC. 019</span><span class="spec-tag">Identité</span>
+        </div>
+        <div class="spec-body">
+          <h3>Charte totale</h3>
+          <p class="spec-find">Charte complète, du logo au grain du papier.</p>
+          <div class="spec-client"><span class="redact" aria-label="client rédigé">███████</span> · Sous NDA</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 004 · FICHE TECHNIQUE ═══ -->
+<section class="section section--dark" id="fiche" data-nav="dark">
+  <div class="wrap">
+    <span class="module reveal">004 · FICHE TECHNIQUE</span>
+    <div class="fiche-grid">
+      <div class="reaction corner reveal" id="reaction">
+        <div class="rlabel">SPÉC. 019 · IDENTITÉ · DÉMONSTRATION LIVE</div>
+        <div class="reaction-stage">
+          <div class="r-avant">outmindlabs</div>
+          <div class="r-apres"><span>OUTMIND</span><b>LABS</b></div>
+        </div>
+        <div class="states">
+          <span class="before">AVANT : brouillon</span>
+          <span class="after">APRÈS : signé</span>
+        </div>
+        <div class="swatches">
+          <span class="sw" style="--sw:#00c49a"></span>
+          <span class="sw" style="--sw:#99EFD1"></span>
+          <span class="sw" style="--sw:#111111"></span>
+          <span class="sw" style="--sw:#ff0055"></span>
+        </div>
+        <button class="btn btn-outline" id="reactBtn">Déclencher la réaction</button>
       </div>
 
-      <!-- Value cards (qualitative, no fabricated numbers) -->
-      <div class="stat-card-gradient impact-cell fade-up" style="transition-delay:.1s">
-        <i class="fa-solid fa-bolt" style="color:#004d3d;font-size:22px;"></i>
-        <div class="stat-num" style="font-size:26px;">Focalisé Revenu</div>
-        <div class="stat-desc">Chaque pixel, chaque mot, chaque clic — pensés pour générer du chiffre.</div>
-      </div>
-
-      <div class="card-dark impact-cell fade-up" style="transition-delay:.15s">
-        <div class="projects-header">
-          <div class="projects-num">Fait Main</div>
-          <i class="fa-solid fa-code" style="color:#00c49a;font-size:20px;"></i>
-        </div>
-        <div class="projects-label">Zéro template. Du sur-mesure, codé proprement pour votre marque.</div>
-      </div>
-
-      <!-- Wide value card -->
-      <div class="card-dark impact-cell fade-up" style="grid-column:2/4;transition-delay:.2s">
-        <div class="lead-row">
-          <div>
-            <div class="lead-label">L'état d'esprit</div>
-            <div class="lead-stat" style="font-size:30px;max-width:360px;line-height:1.05;">Partenaire, pas prestataire.</div>
-          </div>
-          <div class="live-badge">
-            <span class="live-dot"></span>
-            Toujours dispo
+      <div class="fiche-meta reveal">
+        <ul class="metatable">
+          <li><span>Discipline</span><span>Image de marque</span></li>
+          <li><span>Année</span><span>2025</span></li>
+          <li><span>Livrables</span><span>Logo · Charte · Social · Papeterie</span></li>
+          <li><span>Outils</span><span>Grille + obsession</span></li>
+          <li><span>Résultat</span><span>Reconnaissable à 3 m</span></li>
+        </ul>
+        <p class="fiche-note">« Je construis des systèmes de marque, pas des études de cas pour leurs concurrents. »</p>
+        <div class="typekit">
+          <div class="row"><span class="name k1">Syne</span><span class="tag">Titrage</span></div>
+          <div class="row"><span class="name k2">Inter</span><span class="tag">Lecture</span></div>
+          <div class="row"><span class="name k3">Space Mono</span><span class="tag">Instrumentation</span></div>
+          <div class="palette">
+            <span class="chip" style="background:#00c49a;color:#04231c">#00C49A</span>
+            <span class="chip" style="background:#99EFD1;color:#04231c">#99EFD1</span>
+            <span class="chip" style="background:#111;color:#fff">#111111</span>
+            <span class="chip" style="background:#ff0055;color:#fff">#FF0055</span>
           </div>
         </div>
       </div>
@@ -205,336 +273,151 @@
   </div>
 </section>
 
-<!-- SERVICES -->
-<section class="services-home" id="services">
-  <div class="container">
-    <p class="section-label">02 · SERVICES</p>
-    <h2 class="services-h1">
-      Des sites bâtis pour <span class="text-gradient">le profit</span>,<br>pas pour les likes.
-    </h2>
-    <p class="services-lead">
-      Je conçois et développe des systèmes digitaux qui transforment le trafic en clients — sites web, image de marque et design graphique : positionnement clair, UX sans friction et visuels qui poussent réellement à l'action.
+<!-- ═══ 005 · PRÉLÈVEMENTS ═══ -->
+<section class="section section--light" id="prelevements" data-nav="light">
+  <div class="wrap">
+    <div class="assay-intro reveal">
+      <span class="module">005 · PRÉLÈVEMENTS</span>
+      <h2 class="h-lg">Des prélèvements,<br>pas des forfaits.</h2>
+      <p class="lead" style="margin-top:18px;">Vous commandez, je réagis. Quatre protocoles — deux disciplines, une seule main.</p>
+    </div>
+    <div class="assay-grid">
+      <div class="assay reveal">
+        <span class="code">Assai 01 — Landing</span>
+        <h3>Page qui convertit</h3>
+        <ul>
+          <li>Page unique</li>
+          <li>Copie orientée conversion</li>
+          <li>Intégration</li>
+        </ul>
+        <span class="delai">Délai : court</span>
+      </div>
+      <div class="assay feature reveal">
+        <span class="code">Assai 02 — Identité &amp; Image de Marque</span>
+        <h3>Une marque entière</h3>
+        <ul>
+          <li>Logo + logotype</li>
+          <li>Charte complète</li>
+          <li>Templates social</li>
+          <li>Déclinaisons print</li>
+        </ul>
+        <span class="delai">Délai : moyen</span>
+      </div>
+      <div class="assay reveal">
+        <span class="code">Assai 03 — Site Complet</span>
+        <h3>Le site total</h3>
+        <ul>
+          <li>Architecture</li>
+          <li>Design sur mesure</li>
+          <li>Dév + perf</li>
+          <li>SEO de base</li>
+        </ul>
+        <span class="delai">Délai : moyen-long</span>
+      </div>
+      <div class="assay reveal">
+        <span class="code">Assai 04 — Système Total</span>
+        <h3>Tout, aligné</h3>
+        <ul>
+          <li>Marque + site + contenu social</li>
+          <li>Un seul cerveau, tout cohérent</li>
+        </ul>
+        <span class="delai">Délai : sur devis</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 006 · RAPPORTS ═══ -->
+<section class="section section--dark" id="rapports" data-nav="dark">
+  <div class="wrap">
+    <span class="module reveal">006 · RAPPORTS</span>
+    <h2 class="h-lg reveal" style="color:#fff;margin-bottom:44px;">Rapports de terrain.</h2>
+    <div class="rap-grid">
+      <div class="rap reveal">
+        <div class="rhead"><span>Rapport N° 21-A</span><span>Source vérifiée</span></div>
+        <p class="quote">« Je ne sais pas quelle magie noire OutMindLabs utilise, mais ça marche. »</p>
+        <div class="attrib"><span class="redact" aria-label="rédigé">██████</span>, Fondatrice <span class="redact" aria-label="rédigé">█████</span></div>
+        <div class="reading">Relevé : 5/5</div>
+      </div>
+      <div class="rap reveal">
+        <div class="rhead"><span>Rapport N° 14-C</span><span>Source vérifiée</span></div>
+        <p class="quote">« Livré plus vite que mon ancienne agence ne répondait au téléphone. »</p>
+        <div class="attrib"><span class="redact" aria-label="rédigé">██████</span>, Directeur <span class="redact" aria-label="rédigé">█████</span></div>
+        <div class="reading">Relevé : 5/5</div>
+      </div>
+      <div class="rap reveal">
+        <div class="rhead"><span>Rapport N° 33-B</span><span>Source vérifiée</span></div>
+        <p class="quote">« J'ai enfin une marque qu'on reconnaît sans lire le nom. »</p>
+        <div class="attrib"><span class="redact" aria-label="rédigé">██████</span>, Indépendant</div>
+        <div class="reading">Relevé : 5/5</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 007 · DEMANDE D'ACCÈS ═══ -->
+<section class="section section--light" id="demande" data-nav="light">
+  <div class="wrap">
+    <span class="module reveal">007 · DEMANDE D'ACCÈS</span>
+    <div class="acc-grid">
+      <div class="reveal" id="formWrap">
+        <div class="acc-head">
+          <h2 class="h-lg">Ouvrez un<br>nouveau dossier.</h2>
+          <p class="acc-note">Un appel de 20 min. Pas de jargon. Pas de pitch forcé.</p>
+        </div>
+        <form id="accForm" novalidate>
+          <div class="form-row">
+            <label for="f-nom">Nom</label>
+            <input type="text" id="f-nom" name="nom" placeholder="Noah" required>
+          </div>
+          <div class="form-row">
+            <label for="f-email">Email</label>
+            <input type="email" id="f-email" name="email" placeholder="vous@exemple.com" required>
+          </div>
+          <div class="form-row">
+            <label for="f-disc">Discipline souhaitée</label>
+            <select id="f-disc" name="discipline">
+              <option>Web</option>
+              <option>Image &amp; design graphique</option>
+              <option>Les deux</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="f-goal">Objectif</label>
+            <textarea id="f-goal" name="objectif" placeholder="Un site qui convertit, une identité, une refonte..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-solid">Soumettre le dossier</button>
+        </form>
+      </div>
+
+      <aside class="reveal">
+        <div class="protocole corner">
+          <div class="ptitle">Protocole de prise en charge</div>
+          <ol>
+            <li>Prise de contact</li>
+            <li>Prélèvement du brief</li>
+            <li>Mise en production</li>
+          </ol>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 008 · CLÔTURE / FOOTER ═══ -->
+<footer class="section section--dark cloture" id="cloture" data-nav="dark">
+  <div class="cloture-glow"></div>
+  <div class="wrap">
+    <h2 class="h-lg reveal">Ajoutons votre projet<br>à la collection.</h2>
+    <div class="bigmark reveal"><span>OUTMIND</span><b>LABS</b></div>
+    <div class="foot-hair"></div>
+    <p class="colophon reveal">
+      FONDS OUTMINDLABS · WEB + IMAGE · ÉD. 2026 · v3.0 · LAT 46.20 LON 06.14<br>
+      LABORATOIRE &amp; ARCHIVE DE DESIGN<br>
+      <a href="mailto:noahthevoz@gmail.com">noahthevoz@gmail.com</a> · © 2026 OUTMINDLABS
     </p>
   </div>
-
-  <!-- Packages (no prices) -->
-  <div class="container packages-grid" style="margin-top:48px;">
-
-    <div class="package-card fade-up">
-      <div>
-        <div class="package-num">Pack 01</div>
-        <h3 class="package-title">Landing à Forte Conversion</h3>
-        <p class="package-desc">Idéal si votre offre est claire et que vous voulez plus de demandes.</p>
-        <div class="package-features-label">Inclus</div>
-        <ul class="package-features">
-          <li>1 page d'offre + structure de conversion</li>
-          <li>Polissage du copy (titres, CTAs)</li>
-          <li>SEO technique + vitesse</li>
-          <li>Tracking de base (GA/Pixel)</li>
-        </ul>
-      </div>
-      <div class="package-footer">
-        <span class="package-timeline">Délai : 7–10 jours</span>
-      </div>
-    </div>
-
-    <div class="package-card fade-up" style="transition-delay:.1s">
-      <div>
-        <div class="package-num">Pack 02</div>
-        <h3 class="package-title">Site Marketing Premium</h3>
-        <p class="package-desc">Transformez votre présence en machine à leads (pas une brochure).</p>
-        <div class="package-features-label">Inclus</div>
-        <ul class="package-features">
-          <li>4–6 pages (Accueil, Offre, Preuve, Contact)</li>
-          <li>Design UI + interactions</li>
-          <li>Optimisations vitesse + SEO</li>
-          <li>Structure de copy + sections clés</li>
-        </ul>
-      </div>
-      <div class="package-footer">
-        <span class="package-timeline">Délai : 10–15 jours</span>
-      </div>
-    </div>
-
-    <div class="package-card fade-up" style="transition-delay:.2s">
-      <div>
-        <div class="package-num">Pack 03</div>
-        <h3 class="package-title">Système Complet</h3>
-        <p class="package-desc">Offre solide + un site qui évolue avec vous.</p>
-        <div class="package-features-label">Inclus</div>
-        <ul class="package-features">
-          <li>Tout ce qui est dans le Pack 02</li>
-          <li>Identité de marque ou refonte</li>
-          <li>Option retainer mensuel</li>
-        </ul>
-      </div>
-      <div class="package-footer">
-        <span class="package-timeline">Délai : 3–6 semaines</span>
-      </div>
-    </div>
-
-    <div class="package-card fade-up" style="transition-delay:.3s">
-      <div>
-        <div class="package-num">Pack 04</div>
-        <h3 class="package-title">Design &amp; Image de Marque</h3>
-        <p class="package-desc">Une identité forte et des visuels qui vendent, au-delà du site.</p>
-        <div class="package-features-label">Inclus</div>
-        <ul class="package-features">
-          <li>Logo + système d'identité visuelle</li>
-          <li>Direction artistique &amp; palette</li>
-          <li>Templates réseaux sociaux</li>
-          <li>Supports print &amp; digital</li>
-        </ul>
-      </div>
-      <div class="package-footer">
-        <span class="package-timeline">Délai : 1–3 semaines</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- SELECTED WORKS -->
-<section class="works-section">
-  <div class="container">
-    <p class="section-label fade-up">03 · SPÉCIMENS</p>
-    <div class="works-header fade-up">
-      <h2 class="works-heading">Ce Que<br>J'ai Fait</h2>
-      <div class="works-sub">La Preuve Que Ça Marche</div>
-    </div>
-
-    <!-- NDA Notice -->
-    <div class="nda-notice fade-up">
-      <div class="nda-badge">
-        <div class="nda-dot"></div>
-        <span class="nda-badge-label">Plans Confidentiels</span>
-      </div>
-      <div class="nda-divider"></div>
-      <p class="nda-text">
-        En raison d'accords de confidentialité stricts, l'identité exacte des clients est protégée.
-        <strong>Je construis des machines à imprimer de l'argent pour mes clients, pas des études de cas pour leurs concurrents.</strong>
-        Les chiffres ci-dessous sont exacts. Les noms sont modifiés.
-      </p>
-    </div>
-
-    <!-- Project 001 -->
-    <div class="project-row fade-up">
-      <div class="project-img-wrap">
-        <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=800&auto=format&fit=crop" alt="Projet e-commerce">
-      </div>
-      <div class="project-card">
-        <div class="project-meta">001 · E-COMMERCE</div>
-        <h3 class="project-title">Chemises Hors de Prix</h3>
-        <p class="project-desc">Une expérience d'achat sans friction qui a augmenté le panier moyen de 42% dès le premier mois.</p>
-        <div class="project-cta">
-          Voir le décryptage <i class="fa-solid fa-arrow-right"></i>
-        </div>
-      </div>
-    </div>
-
-    <!-- Project 002 -->
-    <div class="project-row flip fade-up">
-      <div class="project-img-wrap">
-        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop" alt="Projet plateforme SaaS">
-      </div>
-      <div class="project-card">
-        <div class="project-meta">002 · PLATEFORME SAAS</div>
-        <h3 class="project-title">Tableaux de Bord</h3>
-        <p class="project-desc">Refonte complète de l'onboarding qui a fait chuter le taux de rebond de 60% à 18%.</p>
-        <div class="project-cta">
-          Voir le décryptage <i class="fa-solid fa-arrow-right"></i>
-        </div>
-      </div>
-    </div>
-
-    <!-- Project 003 -->
-    <div class="project-row fade-up">
-      <div class="project-img-wrap">
-        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop" alt="Projet services juridiques">
-      </div>
-      <div class="project-card">
-        <div class="project-meta">003 · SERVICES JURIDIQUES</div>
-        <h3 class="project-title">Le Cabinet</h3>
-        <p class="project-desc">Refonte du tunnel de génération de leads pour clients haut de gamme, augmentant les mandats qualifiés.</p>
-        <div class="project-cta">
-          Voir le décryptage <i class="fa-solid fa-arrow-right"></i>
-        </div>
-      </div>
-    </div>
-
-    <!-- Project 004 — Branding -->
-    <div class="project-row flip fade-up">
-      <div class="project-img-wrap">
-        <img src="https://images.unsplash.com/photo-1600508774634-4e11d34730e2?q=80&w=800&auto=format&fit=crop" alt="Projet image de marque">
-      </div>
-      <div class="project-card">
-        <div class="project-meta">004 · IMAGE DE MARQUE</div>
-        <h3 class="project-title">Identité Totale</h3>
-        <p class="project-desc">Refonte complète d'identité visuelle : logo, palette et système de marque qui inspire le premium et la confiance.</p>
-        <div class="project-cta">
-          Voir le décryptage <i class="fa-solid fa-arrow-right"></i>
-        </div>
-      </div>
-    </div>
-
-    <!-- Project 005 — Graphic / Social -->
-    <div class="project-row fade-up">
-      <div class="project-img-wrap">
-        <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?q=80&w=800&auto=format&fit=crop" alt="Projet design graphique">
-      </div>
-      <div class="project-card">
-        <div class="project-meta">005 · DESIGN GRAPHIQUE</div>
-        <h3 class="project-title">Contenu Social</h3>
-        <p class="project-desc">Templates de réseaux sociaux en retainer mensuel qui ont triplé l'engagement et fait croître l'audience.</p>
-        <div class="project-cta">
-          Voir le décryptage <i class="fa-solid fa-arrow-right"></i>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testimonials-section lab-grid">
-  <div class="container">
-    <p class="section-label fade-up">04 · RÉACTIONS</p>
-    <h2 class="testimonials-heading fade-up">
-      ILS ONT <span class="text-gradient">FAIT DU CASH.</span>
-    </h2>
-    <div class="testimonials-grid">
-      <div class="testimonial-card fade-up">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-quote">« Honnêtement, je ne sais pas quelle magie noire OutMindLabs utilise, mais notre taux de conversion a doublé en deux semaines. »</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">S</div>
-          <div>
-            <div class="testimonial-name">Stéphane</div>
-            <div class="testimonial-role">PDG, ███████</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card fade-up" style="transition-delay:.1s">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-quote">« Arrêtez de chercher d'autres développeurs. Engagez-le, point. Le ROI sur ce projet était ridicule. Il comprend le business, pas juste le code. »</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">J</div>
-          <div>
-            <div class="testimonial-name">Julien</div>
-            <div class="testimonial-role">Fondateur, ███████</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card fade-up" style="transition-delay:.2s">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-quote">« Le processus était sans friction. Pas de jargon, pas de retards. Juste un site qui tue, qui a généré des leads dès le jour du lancement. »</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">D</div>
-          <div>
-            <div class="testimonial-name">David</div>
-            <div class="testimonial-role">Directeur, ███████</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- BOOKING FORM -->
-<section class="booking-section" id="booking" style="padding-top:96px;">
-  <div style="max-width:760px;margin:0 auto 48px;text-align:center;">
-    <p class="section-label" style="text-align:center;">05 · CONSULTATION</p>
-    <h2 class="booking-h1" style="text-align:center;">
-      Réservez votre <span class="text-gradient">appel de 20 min.</span>
-    </h2>
-    <p class="booking-lead" style="max-width:560px;margin:0 auto;text-align:center;">
-      On passe en revue votre site actuel, vos objectifs et les points de friction qui vous coûtent des clients. Pas de jargon. Pas de pitch forcé.
-    </p>
-  </div>
-
-  <div class="container booking-grid">
-    <!-- Form -->
-    <div class="booking-form-card fade-up" id="form-wrap">
-      <h3 class="booking-form-title">Parlez-moi un peu de votre projet avant l'appel.</h3>
-      <form id="booking-form" novalidate>
-        <div class="form-field">
-          <label class="form-label" for="name">Votre nom</label>
-          <input class="form-input" type="text" id="name" name="name" placeholder="Noah" required>
-        </div>
-        <div class="form-field">
-          <label class="form-label" for="url">Site web actuel</label>
-          <input class="form-input" type="url" id="url" name="url" placeholder="https://votresite.com">
-        </div>
-        <div class="form-field">
-          <label class="form-label" for="type">Type de projet</label>
-          <select class="form-select" id="type" name="type">
-            <option>Page d'atterrissage</option>
-            <option>Site Marketing Premium</option>
-            <option>Système Complet</option>
-            <option>Retainer / Continu</option>
-          </select>
-        </div>
-        <div class="form-field" style="margin-bottom:28px;">
-          <label class="form-label" for="goal">Votre objectif</label>
-          <textarea class="form-textarea" id="goal" name="goal" rows="4" placeholder="Augmenter les leads, refonte complète..."></textarea>
-        </div>
-        <button type="submit" class="btn-primary">Envoyer la Demande</button>
-      </form>
-    </div>
-
-    <!-- What to expect -->
-    <div class="fade-up" style="transition-delay:.1s">
-      <h3 class="booking-expect-title">Ce qui vous attend.</h3>
-      <div class="expect-steps">
-        <div class="expect-step">
-          <div class="expect-num">1</div>
-          <div>
-            <div class="expect-step-title">Audit Rapide</div>
-            <div class="expect-step-desc">Un coup d'œil rapide sur votre site actuel et là où il perd de l'argent.</div>
-          </div>
-        </div>
-        <div class="expect-step">
-          <div class="expect-num">2</div>
-          <div>
-            <div class="expect-step-title">3–5 Recommandations</div>
-            <div class="expect-step-desc">Des corrections concrètes et actionnables pour vos leads et vos ventes.</div>
-          </div>
-        </div>
-        <div class="expect-step">
-          <div class="expect-num">3</div>
-          <div>
-            <div class="expect-step-title">Sans Pression</div>
-            <div class="expect-step-desc">Si le courant passe, on parle projet. Sinon, vous repartez avec un plan d'action gratuit.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT / FOOTER -->
-<section class="contact-section">
-  <div class="contact-blob"></div>
-  <div class="contact-inner fade-up">
-    <p class="section-label">06 · TRANSMISSION</p>
-    <h2 class="contact-heading">
-      Construisons votre<br><span class="text-gradient">machine à cash.</span>
-    </h2>
-    <p class="contact-body">
-      Appel stratégique de 20 min. Pas de jargon. Pas de pitch forcé. Juste un vrai regard sur ce qui vous coûte des leads aujourd'hui.
-    </p>
-    <a href="#booking" class="btn-primary">Réserver un Appel Gratuit</a>
-  </div>
-
-  <!-- Footer bar -->
-  <div class="footer-bar">
-    <div class="footer-logo">
-      <span class="w1">OUTMIND</span><span class="w2">LABS</span>
-    </div>
-    <div class="footer-copy">© 2025 OutMindLabs · Agence d'Expérience Digitale</div>
-  </div>
-</section>
+</footer>
 
 <script src="js/main.js"></script>
 </body>

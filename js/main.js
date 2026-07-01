@@ -1,276 +1,262 @@
-/* OutMindLabs — Shared JS */
+/* OutMindLabs — L'Archive */
+(function () {
+  'use strict';
 
-// ── Custom cursor ─────────────────────────────────────
-(function() {
-  const dot  = document.getElementById('cursor-dot');
-  const ring = document.getElementById('cursor-ring');
-  if (!dot || !ring) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-  let mx = 0, my = 0, rx = 0, ry = 0;
+  // Shared cursor position (viewport space)
+  var CX = null, CY = null;
+  window.addEventListener('mousemove', function (e) { CX = e.clientX; CY = e.clientY; }, { passive: true });
+  window.addEventListener('mouseout', function () { CX = null; CY = null; }, { passive: true });
 
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    dot.style.left = mx + 'px';
-    dot.style.top  = my + 'px';
-  });
-
-  (function lerp() {
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px';
-    ring.style.top  = ry + 'px';
-    requestAnimationFrame(lerp);
+  /* ── Custom cursor ─────────────────────────────── */
+  (function () {
+    if (!fine) return;
+    var dot = document.getElementById('cur-dot');
+    var ring = document.getElementById('cur-ring');
+    if (!dot || !ring) return;
+    var rx = 0, ry = 0;
+    function frame() {
+      if (CX != null) {
+        dot.style.left = CX + 'px'; dot.style.top = CY + 'px';
+        rx += (CX - rx) * 0.16; ry += (CY - ry) * 0.16;
+        ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      }
+      requestAnimationFrame(frame);
+    }
+    frame();
+    var hov = 'a,button,input,select,textarea,label,.spec,.assay,.rap,.filter,.discipline';
+    document.querySelectorAll(hov).forEach(function (el) {
+      el.addEventListener('mouseenter', function () { document.body.classList.add('cur-hover'); });
+      el.addEventListener('mouseleave', function () { document.body.classList.remove('cur-hover'); });
+    });
   })();
 
-  const hoverEls = document.querySelectorAll('a, button, [role="button"], input, select, textarea, label, .card-light, .card-dark, .testimonial-card, .package-card');
-  hoverEls.forEach(el => {
-    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-  });
-})();
+  /* ── Hero mesh + reticle + readout (one loop) ──── */
+  (function () {
+    var canvas = document.getElementById('mesh');
+    if (!canvas) return;
+    var hero = document.getElementById('vitrine');
+    var ctx = canvas.getContext('2d');
+    var reticle = document.getElementById('reticle');
+    var rx = reticle && reticle.querySelector('.rx');
+    var ry = reticle && reticle.querySelector('.ry');
+    var latEl = document.getElementById('lat');
+    var lonEl = document.getElementById('lon');
+    var nodesEl = document.getElementById('nodes');
 
-// ── Scroll fade-in ───────────────────────────────────
-(function() {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.style.opacity = '1';
-        e.target.style.transform = 'translateY(0)';
-        observer.unobserve(e.target);
+    var SPACING = 62, CONNECT = SPACING * 1.6, CONNECT2 = CONNECT * CONNECT, RADIUS = 190;
+    var W = 0, H = 0, parts = [], rect = null;
+    var buckets = new Map();
+
+    function P(x, y, i) { this.x = this.bx = x; this.y = this.by = y; this.i = i; this.sp = Math.random() * 18 + 6; }
+
+    function build() {
+      rect = hero.getBoundingClientRect();
+      W = rect.width; H = rect.height;
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var nav = document.getElementById('nav');
+      var top = (nav ? nav.offsetHeight : 0) + 14;
+      var usable = H - top;
+      parts = []; var i = 0;
+      var sx = ((W % SPACING) + SPACING) / 2;
+      var sy = top + (((usable % SPACING) + SPACING) / 2);
+      for (var y = sy; y < H; y += SPACING)
+        for (var x = sx; x < W; x += SPACING) parts.push(new P(x, y, i++));
+      if (nodesEl) nodesEl.textContent = ('00' + parts.length).slice(-3);
+    }
+
+    function lines() {
+      buckets.clear();
+      for (var a = 0; a < parts.length; a++) {
+        var p = parts[a], k = Math.floor(p.x / CONNECT) + '_' + Math.floor(p.y / CONNECT);
+        var arr = buckets.get(k); if (!arr) buckets.set(k, arr = []); arr.push(p);
       }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.fade-up').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(40px)';
-    el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
-    observer.observe(el);
-  });
-})();
-
-// ── Booking form ─────────────────────────────────────
-(function() {
-  const form = document.getElementById('booking-form');
-  if (!form) return;
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const wrap = document.getElementById('form-wrap');
-    wrap.innerHTML = `
-      <div class="booking-success">
-        <div class="success-icon"><i class="fa-solid fa-check"></i></div>
-        <h3 class="success-title">Demande Envoyée !</h3>
-        <p class="success-body">Noah vous recontactera sous 24h pour confirmer votre créneau d'appel stratégique.</p>
-      </div>
-    `;
-  });
-})();
-
-// ── Nav shrinks on scroll ────────────────────────────
-(function() {
-  const nav = document.querySelector('.nav');
-  if (!nav) return;
-  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
-  onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
-})();
-
-// ── Scroll-spy: highlight the nav link of the section in view
-(function() {
-  const map = { home: 'home', services: 'services', booking: 'booking' };
-  const links = document.querySelectorAll('.nav-links a');
-  const sections = ['home', 'services', 'booking']
-    .map(id => document.getElementById(id))
-    .filter(Boolean);
-  if (!sections.length) return;
-
-  const setActive = id => {
-    links.forEach(a => {
-      const href = a.getAttribute('href') || '';
-      a.classList.toggle('active', href === '#' + id);
-    });
-  };
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting && map[e.target.id]) setActive(e.target.id);
-    });
-  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
-
-  sections.forEach(s => observer.observe(s));
-})();
-
-// ── Magnetic buttons ─────────────────────────────────
-(function() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (window.matchMedia('(hover: none)').matches) return;
-  const magnets = document.querySelectorAll('.btn-primary, .btn-ghost');
-  const strength = 0.12;
-
-  magnets.forEach(btn => {
-    btn.addEventListener('mousemove', e => {
-      const r = btn.getBoundingClientRect();
-      const mx = e.clientX - (r.left + r.width / 2);
-      const my = e.clientY - (r.top + r.height / 2);
-      btn.style.transform = `translate(${mx * strength}px, ${my * strength}px)`;
-    });
-    btn.addEventListener('mouseleave', () => {
-      btn.style.transform = '';
-    });
-  });
-})();
-
-// ── Hero particle constellation ──────────────────────
-// Mint network of dots that connect with nearby neighbours and
-// scatter away from the cursor. Confined to the hero, mapped to
-// the section's coordinate space, and skipped when off-screen.
-(function() {
-  const canvas = document.getElementById('hero-canvas');
-  if (!canvas) return;
-  const hero = canvas.closest('.hero') || canvas.parentElement;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (window.matchMedia('(hover: none)').matches) return;
-
-  const ctx = canvas.getContext('2d');
-  const SPACING = 68;                 // grid gap between dots
-  const CONNECT = SPACING * 1.5;      // max line length
-  const CONNECT2 = CONNECT * CONNECT;
-  const mouse = { x: null, y: null, radius: 240 };
-  let clientX = null, clientY = null; // raw cursor (viewport space)
-  let cssW = 0, cssH = 0, particles = [], rect = null;
-  const buckets = new Map();
-
-  class Particle {
-    constructor(x, y, idx) {
-      this.x = this.baseX = x;
-      this.y = this.baseY = y;
-      this.idx = idx;
-      this.speed = Math.random() * 22 + 6;
-    }
-    update() {
-      if (mouse.x != null) {
-        const dx = mouse.x - this.x;
-        const dy = mouse.y - this.y;
-        const dist = Math.hypot(dx, dy) || 0.0001;
-        if (dist < mouse.radius) {
-          const force = (mouse.radius - dist) / mouse.radius;
-          this.x -= (dx / dist) * force * this.speed;
-          this.y -= (dy / dist) * force * this.speed;
-          return;
-        }
-      }
-      // ease back home (higher divisor = slower return)
-      if (this.x !== this.baseX) this.x -= (this.x - this.baseX) / 45;
-      if (this.y !== this.baseY) this.y -= (this.y - this.baseY) / 45;
-    }
-  }
-
-  function build() {
-    rect = hero.getBoundingClientRect();
-    cssW = rect.width;
-    cssH = rect.height;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = Math.round(cssW * dpr);
-    canvas.height = Math.round(cssH * dpr);
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-    // Keep the top margin clear of the fixed header so it stays visible
-    const nav = document.querySelector('.nav');
-    const topOffset = (nav ? nav.offsetHeight : 0) + 12;
-    const usableH = cssH - topOffset;
-
-    particles = [];
-    let idx = 0;
-    const startX = ((cssW % SPACING) + SPACING) / 2;
-    const startY = topOffset + (((usableH % SPACING) + SPACING) / 2);
-    for (let y = startY; y < cssH; y += SPACING) {
-      for (let x = startX; x < cssW; x += SPACING) {
-        particles.push(new Particle(x, y, idx++));
-      }
-    }
-  }
-
-  function bucketKey(x, y) {
-    return Math.floor(x / CONNECT) + '_' + Math.floor(y / CONNECT);
-  }
-
-  function drawLines() {
-    buckets.clear();
-    for (const p of particles) {
-      const k = bucketKey(p.x, p.y);
-      let arr = buckets.get(k);
-      if (!arr) buckets.set(k, (arr = []));
-      arr.push(p);
-    }
-    ctx.lineWidth = 1;
-    for (const p of particles) {
-      const cx = Math.floor(p.x / CONNECT);
-      const cy = Math.floor(p.y / CONNECT);
-      for (let gx = cx - 1; gx <= cx + 1; gx++) {
-        for (let gy = cy - 1; gy <= cy + 1; gy++) {
-          const arr = buckets.get(gx + '_' + gy);
-          if (!arr) continue;
-          for (const q of arr) {
-            if (q.idx <= p.idx) continue;
-            const dx = p.x - q.x, dy = p.y - q.y;
-            const d2 = dx * dx + dy * dy;
-            if (d2 < CONNECT2) {
-              const op = 1 - Math.sqrt(d2) / CONNECT;
-              ctx.strokeStyle = 'rgba(0,196,154,' + (op * 0.45) + ')';
-              ctx.beginPath();
-              ctx.moveTo(p.x, p.y);
-              ctx.lineTo(q.x, q.y);
-              ctx.stroke();
+      ctx.lineWidth = 1;
+      for (var b = 0; b < parts.length; b++) {
+        var q = parts[b], cx = Math.floor(q.x / CONNECT), cy = Math.floor(q.y / CONNECT);
+        for (var gx = cx - 1; gx <= cx + 1; gx++)
+          for (var gy = cy - 1; gy <= cy + 1; gy++) {
+            var bk = buckets.get(gx + '_' + gy); if (!bk) continue;
+            for (var c = 0; c < bk.length; c++) {
+              var r = bk[c]; if (r.i <= q.i) continue;
+              var dx = q.x - r.x, dy = q.y - r.y, d2 = dx * dx + dy * dy;
+              if (d2 < CONNECT2) {
+                var op = 1 - Math.sqrt(d2) / CONNECT;
+                ctx.strokeStyle = 'rgba(0,196,154,' + (op * 0.5) + ')';
+                ctx.beginPath(); ctx.moveTo(q.x, q.y); ctx.lineTo(r.x, r.y); ctx.stroke();
+              }
             }
           }
+      }
+    }
+
+    function dots() {
+      ctx.fillStyle = 'rgba(0,196,154,0.75)';
+      for (var i = 0; i < parts.length; i++) {
+        ctx.beginPath(); ctx.arc(parts[i].x, parts[i].y, 1.4, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+
+    function draw() { ctx.clearRect(0, 0, W, H); dots(); lines(); }
+
+    if (reduce) { build(); draw(); return; }
+
+    function loop() {
+      requestAnimationFrame(loop);
+      rect = hero.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+
+      var mx = null, my = null, inside = false;
+      if (CX != null) {
+        mx = CX - rect.left; my = CY - rect.top;
+        inside = mx >= 0 && mx <= W && my >= 0 && my <= H;
+      }
+
+      for (var i = 0; i < parts.length; i++) {
+        var p = parts[i];
+        if (inside) {
+          var dx = mx - p.x, dy = my - p.y, d = Math.hypot(dx, dy) || 0.001;
+          if (d < RADIUS) {
+            var f = (RADIUS - d) / RADIUS;
+            p.x -= (dx / d) * f * p.sp; p.y -= (dy / d) * f * p.sp; continue;
+          }
         }
+        if (p.x !== p.bx) p.x -= (p.x - p.bx) / 42;
+        if (p.y !== p.by) p.y -= (p.y - p.by) / 42;
+      }
+      draw();
+
+      if (inside && rx) {
+        rx.style.top = my + 'px'; ry.style.left = mx + 'px';
+        if (latEl) latEl.textContent = (46.00 + (my / H) * 0.5).toFixed(2);
+        if (lonEl) lonEl.textContent = ('0' + (6.00 + (mx / W) * 0.4).toFixed(2));
       }
     }
-  }
+    build(); loop();
+    requestAnimationFrame(function () { hero.classList.add('filled'); });
 
-  function loop() {
-    requestAnimationFrame(loop);
-    rect = hero.getBoundingClientRect();
-    // Skip work while the hero is scrolled out of view
-    if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+    var t;
+    window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(build, 160); });
+  })();
 
-    mouse.x = clientX == null ? null : clientX - rect.left;
-    mouse.y = clientY == null ? null : clientY - rect.top;
+  /* ── Scellé label tape ─────────────────────────── */
+  (function () {
+    var track = document.getElementById('scelle');
+    if (!track) return;
+    var items = ['PIÈCE À CONVICTION', 'FAIT PAR UN HUMAIN', "CTRL+Z C'EST POUR LES LÂCHES",
+      'CONSERVÉ SOUS VERRE', 'VOS CONCURRENTS SONT AU SOUS-SOL',
+      'JE FAIS UNE OBSESSION SUR LES PIXELS', "CE N'EST PAS DE LA SCIENCE-FICTION"];
+    var set = items.map(function (t) { return '<span>' + t + '</span><span class="plus">+</span>'; }).join('');
+    track.innerHTML = set + set;
+  })();
 
-    ctx.clearRect(0, 0, cssW, cssH);
-    for (const p of particles) p.update();
-    ctx.fillStyle = 'rgba(0,196,154,0.55)';
-    for (const p of particles) {
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, 1.3, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    drawLines();
-  }
-
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(build, 150);
-  });
-  window.addEventListener('mousemove', e => { clientX = e.clientX; clientY = e.clientY; });
-  window.addEventListener('mouseout', () => { clientX = clientY = null; });
-
-  build();
-  loop();
-})();
-
-// ── Signal wire powers on when the protocol enters view
-(function() {
-  const steps = document.querySelector('.strategy-steps');
-  if (!steps) return;
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        steps.classList.add('lit');
-        io.disconnect();
+  /* ── Nav: theme by section, scroll-spy, mobile ── */
+  (function () {
+    var nav = document.getElementById('nav');
+    if (!nav) return;
+    var themed = Array.prototype.slice.call(document.querySelectorAll('[data-nav]'));
+    var ticking = false;
+    function apply() {
+      ticking = false;
+      var line = nav.offsetHeight + 4, cur = null;
+      for (var i = 0; i < themed.length; i++) {
+        var r = themed[i].getBoundingClientRect();
+        if (r.top <= line && r.bottom > line) { cur = themed[i]; break; }
       }
+      if (!cur) cur = themed[0];
+      var dark = cur.getAttribute('data-nav') === 'dark';
+      nav.classList.toggle('nav--dark', dark);
+      nav.classList.toggle('nav--light', !dark);
+    }
+    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(apply); } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    apply();
+
+    // scroll-spy active link
+    var links = Array.prototype.slice.call(document.querySelectorAll('.nav-menu a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting && map[e.target.id]) {
+          links.forEach(function (l) { l.classList.remove('active'); });
+          map[e.target.id].classList.add('active');
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    Object.keys(map).forEach(function (id) { var el = document.getElementById(id); if (el) io.observe(el); });
+
+    // mobile toggle
+    var toggle = document.getElementById('navToggle');
+    var menu = document.getElementById('navMenu');
+    if (toggle && menu) {
+      toggle.addEventListener('click', function () { nav.classList.toggle('open'); });
+      menu.addEventListener('click', function (e) { if (e.target.tagName === 'A') nav.classList.remove('open'); });
+    }
+  })();
+
+  /* ── Scroll reveal ─────────────────────────────── */
+  (function () {
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('in'); }); return;
+    }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+
+  /* ── Collection filter ─────────────────────────── */
+  (function () {
+    var box = document.getElementById('filters');
+    var grid = document.getElementById('specGrid');
+    if (!box || !grid) return;
+    var cards = Array.prototype.slice.call(grid.querySelectorAll('.spec'));
+    box.addEventListener('click', function (e) {
+      var btn = e.target.closest('.filter'); if (!btn) return;
+      box.querySelectorAll('.filter').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.getAttribute('data-filter');
+      cards.forEach(function (c) {
+        var show = f === 'all' || c.getAttribute('data-discipline') === f;
+        c.classList.toggle('hide', !show);
+      });
     });
-  }, { threshold: 0.35 });
-  io.observe(steps);
+  })();
+
+  /* ── Reaction demo ─────────────────────────────── */
+  (function () {
+    var mod = document.getElementById('reaction');
+    if (!mod) return;
+    var btn = document.getElementById('reactBtn');
+    if (reduce) { mod.classList.add('reacted'); return; }
+    if (btn) btn.addEventListener('click', function () { mod.classList.toggle('reacted'); });
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { mod.classList.add('reacted'); io.disconnect(); } });
+    }, { threshold: 0.5 });
+    io.observe(mod);
+  })();
+
+  /* ── Access form ───────────────────────────────── */
+  (function () {
+    var form = document.getElementById('accForm');
+    if (!form) return;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var wrap = document.getElementById('formWrap');
+      wrap.innerHTML =
+        '<div class="acc-success corner">' +
+        '<div class="mark">OK</div>' +
+        '<h3>Dossier reçu</h3>' +
+        '<p>Le conservateur revient vers vous sous 24 h pour ouvrir le dossier.</p>' +
+        '</div>';
+    });
+  })();
+
 })();
