@@ -11,6 +11,7 @@
 :root {
   --accent:       #00c49a;
   --accent-light: #99EFD1;
+  --accent-ink:   #067a5c;   /* readable mint for labels on cream (AA) */
   --pink:         #ff0055;   /* redaction only */
 
   --cream:   #f4f4f5;
@@ -64,6 +65,12 @@ a { text-decoration: none; color: inherit; }
 img { display: block; max-width: 100%; }
 button { font: inherit; cursor: pointer; }
 
+/* Keyboard focus — visible everywhere; dark ink on light/mint, mint on dark */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 1px; }
+.section--light :focus-visible,
+.section--mint :focus-visible,
+.nav--light :focus-visible { outline-color: var(--ink); }
+
 /* ── CUSTOM CURSOR ─────────────────────────────────────── */
 @media (hover: hover) and (pointer: fine) {
   body { cursor: none; }
@@ -93,6 +100,10 @@ body.cur-hover #cur-ring { width: 54px; height: 54px; opacity: .9; }
   display: inline-block;
   margin-bottom: 22px;
 }
+/* mint accent fails contrast on cream — darken mono labels on light */
+.section--light .module,
+.assay .code,
+.protocole .ptitle { color: var(--accent-ink); }
 .h-xl, .h-lg, .h-md {
   font-family: var(--font-display);
   font-weight: 800;
@@ -183,6 +194,7 @@ body.cur-hover #cur-ring { width: 54px; height: 54px; opacity: .9; }
 .nav-menu { display: flex; align-items: center; gap: 22px; }
 .nav-menu a { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; opacity: .75; transition: opacity .25s, color .25s; }
 .nav-menu a:hover, .nav-menu a.active { opacity: 1; color: var(--accent); }
+.nav--light .nav-menu a:hover, .nav--light .nav-menu a.active { color: var(--accent-ink); }
 .nav-status { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
 .nav-status .led { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
 .nav-toggle { display: none; background: none; border: 1px solid currentColor; border-radius: 2px; padding: 7px 12px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: inherit; }
@@ -292,7 +304,7 @@ body.cur-hover #cur-ring { width: 54px; height: 54px; opacity: .9; }
 .r-apres span { font-weight: 400; }
 .reacted .r-avant { opacity: 0; transform: scale(0.94); }
 .reacted .r-apres { opacity: 1; transform: scale(1); }
-.states { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #555; margin: 18px 4px 26px; }
+.states { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); margin: 18px 4px 26px; }
 .reacted .states .after { color: var(--accent); }
 .swatches { display: flex; gap: 10px; justify-content: center; margin-bottom: 30px; }
 .sw { width: 40px; height: 40px; border-radius: 2px; background: #2a2a2a; transition: background .6s var(--ease); }
@@ -346,7 +358,7 @@ body.cur-hover #cur-ring { width: 54px; height: 54px; opacity: .9; }
 .form-row label { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
 .form-row input, .form-row select, .form-row textarea {
   width: 100%; border: none; border-bottom: 1px solid var(--line-light); background: transparent;
-  padding: 10px 2px; font-family: var(--font-body); font-size: 15px; color: var(--ink); outline: none;
+  padding: 10px 2px; font-family: var(--font-body); font-size: 15px; color: var(--ink);
   transition: border-color .3s;
 }
 .form-row input:focus, .form-row select:focus, .form-row textarea:focus { border-bottom-color: var(--accent); }
@@ -385,6 +397,7 @@ body.cur-hover #cur-ring { width: 54px; height: 54px; opacity: .9; }
   .nav-menu a, .nav-status { display: none; }
   .nav-toggle { display: inline-block; }
   .nav.open .nav-menu { display: flex; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0; background: inherit; border-bottom: 1px solid var(--hair-dark); padding: 10px 22px 18px; }
+  .nav--light.open .nav-menu { border-bottom-color: var(--hair-light); }
   .nav.open .nav-menu a { display: block; padding: 12px 0; opacity: .9; }
   .hero { padding: 120px 22px 80px; }
   .hero-readout { display: none; }

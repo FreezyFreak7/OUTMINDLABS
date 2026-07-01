@@ -47,7 +47,7 @@
     var nodesEl = document.getElementById('nodes');
 
     var SPACING = 62, CONNECT = SPACING * 1.6, CONNECT2 = CONNECT * CONNECT, RADIUS = 190;
-    var W = 0, H = 0, parts = [], rect = null;
+    var W = 0, H = 0, parts = [], rect = null, dirty = true;
     var buckets = new Map();
 
     function P(x, y, i) { this.x = this.bx = x; this.y = this.by = y; this.i = i; this.sp = Math.random() * 18 + 6; }
@@ -67,6 +67,7 @@
       for (var y = sy; y < H; y += SPACING)
         for (var x = sx; x < W; x += SPACING) parts.push(new P(x, y, i++));
       if (nodesEl) nodesEl.textContent = ('00' + parts.length).slice(-3);
+      dirty = true;
     }
 
     function lines() {
@@ -103,6 +104,13 @@
 
     function draw() { ctx.clearRect(0, 0, W, H); dots(); lines(); }
 
+    // Rebuild on resize in every mode (incl. reduced-motion static frame)
+    var t;
+    window.addEventListener('resize', function () {
+      clearTimeout(t);
+      t = setTimeout(function () { build(); if (reduce) draw(); }, 160);
+    });
+
     if (reduce) { build(); draw(); return; }
 
     function loop() {
@@ -116,19 +124,20 @@
         inside = mx >= 0 && mx <= W && my >= 0 && my <= H;
       }
 
+      var moved = false;
       for (var i = 0; i < parts.length; i++) {
         var p = parts[i];
         if (inside) {
           var dx = mx - p.x, dy = my - p.y, d = Math.hypot(dx, dy) || 0.001;
           if (d < RADIUS) {
             var f = (RADIUS - d) / RADIUS;
-            p.x -= (dx / d) * f * p.sp; p.y -= (dy / d) * f * p.sp; continue;
+            p.x -= (dx / d) * f * p.sp; p.y -= (dy / d) * f * p.sp; moved = true; continue;
           }
         }
-        if (p.x !== p.bx) p.x -= (p.x - p.bx) / 42;
-        if (p.y !== p.by) p.y -= (p.y - p.by) / 42;
+        if (p.x !== p.bx) { var sx = p.x - p.bx; if (Math.abs(sx) < 0.08) p.x = p.bx; else { p.x -= sx / 42; moved = true; } }
+        if (p.y !== p.by) { var sy = p.y - p.by; if (Math.abs(sy) < 0.08) p.y = p.by; else { p.y -= sy / 42; moved = true; } }
       }
-      draw();
+      if (moved || dirty) { draw(); dirty = false; }
 
       if (inside && rx) {
         rx.style.top = my + 'px'; ry.style.left = mx + 'px';
@@ -138,9 +147,6 @@
     }
     build(); loop();
     requestAnimationFrame(function () { hero.classList.add('filled'); });
-
-    var t;
-    window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(build, 160); });
   })();
 
   /* ── Scellé label tape ─────────────────────────── */
