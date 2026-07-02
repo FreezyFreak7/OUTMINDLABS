@@ -36,13 +36,15 @@
   --ease-io: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-html { scroll-behavior: smooth; overflow-x: hidden; }
+/* overflow-x: clip (not hidden) — hidden creates a scroll container that
+   breaks position: sticky in the fiche section */
+html { scroll-behavior: smooth; overflow-x: clip; }
 
 body {
   font-family: var(--font-body);
   background: var(--void);
   color: var(--ink);
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
 }
 
