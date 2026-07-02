@@ -33,15 +33,12 @@
     });
   })();
 
-  /* ── Hero mesh + reticle + readout (one loop) ──── */
+  /* ── Hero mesh + readout (one loop) ────────────── */
   (function () {
     var canvas = document.getElementById('mesh');
     if (!canvas) return;
     var hero = document.getElementById('vitrine');
     var ctx = canvas.getContext('2d');
-    var reticle = document.getElementById('reticle');
-    var rx = reticle && reticle.querySelector('.rx');
-    var ry = reticle && reticle.querySelector('.ry');
     var curxEl = document.getElementById('curx');
     var curyEl = document.getElementById('cury');
 
@@ -137,8 +134,7 @@
       }
       if (moved || dirty) { draw(); dirty = false; }
 
-      if (inside && rx) {
-        rx.style.top = my + 'px'; ry.style.left = mx + 'px';
+      if (inside) {
         if (curxEl) curxEl.textContent = Math.round(mx);
         if (curyEl) curyEl.textContent = Math.round(my);
       }
