@@ -229,17 +229,68 @@
     });
   })();
 
-  /* ── Reaction demo ─────────────────────────────── */
+  /* ── Fiche technique: staged reaction ──────────── */
+  // A: scroll-scrubbed on desktop. B: auto-run on mobile. Static final under reduced-motion.
   (function () {
     var mod = document.getElementById('reaction');
     if (!mod) return;
+    var scroll = document.getElementById('ficheScroll');
+    var stepEl = document.getElementById('rstep');
+    var logEl = document.getElementById('rlog');
     var btn = document.getElementById('reactBtn');
-    if (reduce) { mod.classList.add('reacted'); return; }
-    if (btn) btn.addEventListener('click', function () { mod.classList.toggle('reacted'); });
-    var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) { mod.classList.add('reacted'); io.disconnect(); } });
-    }, { threshold: 0.5 });
-    io.observe(mod);
+    var LOG = ['ÉCHANTILLON BRUT', 'INJECTION DE LA GRILLE', 'MISE EN FORME', 'APPLICATION COULEUR', 'SIGNÉ'];
+    var N = LOG.length;
+    var cur = -1;
+
+    function setStep(n) {
+      n = n < 0 ? 0 : n > N - 1 ? N - 1 : n;
+      if (n === cur) return;
+      cur = n;
+      mod.dataset.step = n;
+      if (stepEl) stepEl.textContent = ('0' + (n + 1)).slice(-2);
+      if (logEl) logEl.textContent = '> ' + LOG[n];
+    }
+
+    if (reduce) { mod.classList.add('mode-static'); setStep(N - 1); return; }
+
+    var small = window.matchMedia('(max-width: 900px)').matches;
+
+    if (small) {
+      // B — auto-run: hold on the raw sample, then play the steps
+      mod.classList.add('mode-auto');
+      setStep(0);
+      var timer = null;
+      function run() {
+        clearInterval(timer); setStep(0);
+        var i = 0;
+        timer = setInterval(function () { i++; setStep(i); if (i >= N - 1) clearInterval(timer); }, 760);
+      }
+      if (btn) btn.addEventListener('click', run);
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { setTimeout(run, 650); io.disconnect(); } });
+      }, { threshold: 0.4 });
+      io.observe(mod);
+    } else if (scroll) {
+      // A — scroll-scrub: the reaction advances as you scroll through the pinned section
+      mod.classList.add('mode-scrub');
+      setStep(0);
+      var ticking = false;
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () {
+          ticking = false;
+          var r = scroll.getBoundingClientRect();
+          var total = r.height - window.innerHeight;
+          if (total <= 0) return;
+          var p = -r.top / total;
+          p = p < 0 ? 0 : p > 1 ? 1 : p;
+          setStep(Math.floor(p * N * 0.999));
+        });
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
   })();
 
   /* ── Access form ───────────────────────────────── */

@@ -216,30 +216,36 @@
 </section>
 
 <!-- ═══ 004 · FICHE TECHNIQUE ═══ -->
-<section class="section section--dark" id="fiche" data-nav="dark">
-  <div class="wrap">
-    <span class="module reveal">004 · FICHE TECHNIQUE</span>
+<section class="section section--dark fiche" id="fiche" data-nav="dark">
+ <div class="fiche-scroll" id="ficheScroll">
+  <div class="fiche-sticky">
+   <div class="wrap">
+    <span class="module">004 · FICHE TECHNIQUE</span>
     <div class="fiche-grid">
-      <div class="reaction corner reveal" id="reaction">
-        <div class="rlabel">SPÉC. 019 · IDENTITÉ · DÉMONSTRATION LIVE</div>
+      <div class="reaction corner" id="reaction" data-step="0">
+        <div class="rtop">
+          <span class="rlabel">SPÉC. 019 · IDENTITÉ</span>
+          <span class="rprog">ÉTAPE <b id="rstep">01</b>/05</span>
+        </div>
         <div class="reaction-stage">
-          <div class="r-avant">outmindlabs</div>
-          <div class="r-apres"><span>OUTMIND</span><b>LABS</b></div>
+          <div class="grid-underlay" aria-hidden="true"></div>
+          <div class="r-word"><span class="wa">OUTMIND</span><span class="wb">LABS</span></div>
+          <div class="r-stamp" aria-hidden="true">SIGNÉ</div>
         </div>
-        <div class="states">
-          <span class="before">AVANT : brouillon</span>
-          <span class="after">APRÈS : signé</span>
-        </div>
+        <div class="rlogline" id="rlog">&gt; ÉCHANTILLON BRUT</div>
         <div class="swatches">
           <span class="sw" style="--sw:#00c49a"></span>
           <span class="sw" style="--sw:#99EFD1"></span>
           <span class="sw" style="--sw:#111111"></span>
           <span class="sw" style="--sw:#ff0055"></span>
         </div>
-        <button class="btn btn-outline" id="reactBtn">Déclencher la réaction</button>
+        <div class="rfoot">
+          <span class="rhint">défilez pour lancer la réaction ↓</span>
+          <button class="btn btn-outline" id="reactBtn">Relancer la réaction</button>
+        </div>
       </div>
 
-      <div class="fiche-meta reveal">
+      <div class="fiche-meta">
         <ul class="metatable">
           <li><span>Discipline</span><span>Image de marque</span></li>
           <li><span>Année</span><span>2025</span></li>
@@ -261,7 +267,9 @@
         </div>
       </div>
     </div>
+   </div>
   </div>
+ </div>
 </section>
 
 <!-- ═══ 005 · PRÉLÈVEMENTS ═══ -->
