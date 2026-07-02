@@ -310,4 +310,45 @@
     });
   })();
 
+  /* ── Redaction that bugs out ────────────────────── */
+  // Classified fields periodically try to resolve, glitch, then re-redact.
+  (function () {
+    var reds = document.querySelectorAll('.redact');
+    if (!reds.length) return;
+    var GLYPHS = '▓▒░█#@%&/\\?§µ0101';
+
+    reds.forEach(function (el) {
+      var base = el.textContent;
+      var len = base.length;
+      var busy = false;
+
+      function scramble(k) {
+        var s = '';
+        for (var i = 0; i < len; i++) s += GLYPHS.charAt((Math.random() * GLYPHS.length) | 0);
+        return s;
+      }
+      function burst() {
+        if (busy) return;
+        busy = true;
+        el.classList.add('glitch');
+        var ticks = 7, i = 0;
+        var iv = setInterval(function () {
+          el.textContent = scramble();
+          if (++i >= ticks) {
+            clearInterval(iv);
+            el.textContent = base;
+            el.classList.remove('glitch');
+            busy = false;
+          }
+        }, 45);
+      }
+
+      if (reduce) return;              // stays a static censored bar
+      el.addEventListener('mouseenter', burst);
+      (function loop() {
+        setTimeout(function () { burst(); loop(); }, 2600 + Math.random() * 4200);
+      })();
+    });
+  })();
+
 })();
