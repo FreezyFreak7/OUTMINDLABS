@@ -114,8 +114,8 @@ body.cur-hover #cur-ring { width: 54px; height: 54px; opacity: .9; }
   line-height: 0.94;
 }
 .h-xl { font-size: clamp(44px, 7vw, 104px); line-height: 0.9; }
-.h-lg { font-size: clamp(32px, 4.6vw, 60px); }
-.h-md { font-size: clamp(22px, 2.4vw, 30px); font-weight: 700; }
+.h-lg { font-size: clamp(32px, 4.6vw, 60px); text-wrap: balance; }
+.h-md { font-size: clamp(22px, 2.4vw, 30px); font-weight: 700; text-wrap: balance; }
 .lead { font-family: var(--font-body); font-weight: 300; font-size: clamp(16px, 1.5vw, 19px); line-height: 1.65; color: var(--muted); }
 .section--dark .lead { color: var(--dim); }
 .tg {
@@ -130,6 +130,16 @@ body.cur-hover #cur-ring { width: 54px; height: 54px; opacity: .9; }
 .section--dark  { background: var(--void);  color: #fff; }
 .section--light { background: var(--cream); color: var(--ink); }
 .section--mint  { background: linear-gradient(140deg, #aef2df 0%, #99EFD1 42%, #4fd6b2 100%); color: var(--ink); }
+.section--mint::before {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px);
+  background-size: 46px 46px;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 45%, #000 25%, transparent 82%);
+  mask-image: radial-gradient(ellipse at 50% 45%, #000 25%, transparent 82%);
+}
+.section--mint > .wrap { position: relative; z-index: 1; }
 .wrap { max-width: 1200px; margin: 0 auto; position: relative; }
 
 /* blueprint grid behind dark sections */
@@ -174,12 +184,12 @@ body.cur-hover #cur-ring { width: 54px; height: 54px; opacity: .9; }
 
 /* redaction — the ONLY pink */
 .redact {
-  display: inline-block; background: var(--pink); color: #2b0010;
-  font-family: var(--font-mono); font-weight: 700; font-size: 0.82em;
-  letter-spacing: 4px; padding: 1px 3px 1px 7px; border-radius: 1px;
+  display: inline-block; background: var(--pink); color: var(--pink);
+  font-family: var(--font-mono); font-weight: 700; font-size: 0.78em;
+  letter-spacing: 2px; padding: 1px 6px; border-radius: 2px;
   vertical-align: middle; user-select: none; overflow: hidden; white-space: nowrap;
 }
-.redact.glitch { color: #fff; }
+.redact.glitch { color: #fff; }   /* scrambled glyphs surface only mid-glitch */
 
 /* ═══════════════ NAV ═══════════════ */
 .nav {
@@ -242,8 +252,8 @@ body.cur-hover #cur-ring { width: 54px; height: 54px; opacity: .9; }
 @keyframes tape { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* ═══════════════ 001 · LE CONSERVATEUR ═══════════════ */
-.cons-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 64px; align-items: center; }
-.cons-photo { border: 1px solid var(--line-light); padding: 12px; background: #fff; }
+.cons-grid { display: grid; grid-template-columns: 0.68fr 1.32fr; gap: 60px; align-items: center; }
+.cons-photo { border: 1px solid var(--line-light); padding: 12px; background: #fff; max-width: 300px; }
 .cons-photo img { width: 100%; aspect-ratio: 4/5; object-fit: cover; filter: grayscale(1) contrast(1.05); }
 .cons-photo .cap { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
 .cons-photo .cap .mono { color: var(--muted); font-size: 10px; letter-spacing: .1em; }
@@ -320,7 +330,7 @@ body.cur-hover #cur-ring { width: 54px; height: 54px; opacity: .9; }
 .fiche-grid > * { min-width: 0; }   /* stop the big Syne word from widening its track */
 
 /* ── reaction module ── */
-.reaction { border: 1px solid var(--line-dark); background: #0d0d0d; padding: 34px; }
+.reaction { position: relative; border: 1px solid var(--line-dark); background: #0d0d0d; padding: 34px; }
 .rtop { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
 .rlabel, .rprog { font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
 .rprog b { color: var(--accent); }
@@ -341,7 +351,7 @@ body.cur-hover #cur-ring { width: 54px; height: 54px; opacity: .9; }
 }
 .r-word .wb { transition: color .5s var(--ease); }
 .r-stamp {
-  position: absolute; right: 0; top: 2px; z-index: 2;
+  position: absolute; right: 30px; top: 96px; z-index: 3;
   font-family: var(--font-mono); font-weight: 700; font-size: 15px; letter-spacing: .22em; color: var(--accent);
   border: 2px solid var(--accent); padding: 7px 14px; border-radius: 2px;
   transform: rotate(-8deg) scale(.5); opacity: 0;
