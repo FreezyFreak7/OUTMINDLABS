@@ -42,9 +42,8 @@
     var reticle = document.getElementById('reticle');
     var rx = reticle && reticle.querySelector('.rx');
     var ry = reticle && reticle.querySelector('.ry');
-    var latEl = document.getElementById('lat');
-    var lonEl = document.getElementById('lon');
-    var nodesEl = document.getElementById('nodes');
+    var curxEl = document.getElementById('curx');
+    var curyEl = document.getElementById('cury');
 
     var SPACING = 62, CONNECT = SPACING * 1.6, CONNECT2 = CONNECT * CONNECT, RADIUS = 190;
     var W = 0, H = 0, parts = [], rect = null, dirty = true;
@@ -66,7 +65,6 @@
       var sy = top + (((usable % SPACING) + SPACING) / 2);
       for (var y = sy; y < H; y += SPACING)
         for (var x = sx; x < W; x += SPACING) parts.push(new P(x, y, i++));
-      if (nodesEl) nodesEl.textContent = ('00' + parts.length).slice(-3);
       dirty = true;
     }
 
@@ -96,7 +94,7 @@
     }
 
     function dots() {
-      ctx.fillStyle = 'rgba(0,196,154,0.75)';
+      ctx.fillStyle = 'rgba(0,196,154,0.65)';
       for (var i = 0; i < parts.length; i++) {
         ctx.beginPath(); ctx.arc(parts[i].x, parts[i].y, 1.4, 0, Math.PI * 2); ctx.fill();
       }
@@ -141,12 +139,11 @@
 
       if (inside && rx) {
         rx.style.top = my + 'px'; ry.style.left = mx + 'px';
-        if (latEl) latEl.textContent = (46.00 + (my / H) * 0.5).toFixed(2);
-        if (lonEl) lonEl.textContent = ('0' + (6.00 + (mx / W) * 0.4).toFixed(2));
+        if (curxEl) curxEl.textContent = Math.round(mx);
+        if (curyEl) curyEl.textContent = Math.round(my);
       }
     }
     build(); loop();
-    requestAnimationFrame(function () { hero.classList.add('filled'); });
   })();
 
   /* ── Scellé label tape ─────────────────────────── */

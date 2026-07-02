@@ -13,7 +13,7 @@
 <div id="cur-ring"></div>
 
 <!-- ═══ NAV ═══ -->
-<nav class="nav nav--dark" id="nav">
+<nav class="nav nav--light" id="nav">
   <a href="#vitrine" class="nav-brand"><span>OUTMIND</span><b>LABS</b></a>
   <div class="nav-menu" id="navMenu">
     <a href="#conservateur">001 Conservateur</a>
@@ -26,40 +26,43 @@
   <button class="nav-toggle" id="navToggle" aria-label="Menu">Index</button>
 </nav>
 
-<!-- ═══ 000 · VITRINE / HERO ═══ -->
-<header class="hero" id="vitrine" data-nav="dark">
+<!-- ═══ 000 · LA PAILLASSE / HERO ═══ -->
+<header class="hero" id="vitrine" data-nav="light">
   <canvas id="mesh"></canvas>
-  <div class="hero-frame"></div>
+  <div class="ruler-top" aria-hidden="true"></div>
+  <div class="ruler-left" aria-hidden="true"></div>
   <div class="reticle" id="reticle"><span class="rx"></span><span class="ry"></span></div>
 
   <div class="hero-inner">
     <div class="hero-plate corner">
-      <span class="mono">FONDS <b>OUTMINDLABS</b></span>
-      <span class="mono">CONSERVATEUR : <b>NOAH</b></span>
-      <span class="mono">DISCIPLINES : <b>WEB + IMAGE</b></span>
-      <span class="mono">STATUT : <b>OUVERT AUX VISITEURS</b></span>
-      <span class="mono">EST. 2019</span>
+      <span class="mono">FICHE D'ÉCHANTILLON</span>
+      <span class="mono">N° : <b>000</b></span>
+      <span class="mono">TYPE : <b>ORGANISME VIVANT</b></span>
+      <span class="mono">TEINTE : <b>#00C49A</b></span>
+      <span class="mono">GRILLE : <b>12 COLONNES</b></span>
+      <span class="mono">STATUT : <b><span class="dot-inline"></span>EN TEST</b></span>
     </div>
 
     <h1 class="h-xl">
-      <span class="line">ENTRÉE : LE CHAOS.</span>
-      <span class="line">SORTIE : <span class="redact" aria-label="information rédigée">███████</span>.</span>
+      <span class="line">ON MÉLANGE.</span>
+      <span class="line">ON TESTE.</span>
+      <span class="line">ON <span class="tg">SIGNE.</span></span>
     </h1>
 
     <p class="lead hero-sub">
-      Laboratoire &amp; archive de design. Un conservateur, deux disciplines&nbsp;:
-      le web qui rapporte, et l'image qui marque.
+      Le laboratoire où vos designs passent les tests. On mélange les idées, on mesure
+      ce qui convertit, on garde ce qui marque. Web + image — une seule paillasse.
     </p>
 
     <div class="hero-cta">
-      <a href="#collection" class="btn btn-outline">Entrer dans l'archive</a>
-      <a href="#demande" class="link-ghost">ou demander un spécimen →</a>
+      <a href="#collection" class="btn btn-solid">Voir les spécimens</a>
+      <a href="#demande" class="link-ghost">ou demander un test →</a>
     </div>
   </div>
 
   <div class="hero-readout" id="readout">
-    SPÉCIMEN 000 · L'ORGANISME VIVANT<br>
-    LAT <b id="lat">46.20</b> · LON <b id="lon">06.14</b> · N=<b id="nodes">000</b> NŒUDS
+    ÉCHANTILLON 000 · TEINTE #00C49A · GRILLE 12 COL<br>
+    CURSEUR X:<b id="curx">—</b> Y:<b id="cury">—</b> PX
   </div>
 </header>
 
