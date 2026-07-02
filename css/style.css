@@ -317,6 +317,7 @@ body.cur-hover #cur-ring { width: 54px; height: 54px; opacity: .9; }
 }
 .fiche-sticky .wrap { position: relative; z-index: 1; width: 100%; }
 .fiche-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 54px; align-items: center; margin-top: 26px; }
+.fiche-grid > * { min-width: 0; }   /* stop the big Syne word from widening its track */
 
 /* ── reaction module ── */
 .reaction { border: 1px solid var(--line-dark); background: #0d0d0d; padding: 34px; }
@@ -347,27 +348,30 @@ body.cur-hover #cur-ring { width: 54px; height: 54px; opacity: .9; }
   transition: opacity .4s, transform .5s var(--ease-io);
 }
 
-/* step states (driven by data-step 0..4) */
-.reaction[data-step="1"] .r-word,
-.reaction[data-step="2"] .r-word,
-.reaction[data-step="3"] .r-word,
-.reaction[data-step="4"] .r-word { text-transform: uppercase; }
-.reaction[data-step="1"] .r-word { letter-spacing: .14em; color: #9a9a9a; }
-.reaction[data-step="2"] .r-word,
-.reaction[data-step="3"] .r-word,
-.reaction[data-step="4"] .r-word { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.03em; font-size: clamp(30px, 4vw, 46px); color: #fff; }
-.reaction[data-step="1"] .grid-underlay,
-.reaction[data-step="2"] .grid-underlay,
-.reaction[data-step="3"] .grid-underlay { opacity: 1; }
-.reaction[data-step="4"] .grid-underlay { opacity: 0; }
-.reaction[data-step="3"] .r-word .wb,
-.reaction[data-step="4"] .r-word .wb { color: var(--accent); }
-.reaction[data-step="3"] .sw,
-.reaction[data-step="4"] .sw { background: var(--sw); }
-.reaction[data-step="3"] .sw:nth-child(2), .reaction[data-step="4"] .sw:nth-child(2) { transition-delay: .07s; }
-.reaction[data-step="3"] .sw:nth-child(3), .reaction[data-step="4"] .sw:nth-child(3) { transition-delay: .14s; }
-.reaction[data-step="3"] .sw:nth-child(4), .reaction[data-step="4"] .sw:nth-child(4) { transition-delay: .21s; }
-.reaction[data-step="4"] .r-stamp { opacity: 1; transform: rotate(-8deg) scale(1); }
+/* step states (data-step 0..4 on .fiche-grid drives BOTH columns) */
+.fiche-grid[data-step="1"] .r-word,
+.fiche-grid[data-step="2"] .r-word,
+.fiche-grid[data-step="3"] .r-word,
+.fiche-grid[data-step="4"] .r-word { text-transform: uppercase; }
+.fiche-grid[data-step="1"] .r-word { letter-spacing: .14em; color: #9a9a9a; }
+.fiche-grid[data-step="2"] .r-word,
+.fiche-grid[data-step="3"] .r-word,
+.fiche-grid[data-step="4"] .r-word { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.03em; font-size: clamp(30px, 4vw, 46px); color: #fff; }
+/* wordmark weights once formed: OUTMIND lighter than LABS */
+.fiche-grid[data-step="2"] .wa, .fiche-grid[data-step="3"] .wa, .fiche-grid[data-step="4"] .wa { font-weight: 400; }
+.fiche-grid[data-step="2"] .wb, .fiche-grid[data-step="3"] .wb, .fiche-grid[data-step="4"] .wb { font-weight: 700; }
+.fiche-grid[data-step="1"] .grid-underlay,
+.fiche-grid[data-step="2"] .grid-underlay,
+.fiche-grid[data-step="3"] .grid-underlay { opacity: 1; }
+.fiche-grid[data-step="4"] .grid-underlay { opacity: 0; }
+.fiche-grid[data-step="3"] .wb,
+.fiche-grid[data-step="4"] .wb { color: var(--accent); }
+.fiche-grid[data-step="3"] .sw,
+.fiche-grid[data-step="4"] .sw { background: var(--sw); }
+.fiche-grid[data-step="3"] .sw:nth-child(2), .fiche-grid[data-step="4"] .sw:nth-child(2) { transition-delay: .07s; }
+.fiche-grid[data-step="3"] .sw:nth-child(3), .fiche-grid[data-step="4"] .sw:nth-child(3) { transition-delay: .14s; }
+.fiche-grid[data-step="3"] .sw:nth-child(4), .fiche-grid[data-step="4"] .sw:nth-child(4) { transition-delay: .21s; }
+.fiche-grid[data-step="4"] .r-stamp { opacity: 1; transform: rotate(-8deg) scale(1); }
 
 .rlogline { font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin: 20px 0 22px; min-height: 14px; }
 .swatches { display: flex; gap: 10px; justify-content: center; margin-bottom: 24px; }
@@ -390,7 +394,29 @@ body.cur-hover #cur-ring { width: 54px; height: 54px; opacity: .9; }
 .typekit .k3 { font-family: var(--font-mono); font-size: 14px; }
 .typekit .tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; color: var(--dim); text-transform: uppercase; }
 .typekit .palette { display: flex; gap: 8px; margin-top: 16px; }
-.typekit .chip { flex: 1; height: 30px; border-radius: 2px; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 8px; letter-spacing: .05em; }
+.typekit .chip { flex: 1; height: 30px; border-radius: 2px; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 8px; letter-spacing: .05em; background: #262626; color: transparent; transition: background .5s var(--ease), color .4s; }
+
+/* ── right column reveals in lockstep with the reaction steps ── */
+.fiche-meta .metatable li,
+.fiche-note,
+.typekit .row { opacity: 0; transform: translateY(10px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
+/* step >= 1: the spec sheet fills in, row by row */
+.fiche-grid:not([data-step="0"]) .metatable li { opacity: 1; transform: none; }
+.fiche-grid:not([data-step="0"]) .metatable li:nth-child(2) { transition-delay: .05s; }
+.fiche-grid:not([data-step="0"]) .metatable li:nth-child(3) { transition-delay: .10s; }
+.fiche-grid:not([data-step="0"]) .metatable li:nth-child(4) { transition-delay: .15s; }
+.fiche-grid:not([data-step="0"]) .metatable li:nth-child(5) { transition-delay: .20s; }
+/* step >= 2: the type kit appears (as the fonts form) */
+.fiche-grid:not([data-step="0"]):not([data-step="1"]) .typekit .row { opacity: 1; transform: none; }
+.fiche-grid:not([data-step="0"]):not([data-step="1"]) .typekit .row:nth-child(2) { transition-delay: .07s; }
+.fiche-grid:not([data-step="0"]):not([data-step="1"]) .typekit .row:nth-child(3) { transition-delay: .14s; }
+/* step >= 3: the palette colours in, synced with the swatches */
+.fiche-grid:not([data-step="0"]):not([data-step="1"]):not([data-step="2"]) .chip { background: var(--cc); color: var(--ct); }
+.fiche-grid:not([data-step="0"]):not([data-step="1"]):not([data-step="2"]) .chip:nth-child(2) { transition-delay: .07s; }
+.fiche-grid:not([data-step="0"]):not([data-step="1"]):not([data-step="2"]) .chip:nth-child(3) { transition-delay: .14s; }
+.fiche-grid:not([data-step="0"]):not([data-step="1"]):not([data-step="2"]) .chip:nth-child(4) { transition-delay: .21s; }
+/* step 4: the closing note lands */
+.fiche-grid[data-step="4"] .fiche-note { opacity: 1; transform: none; }
 
 /* ═══════════════ 005 · PRÉLÈVEMENTS ═══════════════ */
 .assay-intro { max-width: 640px; margin-bottom: 48px; }
@@ -483,7 +509,8 @@ body.cur-hover #cur-ring { width: 54px; height: 54px; opacity: .9; }
   html { scroll-behavior: auto; }
   .scelle-track { animation: none; transform: none; white-space: normal; flex-wrap: wrap; }
   .reveal { opacity: 1; transform: none; transition: none; }
-  .r-word, .sw, .grid-underlay, .r-stamp { transition: none; }
+  .r-word, .sw, .grid-underlay, .r-stamp,
+  .metatable li, .fiche-note, .typekit .row, .typekit .chip { transition: none; }
   .fiche-scroll { height: auto; }
   .fiche-sticky { position: static; min-height: 0; }
   * { scroll-behavior: auto !important; }

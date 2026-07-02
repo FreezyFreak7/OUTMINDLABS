@@ -234,6 +234,7 @@
   (function () {
     var mod = document.getElementById('reaction');
     if (!mod) return;
+    var grid = mod.closest('.fiche-grid') || mod;
     var scroll = document.getElementById('ficheScroll');
     var stepEl = document.getElementById('rstep');
     var logEl = document.getElementById('rlog');
@@ -246,7 +247,7 @@
       n = n < 0 ? 0 : n > N - 1 ? N - 1 : n;
       if (n === cur) return;
       cur = n;
-      mod.dataset.step = n;
+      grid.dataset.step = n;
       if (stepEl) stepEl.textContent = ('0' + (n + 1)).slice(-2);
       if (logEl) logEl.textContent = '> ' + LOG[n];
     }
