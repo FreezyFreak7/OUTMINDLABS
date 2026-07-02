@@ -254,7 +254,7 @@ body.cur-hover #cur-ring { width: 54px; height: 54px; opacity: .9; }
 /* ═══════════════ 001 · LE CONSERVATEUR ═══════════════ */
 .cons-grid { display: grid; grid-template-columns: 0.68fr 1.32fr; gap: 60px; align-items: center; }
 .cons-photo { border: 1px solid var(--line-light); padding: 12px; background: #fff; max-width: 300px; }
-.cons-photo img { width: 100%; aspect-ratio: 4/5; object-fit: cover; filter: grayscale(1) contrast(1.05); }
+.cons-photo img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
 .cons-photo .cap { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
 .cons-photo .cap .mono { color: var(--muted); font-size: 10px; letter-spacing: .1em; }
 .status { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); }
@@ -435,7 +435,8 @@ body.cur-hover #cur-ring { width: 54px; height: 54px; opacity: .9; }
 .fiche-grid[data-step="4"] .fiche-note { opacity: 1; transform: none; }
 
 /* ═══════════════ 005 · PRÉLÈVEMENTS ═══════════════ */
-.assay-intro { max-width: 920px; margin-bottom: 48px; }
+.assay-intro { max-width: none; margin-bottom: 48px; }
+.assay-intro .lead { max-width: 760px; }
 .assay-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 .assay { border: 1px solid var(--line-light); background: #fff; padding: 30px; display: flex; flex-direction: column; transition: transform .4s var(--ease), border-color .3s; }
 .assay:hover { transform: translateY(-5px); border-color: rgba(0,196,154,0.5); }
