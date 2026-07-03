@@ -95,11 +95,13 @@
     }
 
     function grid() {
+      // full-bleed graph paper: lines span the whole canvas, phase-locked to the dots
       ctx.strokeStyle = 'rgba(17,17,17,0.05)';
       ctx.lineWidth = 1;
       ctx.beginPath();
-      for (var x = gStartX; x <= gEndX + 0.5; x += SPACING) { var px = Math.round(x) + 0.5; ctx.moveTo(px, gStartY); ctx.lineTo(px, gEndY); }
-      for (var y = gStartY; y <= gEndY + 0.5; y += SPACING) { var py = Math.round(y) + 0.5; ctx.moveTo(gStartX, py); ctx.lineTo(gEndX, py); }
+      var phaseX = gStartX % SPACING, phaseY = gStartY % SPACING;
+      for (var x = phaseX; x < W; x += SPACING) { var px = Math.round(x) + 0.5; ctx.moveTo(px, 0); ctx.lineTo(px, H); }
+      for (var y = phaseY; y < H; y += SPACING) { var py = Math.round(y) + 0.5; ctx.moveTo(0, py); ctx.lineTo(W, py); }
       ctx.stroke();
     }
 

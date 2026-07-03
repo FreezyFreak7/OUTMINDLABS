@@ -455,7 +455,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .acc-aside { display: flex; flex-direction: column; justify-content: space-between; gap: 20px; height: 100%; }
 .acc-direct p { font-size: 14px; color: var(--muted); margin: 4px 0 14px; }
 .acc-direct a { display: inline-block; font-family: var(--font-mono); font-weight: 700; font-size: 14px; color: var(--accent-ink); word-break: break-all; }
-.acc-direct .mono { display: block; margin-top: 14px; color: var(--muted); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+.acc-direct .mono { display: block; margin-top: 14px; font-family: var(--font-body); color: var(--muted); font-size: 13px; letter-spacing: 0; text-transform: none; }
 .acc-head { margin-bottom: 34px; }
 .form-row { margin-bottom: 24px; }
 .form-row label { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
@@ -485,7 +485,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .cloture .bigmark { font-family: var(--font-display); font-size: clamp(28px, 4vw, 54px); letter-spacing: -0.04em; margin-bottom: 30px; }
 .cloture .bigmark span { font-weight: 400; color: #fff; }
 .cloture .bigmark b { font-weight: 700; color: var(--accent); }
-.cloture .colophon { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); line-height: 2; }
+.cloture .colophon { font-family: var(--font-body); font-size: 12.5px; letter-spacing: .01em; color: var(--dim); line-height: 2; }
 .cloture .colophon a { color: var(--accent); }
 .cloture .foot-hair { width: 100%; max-width: 900px; height: 1px; background: var(--hair-dark); margin: 40px auto; }
 
