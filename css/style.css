@@ -117,6 +117,8 @@ body.cur-hover #cur-ring { width: 54px; height: 54px; opacity: .9; }
 .h-lg { font-size: clamp(32px, 4.6vw, 60px); text-wrap: balance; }
 .h-md { font-size: clamp(22px, 2.4vw, 30px); font-weight: 700; text-wrap: balance; }
 .lead { font-family: var(--font-body); font-weight: 300; font-size: clamp(16px, 1.5vw, 19px); line-height: 1.65; color: var(--muted); }
+/* nicer body wrapping — avoids orphans and short last lines */
+p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty; }
 .section--dark .lead { color: var(--dim); }
 .tg {
   background: linear-gradient(120deg, var(--accent-light), var(--accent));
@@ -450,6 +452,10 @@ body.cur-hover #cur-ring { width: 54px; height: 54px; opacity: .9; }
 
 /* ═══════════════ 007 · DEMANDE D'ACCÈS ═══════════════ */
 .acc-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 56px; }
+.acc-aside { display: flex; flex-direction: column; justify-content: space-between; gap: 20px; height: 100%; }
+.acc-direct p { font-size: 14px; color: var(--muted); margin: 4px 0 14px; }
+.acc-direct a { display: inline-block; font-family: var(--font-mono); font-weight: 700; font-size: 14px; color: var(--accent-ink); word-break: break-all; }
+.acc-direct .mono { display: block; margin-top: 14px; color: var(--muted); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
 .acc-head { margin-bottom: 34px; }
 .form-row { margin-bottom: 24px; }
 .form-row label { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }

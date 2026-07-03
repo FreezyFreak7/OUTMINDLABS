@@ -44,7 +44,7 @@
 
     var SPACING = 62, CONNECT = SPACING * 1.6, CONNECT2 = CONNECT * CONNECT, RADIUS = 190;
     var W = 0, H = 0, parts = [], rect = null, dirty = true;
-    var gStartX = 0, gStartY = 0;
+    var gStartX = 0, gStartY = 0, gEndX = 0, gEndY = 0;
     var buckets = new Map();
 
     function P(x, y, i) { this.x = this.bx = x; this.y = this.by = y; this.i = i; this.sp = Math.random() * 18 + 6; }
@@ -55,12 +55,17 @@
       var dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      // Symmetric margins on every edge; the grey grid + dots share these coords
+      // Equal margins on all four edges, with the top starting below the header
+      var navEl = document.getElementById('nav');
+      var navH = navEl ? navEl.offsetHeight : 0;
+      var availH = H - navH;
       gStartX = ((W % SPACING) + SPACING) / 2;
-      gStartY = ((H % SPACING) + SPACING) / 2;
+      gStartY = navH + ((availH % SPACING) + SPACING) / 2;
+      gEndX = gStartX; while (gEndX + SPACING < W) gEndX += SPACING;
+      gEndY = gStartY; while (gEndY + SPACING < H) gEndY += SPACING;
       parts = []; var i = 0;
-      for (var y = gStartY; y < H; y += SPACING)
-        for (var x = gStartX; x < W; x += SPACING) parts.push(new P(x, y, i++));
+      for (var y = gStartY; y <= gEndY + 0.5; y += SPACING)
+        for (var x = gStartX; x <= gEndX + 0.5; x += SPACING) parts.push(new P(x, y, i++));
       dirty = true;
     }
 
@@ -93,8 +98,8 @@
       ctx.strokeStyle = 'rgba(17,17,17,0.05)';
       ctx.lineWidth = 1;
       ctx.beginPath();
-      for (var x = gStartX; x < W; x += SPACING) { var px = Math.round(x) + 0.5; ctx.moveTo(px, 0); ctx.lineTo(px, H); }
-      for (var y = gStartY; y < H; y += SPACING) { var py = Math.round(y) + 0.5; ctx.moveTo(0, py); ctx.lineTo(W, py); }
+      for (var x = gStartX; x <= gEndX + 0.5; x += SPACING) { var px = Math.round(x) + 0.5; ctx.moveTo(px, gStartY); ctx.lineTo(px, gEndY); }
+      for (var y = gStartY; y <= gEndY + 0.5; y += SPACING) { var py = Math.round(y) + 0.5; ctx.moveTo(gStartX, py); ctx.lineTo(gEndX, py); }
       ctx.stroke();
     }
 
