@@ -220,17 +220,8 @@ body.cur-hover #cur-ring { width: 54px; height: 54px; opacity: .9; }
   display: flex; align-items: center;
   padding: 130px 40px 90px;
 }
+/* the grey graph grid is drawn inside #mesh so it stays aligned with the dots */
 #mesh { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
-/* graph-paper bench surface */
-.hero::before {
-  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-  background-image:
-    linear-gradient(rgba(0,120,92,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,120,92,0.06) 1px, transparent 1px);
-  background-size: 40px 40px;
-  -webkit-mask-image: radial-gradient(ellipse at 60% 45%, #000 45%, transparent 92%);
-  mask-image: radial-gradient(ellipse at 60% 45%, #000 45%, transparent 92%);
-}
 .hero-inner { position: relative; z-index: 2; max-width: 1440px; margin: 0 auto; width: 100%; }
 .hero h1 { color: var(--ink); margin-bottom: 26px; }
 .hero h1 .line { display: block; }
@@ -252,11 +243,11 @@ body.cur-hover #cur-ring { width: 54px; height: 54px; opacity: .9; }
 @keyframes tape { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* ═══════════════ 001 · LE CONSERVATEUR ═══════════════ */
-.cons-grid { display: grid; grid-template-columns: 0.68fr 1.32fr; gap: 60px; align-items: center; }
-.cons-photo { border: 1px solid var(--line-light); padding: 12px; background: #fff; max-width: 300px; }
-.cons-photo img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
-.cons-photo .cap { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
-.cons-photo .cap .mono { color: var(--muted); font-size: 10px; letter-spacing: .1em; }
+.cons-grid { display: grid; grid-template-columns: 300px 1fr; gap: 52px; align-items: center; }
+.cons-photo { border: 1px solid var(--line-light); padding: 12px; background: #fff; max-width: 340px; }
+.cons-photo img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
+.cons-photo .cap { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 12px; }
+.cons-photo .cap .mono { color: var(--muted); font-size: 10px; letter-spacing: .1em; white-space: nowrap; }
 .status { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); }
 .status .led { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
 .cons-body p { margin-bottom: 20px; max-width: 680px; }

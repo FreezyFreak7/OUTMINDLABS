@@ -44,6 +44,7 @@
 
     var SPACING = 62, CONNECT = SPACING * 1.6, CONNECT2 = CONNECT * CONNECT, RADIUS = 190;
     var W = 0, H = 0, parts = [], rect = null, dirty = true;
+    var gStartX = 0, gStartY = 0;
     var buckets = new Map();
 
     function P(x, y, i) { this.x = this.bx = x; this.y = this.by = y; this.i = i; this.sp = Math.random() * 18 + 6; }
@@ -54,14 +55,12 @@
       var dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      var nav = document.getElementById('nav');
-      var top = (nav ? nav.offsetHeight : 0) + 14;
-      var usable = H - top;
+      // Symmetric margins on every edge; the grey grid + dots share these coords
+      gStartX = ((W % SPACING) + SPACING) / 2;
+      gStartY = ((H % SPACING) + SPACING) / 2;
       parts = []; var i = 0;
-      var sx = ((W % SPACING) + SPACING) / 2;
-      var sy = top + (((usable % SPACING) + SPACING) / 2);
-      for (var y = sy; y < H; y += SPACING)
-        for (var x = sx; x < W; x += SPACING) parts.push(new P(x, y, i++));
+      for (var y = gStartY; y < H; y += SPACING)
+        for (var x = gStartX; x < W; x += SPACING) parts.push(new P(x, y, i++));
       dirty = true;
     }
 
@@ -90,6 +89,15 @@
       }
     }
 
+    function grid() {
+      ctx.strokeStyle = 'rgba(17,17,17,0.05)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (var x = gStartX; x < W; x += SPACING) { var px = Math.round(x) + 0.5; ctx.moveTo(px, 0); ctx.lineTo(px, H); }
+      for (var y = gStartY; y < H; y += SPACING) { var py = Math.round(y) + 0.5; ctx.moveTo(0, py); ctx.lineTo(W, py); }
+      ctx.stroke();
+    }
+
     function dots() {
       ctx.fillStyle = 'rgba(0,196,154,0.65)';
       for (var i = 0; i < parts.length; i++) {
@@ -97,7 +105,7 @@
       }
     }
 
-    function draw() { ctx.clearRect(0, 0, W, H); dots(); lines(); }
+    function draw() { ctx.clearRect(0, 0, W, H); grid(); dots(); lines(); }
 
     // Rebuild on resize in every mode (incl. reduced-motion static frame)
     var t;
