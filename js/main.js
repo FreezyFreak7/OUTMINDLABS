@@ -254,7 +254,7 @@
     var stepEl = document.getElementById('rstep');
     var logEl = document.getElementById('rlog');
     var btn = document.getElementById('reactBtn');
-    var LOG = ['ÉCHANTILLON BRUT', 'INJECTION DE LA GRILLE', 'MISE EN FORME', 'APPLICATION COULEUR', 'SIGNÉ'];
+    var LOG = ['Brouillon', 'Grille', 'Mise en forme', 'Couleur', 'Signé'];
     var N = LOG.length;
     var cur = -1;
 
@@ -264,7 +264,7 @@
       cur = n;
       grid.dataset.step = n;
       if (stepEl) stepEl.textContent = ('0' + (n + 1)).slice(-2);
-      if (logEl) logEl.textContent = '> ' + LOG[n];
+      if (logEl) logEl.textContent = LOG[n];
     }
 
     if (reduce) { mod.classList.add('mode-static'); setStep(N - 1); return; }
@@ -317,10 +317,10 @@
       e.preventDefault();
       var wrap = document.getElementById('formWrap');
       wrap.innerHTML =
-        '<div class="acc-success corner">' +
+        '<div class="acc-success">' +
         '<div class="mark">OK</div>' +
-        '<h3>Dossier reçu</h3>' +
-        '<p>Le conservateur revient vers vous sous 24 h pour ouvrir le dossier.</p>' +
+        '<h3>Message reçu</h3>' +
+        '<p>Merci ! Je reviens vers vous sous 24 h.</p>' +
         '</div>';
     });
   })();

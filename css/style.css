@@ -450,13 +450,22 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .rap .attrib { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); margin-bottom: 12px; }
 .rap .reading { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
 
-/* ═══════════════ 007 · DEMANDE D'ACCÈS ═══════════════ */
-.acc-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 56px; }
-.acc-aside { display: flex; flex-direction: column; justify-content: space-between; gap: 20px; height: 100%; }
-.acc-direct p { font-size: 14px; color: var(--muted); margin: 4px 0 14px; }
-.acc-direct a { display: inline-block; font-family: var(--font-mono); font-weight: 700; font-size: 14px; color: var(--accent-ink); word-break: break-all; }
-.acc-direct .mono { display: block; margin-top: 14px; font-family: var(--font-body); color: var(--muted); font-size: 13px; letter-spacing: 0; text-transform: none; }
-.acc-head { margin-bottom: 34px; }
+/* ═══════════════ 007 · CONTACT ═══════════════ */
+.acc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.acc-info { display: flex; flex-direction: column; }
+.acc-info .h-lg { margin-bottom: 14px; }
+.acc-note { font-size: 15px; color: var(--muted); margin-bottom: 34px; }
+.acc-steps { display: flex; flex-direction: column; gap: 4px; border-top: 1px solid var(--line-light); margin-bottom: 34px; }
+.acc-step { display: flex; gap: 18px; align-items: baseline; padding: 18px 0; border-bottom: 1px solid var(--hair-light); }
+.acc-step .n { font-family: var(--font-mono); font-weight: 700; font-size: 12px; color: var(--accent-ink); flex-shrink: 0; }
+.acc-step b { display: block; font-size: 15px; color: var(--ink); margin-bottom: 3px; }
+.acc-step span { font-size: 14px; color: var(--muted); }
+.acc-direct { margin-top: auto; padding-top: 6px; }
+.acc-direct p { font-size: 14px; color: var(--muted); margin: 0 0 10px; }
+.acc-direct a { display: inline-block; font-family: var(--font-display); font-weight: 700; font-size: 18px; letter-spacing: -0.02em; color: var(--ink); word-break: break-all; }
+.acc-direct a:hover { color: var(--accent-ink); }
+.acc-direct .mono { display: block; margin-top: 10px; font-family: var(--font-body); color: var(--muted); font-size: 13px; }
+.acc-form { background: #fff; border: 1px solid var(--line-light); padding: 40px; box-shadow: 0 30px 60px -40px rgba(0,0,0,0.4); }
 .form-row { margin-bottom: 24px; }
 .form-row label { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
 .form-row input, .form-row select, .form-row textarea {
@@ -472,7 +481,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .protocole ol { list-style: none; counter-reset: p; }
 .protocole li { counter-increment: p; padding: 16px 0; border-top: 1px solid var(--hair-light); font-family: var(--font-body); font-size: 14.5px; color: var(--muted); display: flex; gap: 14px; align-items: baseline; }
 .protocole li::before { content: '0' counter(p); font-family: var(--font-mono); font-size: 12px; color: var(--accent-ink); font-weight: 700; }
-.acc-success { border: 1px solid var(--accent); background: #fff; padding: 40px; text-align: center; }
+.acc-success { text-align: center; padding: 24px 6px; }
 .acc-success .mark { width: 46px; height: 46px; border: 1.5px solid var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; color: var(--accent); font-family: var(--font-mono); }
 .acc-success h3 { font-family: var(--font-display); font-weight: 700; font-size: 24px; letter-spacing: -0.03em; text-transform: uppercase; margin-bottom: 12px; }
 .acc-success p { color: var(--muted); font-size: 14px; }
