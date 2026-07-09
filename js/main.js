@@ -238,7 +238,8 @@
       btn.classList.add('active');
       var f = btn.getAttribute('data-filter');
       cards.forEach(function (c) {
-        var show = f === 'all' || c.getAttribute('data-discipline') === f;
+        var d = c.getAttribute('data-discipline');
+        var show = f === 'all' || d === f || d === 'both';
         c.classList.toggle('hide', !show);
       });
     });

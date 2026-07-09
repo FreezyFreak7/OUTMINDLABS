@@ -300,8 +300,11 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .spec.hide { display: none; }
 .spec:hover { transform: translateY(-6px); box-shadow: 0 24px 40px -20px rgba(0,0,0,0.25); }
 .spec-img { position: relative; overflow: hidden; }
-.spec-img img { width: 100%; aspect-ratio: 4/5; object-fit: cover; filter: grayscale(1) contrast(1.04); transition: filter .5s, transform .6s var(--ease); }
-.spec:hover .spec-img img { filter: grayscale(0); transform: scale(1.04); }
+.spec-img img { width: 100%; aspect-ratio: 4/5; object-fit: cover; transition: transform .6s var(--ease); }
+.spec:hover .spec-img img { transform: scale(1.04); }
+.spec-link { display: block; color: inherit; }
+.spec-more { border-top: 1px solid var(--hair-light); padding-top: 12px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-ink); transition: gap .3s; }
+.spec:hover .spec-more { color: var(--ink); }
 .spec-idx { position: absolute; top: 10px; left: 10px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; color: #fff; background: rgba(0,0,0,0.6); padding: 4px 8px; }
 .spec-tag { position: absolute; top: 10px; right: 10px; font-family: var(--font-mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: #04231c; background: var(--accent); padding: 4px 8px; }
 .spec-body { padding: 16px 6px 6px; }
@@ -537,4 +540,75 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
   .fiche-scroll { height: auto; }
   .fiche-sticky { position: static; min-height: 0; }
   * { scroll-behavior: auto !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PROJECT PAGES + LEGAL PAGES
+   ═══════════════════════════════════════════════════════════ */
+.subpage { background: var(--cream); color: var(--ink); }
+.sub-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 15px 40px; background: rgba(244,244,245,0.82);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--hair-light);
+}
+.sub-nav .nav-brand { color: var(--ink); }
+.sub-nav .back { font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-ink); }
+.sub-nav .back:hover { color: var(--ink); }
+
+/* ── project hero ── */
+.proj-hero { max-width: 1040px; margin: 0 auto; padding: 150px 40px 30px; }
+.proj-tag { display: inline-block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line-light); padding: 6px 12px; border-radius: 2px; margin-bottom: 22px; }
+.proj-title { font-family: var(--font-display); font-weight: 800; font-size: clamp(44px, 7.5vw, 96px); letter-spacing: -0.04em; text-transform: uppercase; line-height: 0.92; margin-bottom: 26px; }
+.proj-title .tg { display: inline; }
+.proj-intro { font-family: var(--font-body); font-weight: 300; font-size: clamp(17px, 1.6vw, 21px); line-height: 1.6; color: var(--muted); max-width: 760px; }
+.proj-meta { display: flex; gap: 30px; flex-wrap: wrap; margin-top: 30px; }
+.proj-meta div { font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+.proj-meta div span { display: block; color: var(--muted); margin-bottom: 4px; }
+.proj-meta div b { color: var(--ink); font-weight: 700; }
+
+.proj-cover { max-width: 1240px; margin: 44px auto; padding: 0 40px; }
+.proj-cover img { width: 100%; border: 1px solid var(--line-light); display: block; }
+
+.proj-content { max-width: 1040px; margin: 0 auto; padding: 20px 40px; }
+.proj-block { margin: 0 0 64px; }
+.proj-block h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(26px, 3.2vw, 42px); letter-spacing: -0.03em; text-transform: uppercase; line-height: 1; margin-bottom: 22px; }
+.proj-block h2 .tg { display: inline; }
+.proj-block p { font-size: 16.5px; line-height: 1.75; color: var(--muted); max-width: 760px; margin-bottom: 16px; }
+.proj-block p strong { color: var(--ink); font-weight: 600; }
+.proj-note { font-size: 14px; color: var(--muted); font-style: italic; border-left: 2px solid var(--accent); padding-left: 18px; max-width: 760px; }
+.proj-note a { color: var(--accent-ink); font-weight: 600; }
+
+.proj-gallery { max-width: 1240px; margin: 10px auto 80px; padding: 0 40px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.proj-gallery img { width: 100%; border: 1px solid var(--line-light); display: block; }
+.proj-gallery .wide { grid-column: 1 / -1; }
+
+.sub-foot { text-align: center; }
+.sub-foot .h-lg { color: #fff; margin-bottom: 30px; }
+.sub-foot .colophon { font-family: var(--font-body); font-size: 12.5px; color: var(--dim); line-height: 2; margin-top: 40px; }
+.sub-foot .colophon a { color: var(--accent); }
+
+/* ── legal pages ── */
+.legal-wrap { max-width: 760px; margin: 0 auto; padding: 140px 40px 90px; }
+.legal-wrap h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(34px, 5vw, 56px); letter-spacing: -0.04em; text-transform: uppercase; line-height: 0.95; margin-bottom: 12px; }
+.legal-wrap .updated { font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 44px; }
+.legal-wrap h2 { font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: -0.02em; margin: 40px 0 14px; }
+.legal-wrap p, .legal-wrap li { font-size: 15.5px; line-height: 1.75; color: var(--muted); }
+.legal-wrap p { margin-bottom: 14px; }
+.legal-wrap ul { padding-left: 20px; margin-bottom: 14px; }
+.legal-wrap li { margin-bottom: 8px; }
+.legal-wrap a { color: var(--accent-ink); font-weight: 600; }
+.legal-wrap strong { color: var(--ink); }
+
+/* footer legal links */
+.foot-legal { margin-top: 18px; }
+.foot-legal a { color: var(--dim); }
+.foot-legal a:hover { color: var(--accent); }
+
+@media (max-width: 700px) {
+  .proj-gallery { grid-template-columns: 1fr; }
+  .sub-nav { padding: 13px 22px; }
+  .proj-hero, .proj-content { padding-left: 22px; padding-right: 22px; }
+  .proj-cover, .proj-gallery { padding-left: 22px; padding-right: 22px; }
 }
