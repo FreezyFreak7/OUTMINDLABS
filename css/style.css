@@ -558,7 +558,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .sub-nav .back:hover { color: var(--ink); }
 
 /* ── project hero ── */
-.proj-hero { max-width: 1040px; margin: 0 auto; padding: 150px 40px 30px; }
+.proj-hero { max-width: 1440px; margin: 0 auto; padding: 150px 40px 30px; }
 .proj-tag { display: inline-block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line-light); padding: 6px 12px; border-radius: 2px; margin-bottom: 22px; }
 .proj-title { font-family: var(--font-display); font-weight: 800; font-size: clamp(44px, 7.5vw, 96px); letter-spacing: -0.04em; text-transform: uppercase; line-height: 0.92; margin-bottom: 26px; }
 .proj-title .tg { display: inline; }
@@ -568,21 +568,20 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .proj-meta div span { display: block; color: var(--muted); margin-bottom: 4px; }
 .proj-meta div b { color: var(--ink); font-weight: 700; }
 
-.proj-cover { max-width: 1240px; margin: 44px auto; padding: 0 40px; }
+.proj-cover { max-width: 1440px; margin: 44px auto; padding: 0 40px; }
 .proj-cover img { width: 100%; border: 1px solid var(--line-light); display: block; }
 
-.proj-content { max-width: 1040px; margin: 0 auto; padding: 20px 40px; }
+.proj-content { max-width: 1440px; margin: 0 auto; padding: 20px 40px; }
 .proj-block { margin: 0 0 64px; }
 .proj-block h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(26px, 3.2vw, 42px); letter-spacing: -0.03em; text-transform: uppercase; line-height: 1; margin-bottom: 22px; }
 .proj-block h2 .tg { display: inline; }
-.proj-block p { font-size: 16.5px; line-height: 1.75; color: var(--muted); max-width: 760px; margin-bottom: 16px; }
+.proj-block p { font-size: 16.5px; line-height: 1.75; color: var(--muted); max-width: 820px; margin-bottom: 16px; }
 .proj-block p strong { color: var(--ink); font-weight: 600; }
 .proj-note { font-size: 14px; color: var(--muted); font-style: italic; border-left: 2px solid var(--accent); padding-left: 18px; max-width: 760px; }
 .proj-note a { color: var(--accent-ink); font-weight: 600; }
 
-.proj-gallery { max-width: 1240px; margin: 10px auto 80px; padding: 0 40px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-.proj-gallery img { width: 100%; border: 1px solid var(--line-light); display: block; }
-.proj-gallery .wide { grid-column: 1 / -1; }
+.proj-gallery { max-width: 1440px; margin: 10px auto 80px; padding: 0 40px; column-count: 2; column-gap: 16px; }
+.proj-gallery img { width: 100%; border: 1px solid var(--line-light); display: block; margin-bottom: 16px; break-inside: avoid; }
 
 .sub-foot { text-align: center; }
 .sub-foot .h-lg { color: #fff; margin-bottom: 30px; }
@@ -590,7 +589,8 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .sub-foot .colophon a { color: var(--accent); }
 
 /* ── legal pages ── */
-.legal-wrap { max-width: 760px; margin: 0 auto; padding: 140px 40px 90px; }
+.legal-wrap { max-width: 1440px; margin: 0 auto; padding: 140px 40px 90px; }
+.legal-wrap p, .legal-wrap li, .legal-wrap h2, .legal-wrap .updated { max-width: 820px; }
 .legal-wrap h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(34px, 5vw, 56px); letter-spacing: -0.04em; text-transform: uppercase; line-height: 0.95; margin-bottom: 12px; }
 .legal-wrap .updated { font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 44px; }
 .legal-wrap h2 { font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: -0.02em; margin: 40px 0 14px; }
@@ -607,7 +607,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .foot-legal a:hover { color: var(--accent); }
 
 @media (max-width: 700px) {
-  .proj-gallery { grid-template-columns: 1fr; }
+  .proj-gallery { column-count: 1; }
   .sub-nav { padding: 13px 22px; }
   .proj-hero, .proj-content { padding-left: 22px; padding-right: 22px; }
   .proj-cover, .proj-gallery { padding-left: 22px; padding-right: 22px; }
