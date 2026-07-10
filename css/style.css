@@ -333,7 +333,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 
 /* ── reaction module ── */
 .reaction { position: relative; border: 1px solid var(--line-dark); background: #0d0d0d; padding: 34px; }
-.rtop { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
+.rtop { display: flex; justify-content: space-between; align-items: baseline; gap: 6px 16px; flex-wrap: wrap; margin-bottom: 22px; }
 .rlabel, .rprog { font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
 .rprog b { color: var(--accent); }
 
@@ -467,7 +467,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .acc-direct p { font-size: 14px; color: var(--muted); margin: 0 0 10px; }
 .acc-direct a { display: inline-block; font-family: var(--font-display); font-weight: 700; font-size: 18px; letter-spacing: -0.02em; color: var(--ink); word-break: break-all; }
 .acc-direct a:hover { color: var(--accent-ink); }
-.acc-direct .mono { display: block; margin-top: 10px; font-family: var(--font-body); color: var(--muted); font-size: 13px; }
+.acc-direct .mono { display: block; margin-top: 10px; font-family: var(--font-body); color: var(--muted); font-size: 13px; letter-spacing: 0; text-transform: none; }
 .acc-form { background: #fff; border: 1px solid var(--line-light); padding: 40px; box-shadow: 0 30px 60px -40px rgba(0,0,0,0.4); }
 .form-row { margin-bottom: 24px; }
 .form-row label { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
@@ -523,11 +523,24 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
   .spec-grid { grid-template-columns: repeat(2, 1fr); }
   .assay-grid { grid-template-columns: repeat(2, 1fr); }
   .rap-grid { grid-template-columns: 1fr; }
+  /* the fiche right column reveals with the desktop scrub; on mobile the
+     scrub is off, so show it regardless of the animation state */
+  .fiche-grid .metatable li, .fiche-grid .fiche-note, .fiche-grid .typekit .row { opacity: 1; transform: none; }
+  .fiche-grid .chip { background: var(--cc); color: var(--ct); }
+  .acc-form { padding: 28px 22px; }
+  .proj-hero { padding-top: 130px; }
+  .proj-meta { gap: 14px 26px; }
 }
 @media (max-width: 560px) {
+  .section { padding: 76px 18px; }
   .spec-grid { grid-template-columns: 1fr; }
   .assay-grid { grid-template-columns: 1fr; }
-  .hero-cta { gap: 16px; }
+  .hero { padding: 110px 18px 70px; }
+  .hero-cta { gap: 16px; flex-direction: column; align-items: flex-start; }
+  .hero-cta .btn { width: 100%; justify-content: center; }
+  .discipline, .reaction, .rap, .assay { padding: 24px; }
+  .proj-flow, .proj-hero, .proj-cover, .proj-gallery { padding-left: 18px; padding-right: 18px; }
+  .legal-wrap { padding: 120px 18px 70px; }
 }
 
 /* ═══════════════ REDUCED MOTION ═══════════════ */
