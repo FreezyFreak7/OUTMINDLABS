@@ -42,9 +42,9 @@
     var curxEl = document.getElementById('curx');
     var curyEl = document.getElementById('cury');
 
-    var SPACING = 62, CONNECT = SPACING * 1.6, CONNECT2 = CONNECT * CONNECT, RADIUS = 190;
+    var CELL = 40, SPACING = 80, CONNECT = SPACING * 1.5, CONNECT2 = CONNECT * CONNECT, RADIUS = 200;
     var W = 0, H = 0, parts = [], rect = null, dirty = true;
-    var gStartX = 0, gStartY = 0, gEndX = 0, gEndY = 0;
+    var gStartX = 0, gStartY = 0, gEndX = 0, gEndY = 0, gPhaseX = 0, gPhaseY = 0;
     var buckets = new Map();
 
     function P(x, y, i) { this.x = this.bx = x; this.y = this.by = y; this.i = i; this.sp = Math.random() * 18 + 6; }
@@ -58,9 +58,14 @@
       // Equal margins on all four edges, with the top starting below the header
       var navEl = document.getElementById('nav');
       var navH = navEl ? navEl.offsetHeight : 0;
-      var availH = H - navH;
-      gStartX = ((W % SPACING) + SPACING) / 2;
-      gStartY = navH + ((availH % SPACING) + SPACING) / 2;
+      // grey 40px grid, anchored so a line sits on the content's left edge
+      var contentLeft = Math.max(40, (W - 1440) / 2);
+      gPhaseX = ((contentLeft % CELL) + CELL) % CELL;
+      gPhaseY = 0;
+      // dots on every other grid line (80px), below the header
+      gStartX = contentLeft;
+      while (gStartX - SPACING >= 0) gStartX -= SPACING;
+      gStartY = Math.ceil((navH + CELL) / SPACING) * SPACING;
       gEndX = gStartX; while (gEndX + SPACING < W) gEndX += SPACING;
       gEndY = gStartY; while (gEndY + SPACING < H) gEndY += SPACING;
       parts = []; var i = 0;
@@ -99,9 +104,8 @@
       ctx.strokeStyle = 'rgba(17,17,17,0.05)';
       ctx.lineWidth = 1;
       ctx.beginPath();
-      var phaseX = gStartX % SPACING, phaseY = gStartY % SPACING;
-      for (var x = phaseX; x < W; x += SPACING) { var px = Math.round(x) + 0.5; ctx.moveTo(px, 0); ctx.lineTo(px, H); }
-      for (var y = phaseY; y < H; y += SPACING) { var py = Math.round(y) + 0.5; ctx.moveTo(0, py); ctx.lineTo(W, py); }
+      for (var x = gPhaseX; x < W; x += CELL) { var px = Math.round(x) + 0.5; ctx.moveTo(px, 0); ctx.lineTo(px, H); }
+      for (var y = gPhaseY; y < H; y += CELL) { var py = Math.round(y) + 0.5; ctx.moveTo(0, py); ctx.lineTo(W, py); }
       ctx.stroke();
     }
 
@@ -310,20 +314,50 @@
     }
   })();
 
-  /* ── Access form ───────────────────────────────── */
+  /* ── Access form (Web3Forms) ───────────────────── */
   (function () {
     var form = document.getElementById('accForm');
     if (!form) return;
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var wrap = document.getElementById('formWrap');
+    var wrap = document.getElementById('formWrap');
+
+    function success() {
       wrap.innerHTML =
         '<div class="acc-success">' +
         '<div class="mark">OK</div>' +
         '<h3>Message reçu</h3>' +
         '<p>Merci ! Je reviens vers vous sous 24 h.</p>' +
         '</div>';
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var btn = form.querySelector('button[type="submit"]');
+      var label = btn ? btn.textContent : '';
+      if (btn) { btn.disabled = true; btn.textContent = 'Envoi…'; }
+
+      var err = form.querySelector('.form-error');
+      if (err) err.remove();
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          if (j && j.success) { success(); }
+          else { fail(btn, label); }
+        })
+        .catch(function () { fail(btn, label); });
     });
+
+    function fail(btn, label) {
+      if (btn) { btn.disabled = false; btn.textContent = label || 'Envoyer'; }
+      var p = document.createElement('p');
+      p.className = 'form-error';
+      p.textContent = 'Échec de l’envoi. Réessayez, ou écrivez-moi à noah@outmindlabs.com.';
+      form.appendChild(p);
+    }
   })();
 
   /* ── Redaction that bugs out ────────────────────── */

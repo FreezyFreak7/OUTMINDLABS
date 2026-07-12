@@ -128,7 +128,9 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .hp { color: var(--pink); }   /* highlight where mint would vanish (on mint bg) */
 
 /* ── SECTION SHELL ─────────────────────────────────────── */
-.section { position: relative; padding: 118px 40px; }
+/* 40px base unit. Content = 1440 (36u); section padding 120 vertical (3u),
+   40 horizontal (1u), so the background grid lines fall on content edges. */
+.section { position: relative; padding: 120px 40px; }
 .section--dark  { background: var(--void);  color: #fff; }
 .section--light { background: var(--cream); color: var(--ink); }
 .section--mint  { background: linear-gradient(140deg, #aef2df 0%, #99EFD1 42%, #4fd6b2 100%); color: var(--ink); }
@@ -137,7 +139,8 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
   background-image:
     linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px);
-  background-size: 46px 46px;
+  background-size: 40px 40px;
+  background-position: max(40px, calc((100vw - 1440px) / 2)) 0;
   -webkit-mask-image: radial-gradient(ellipse at 50% 45%, #000 25%, transparent 82%);
   mask-image: radial-gradient(ellipse at 50% 45%, #000 25%, transparent 82%);
 }
@@ -148,9 +151,10 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .section--dark::before {
   content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
   background-image:
-    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
-  background-size: 48px 48px;
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: max(40px, calc((100vw - 1440px) / 2)) 0;
   -webkit-mask-image: radial-gradient(ellipse at 50% 40%, #000 30%, transparent 82%);
   mask-image: radial-gradient(ellipse at 50% 40%, #000 30%, transparent 82%);
 }
@@ -321,9 +325,10 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .fiche-sticky::before {
   content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
   background-image:
-    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
-  background-size: 48px 48px;
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: max(40px, calc((100vw - 1440px) / 2)) 0;
   -webkit-mask-image: radial-gradient(ellipse at 50% 45%, #000 30%, transparent 82%);
   mask-image: radial-gradient(ellipse at 50% 45%, #000 30%, transparent 82%);
 }
@@ -469,6 +474,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .acc-direct a:hover { color: var(--accent-ink); }
 .acc-direct .mono { display: block; margin-top: 10px; font-family: var(--font-body); color: var(--muted); font-size: 13px; letter-spacing: 0; text-transform: none; }
 .acc-form { background: #fff; border: 1px solid var(--line-light); padding: 40px; box-shadow: 0 30px 60px -40px rgba(0,0,0,0.4); }
+.form-error { margin-top: 16px; font-size: 13.5px; color: #b3261e; }
 .form-row { margin-bottom: 24px; }
 .form-row label { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
 .form-row input, .form-row select, .form-row textarea {
