@@ -128,7 +128,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .hp { color: var(--pink); }   /* highlight where mint would vanish (on mint bg) */
 
 /* ── SECTION SHELL ─────────────────────────────────────── */
-/* 40px base unit. Content = 1440 (36u); section padding 120 vertical (3u),
+/* 40px base unit. Content = 1400 (35u); section padding 120 vertical (3u),
    40 horizontal (1u), so the background grid lines fall on content edges. */
 .section { position: relative; padding: 120px 40px; }
 .section--dark  { background: var(--void);  color: #fff; }
@@ -140,12 +140,12 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
     linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px);
   background-size: 40px 40px;
-  background-position: max(40px, calc((100vw - 1440px) / 2)) 0;
+  background-position: max(40px, calc((100vw - 1400px) / 2)) 0;
   -webkit-mask-image: radial-gradient(ellipse at 50% 45%, #000 25%, transparent 82%);
   mask-image: radial-gradient(ellipse at 50% 45%, #000 25%, transparent 82%);
 }
 .section--mint > .wrap { position: relative; z-index: 1; }
-.wrap { max-width: 1440px; margin: 0 auto; position: relative; }
+.wrap { max-width: 1400px; margin: 0 auto; position: relative; }
 
 /* blueprint grid behind dark sections */
 .section--dark::before {
@@ -154,7 +154,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
     linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
   background-size: 40px 40px;
-  background-position: max(40px, calc((100vw - 1440px) / 2)) 0;
+  background-position: max(40px, calc((100vw - 1400px) / 2)) 0;
   -webkit-mask-image: radial-gradient(ellipse at 50% 40%, #000 30%, transparent 82%);
   mask-image: radial-gradient(ellipse at 50% 40%, #000 30%, transparent 82%);
 }
@@ -228,7 +228,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 }
 /* the grey graph grid is drawn inside #mesh so it stays aligned with the dots */
 #mesh { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
-.hero-inner { position: relative; z-index: 2; max-width: 1440px; margin: 0 auto; width: 100%; }
+.hero-inner { position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; width: 100%; }
 .hero h1 { color: var(--ink); margin-bottom: 26px; }
 .hero h1 .line { display: block; }
 .hero .lead { color: var(--muted); }
@@ -249,7 +249,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 @keyframes tape { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* ═══════════════ 001 · LE CONSERVATEUR ═══════════════ */
-.cons-grid { display: grid; grid-template-columns: 300px 1fr; gap: 52px; align-items: center; }
+.cons-grid { display: grid; grid-template-columns: 320px 1fr; gap: 40px; align-items: center; }
 .cons-photo { border: 1px solid var(--line-light); padding: 12px; background: #fff; max-width: 340px; }
 .cons-photo img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
 .cons-photo .cap { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 12px; }
@@ -272,7 +272,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 #classification .discipline h3 { margin-bottom: 16px; }
 #classification .taxo { margin-bottom: 16px; }
 #classification .taxo li { padding: 7px 0; }
-.class-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.class-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
 .discipline {
   background: #fff;
   border: 1px solid rgba(0,0,0,0.14);
@@ -299,7 +299,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .filter { font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; padding: 9px 16px; border: 1px solid var(--line-light); background: transparent; color: var(--muted); border-radius: 2px; transition: all .25s; }
 .filter:hover { border-color: var(--ink); color: var(--ink); }
 .filter.active { background: var(--ink); color: #fff; border-color: var(--ink); }
-.spec-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.spec-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
 .spec { border: 1px solid var(--line-light); background: #fff; padding: 12px; transition: transform .45s var(--ease), box-shadow .45s var(--ease); }
 .spec.hide { display: none; }
 .spec:hover { transform: translateY(-6px); box-shadow: 0 24px 40px -20px rgba(0,0,0,0.25); }
@@ -328,12 +328,12 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
     linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
   background-size: 40px 40px;
-  background-position: max(40px, calc((100vw - 1440px) / 2)) 0;
+  background-position: max(40px, calc((100vw - 1400px) / 2)) 0;
   -webkit-mask-image: radial-gradient(ellipse at 50% 45%, #000 30%, transparent 82%);
   mask-image: radial-gradient(ellipse at 50% 45%, #000 30%, transparent 82%);
 }
 .fiche-sticky .wrap { position: relative; z-index: 1; width: 100%; }
-.fiche-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 54px; align-items: center; margin-top: 26px; }
+.fiche-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-top: 40px; }
 .fiche-grid > * { min-width: 0; }   /* stop the big Syne word from widening its track */
 
 /* ── reaction module ── */
@@ -438,7 +438,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 /* ═══════════════ 005 · PRÉLÈVEMENTS ═══════════════ */
 .assay-intro { max-width: none; margin-bottom: 48px; }
 .assay-intro .lead { max-width: 760px; }
-.assay-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.assay-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
 .assay { border: 1px solid var(--line-light); background: #fff; padding: 30px; display: flex; flex-direction: column; transition: transform .4s var(--ease), border-color .3s; }
 .assay:hover { transform: translateY(-5px); border-color: rgba(0,196,154,0.5); }
 .assay .code { font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
@@ -450,7 +450,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .assay.feature { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
 
 /* ═══════════════ 006 · RAPPORTS ═══════════════ */
-.rap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.rap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
 .rap { border: 1px solid var(--line-dark); background: var(--panel); padding: 28px; transition: transform .4s var(--ease), border-color .3s; }
 .rap:hover { transform: translateY(-5px); border-color: var(--accent); }
 .rap .rhead { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); border-bottom: 1px solid var(--hair-dark); padding-bottom: 14px; margin-bottom: 18px; }
@@ -459,7 +459,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .rap .reading { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
 
 /* ═══════════════ 007 · CONTACT ═══════════════ */
-.acc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.acc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
 .acc-info { display: flex; flex-direction: column; }
 .acc-info .h-lg { margin-bottom: 14px; }
 .acc-note { font-size: 15px; color: var(--muted); margin-bottom: 34px; }
@@ -577,7 +577,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .sub-nav .back:hover { color: var(--ink); }
 
 /* ── project hero ── */
-.proj-hero { max-width: 1440px; margin: 0 auto; padding: 150px 40px 30px; }
+.proj-hero { max-width: 1400px; margin: 0 auto; padding: 150px 40px 30px; }
 .proj-tag { display: inline-block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line-light); padding: 6px 12px; border-radius: 2px; margin-bottom: 22px; }
 .proj-title { font-family: var(--font-display); font-weight: 800; font-size: clamp(44px, 7.5vw, 96px); letter-spacing: -0.04em; text-transform: uppercase; line-height: 0.92; margin-bottom: 26px; }
 .proj-title .tg { display: inline; }
@@ -587,10 +587,10 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .proj-meta div span { display: block; color: var(--muted); margin-bottom: 4px; }
 .proj-meta div b { color: var(--ink); font-weight: 700; }
 
-.proj-cover { max-width: 1440px; margin: 44px auto; padding: 0 40px; }
+.proj-cover { max-width: 1400px; margin: 44px auto; padding: 0 40px; }
 .proj-cover img { width: 100%; border: 1px solid var(--line-light); display: block; }
 
-.proj-content { max-width: 1440px; margin: 0 auto; padding: 20px 40px; }
+.proj-content { max-width: 1400px; margin: 0 auto; padding: 20px 40px; }
 .proj-block { margin: 0 0 64px; }
 .proj-block h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(26px, 3.2vw, 42px); letter-spacing: -0.03em; text-transform: uppercase; line-height: 1; margin-bottom: 22px; }
 .proj-block h2 .tg { display: inline; }
@@ -599,7 +599,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .proj-note { font-size: 14px; color: var(--muted); font-style: italic; border-left: 2px solid var(--accent); padding-left: 18px; max-width: 760px; }
 .proj-note a { color: var(--accent-ink); font-weight: 600; }
 
-.proj-gallery { max-width: 1440px; margin: 10px auto 80px; padding: 0 40px; column-count: 2; column-gap: 16px; }
+.proj-gallery { max-width: 1400px; margin: 10px auto 80px; padding: 0 40px; column-count: 2; column-gap: 16px; }
 .proj-gallery img { width: 100%; border: 1px solid var(--line-light); display: block; margin-bottom: 16px; break-inside: avoid; }
 
 .sub-foot { text-align: center; }
@@ -608,7 +608,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .sub-foot .colophon a { color: var(--accent); }
 
 /* ── legal pages ── */
-.legal-wrap { max-width: 1440px; margin: 0 auto; padding: 140px 40px 90px; }
+.legal-wrap { max-width: 1400px; margin: 0 auto; padding: 140px 40px 90px; }
 .legal-wrap p, .legal-wrap li, .legal-wrap h2, .legal-wrap .updated { max-width: 820px; }
 .legal-wrap h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(34px, 5vw, 56px); letter-spacing: -0.04em; text-transform: uppercase; line-height: 0.95; margin-bottom: 12px; }
 .legal-wrap .updated { font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 44px; }
@@ -633,7 +633,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 }
 
 /* ── project flow: alternating text / image ── */
-.proj-flow { max-width: 1440px; margin: 0 auto; padding: 20px 40px; }
+.proj-flow { max-width: 1400px; margin: 0 auto; padding: 20px 40px; }
 .proj-split { display: grid; grid-template-columns: 1fr 1fr; gap: 54px; align-items: center; margin: 64px 0; }
 .proj-split .proj-fig { margin: 0; }
 .proj-split .proj-fig img, .proj-full img { width: 100%; border: 1px solid var(--line-light); display: block; }

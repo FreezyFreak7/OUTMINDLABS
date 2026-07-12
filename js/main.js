@@ -59,7 +59,7 @@
       var navEl = document.getElementById('nav');
       var navH = navEl ? navEl.offsetHeight : 0;
       // grey 40px grid, anchored so a line sits on the content's left edge
-      var contentLeft = Math.max(40, (W - 1440) / 2);
+      var contentLeft = Math.max(40, (W - 1400) / 2);
       gPhaseX = ((contentLeft % CELL) + CELL) % CELL;
       gPhaseY = 0;
       // dots on every other grid line (80px), below the header
