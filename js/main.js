@@ -9,6 +9,11 @@
   var CX = null, CY = null;
   window.addEventListener('mousemove', function (e) { CX = e.clientX; CY = e.clientY; }, { passive: true });
   window.addEventListener('mouseout', function () { CX = null; CY = null; }, { passive: true });
+  // touch: a tap or a swipe pushes the hero mesh around too
+  function touchPos(e) { var t = e.touches && e.touches[0]; if (t) { CX = t.clientX; CY = t.clientY; } }
+  window.addEventListener('touchstart', touchPos, { passive: true });
+  window.addEventListener('touchmove', touchPos, { passive: true });
+  window.addEventListener('touchend', function () { CX = null; CY = null; }, { passive: true });
 
   /* ── Custom cursor ─────────────────────────────── */
   (function () {
@@ -59,8 +64,11 @@
       var navEl = document.getElementById('nav');
       var navH = navEl ? navEl.offsetHeight : 0;
       var availH = H - navH;
-      gStartX = ((W % SPACING) + SPACING) / 2;
       gStartY = navH + ((availH % SPACING) + SPACING) / 2;
+      // On mobile, start the grid at the content's side padding so a line
+      // sits on the hero content's left edge; centred margins on desktop.
+      if (W <= 900) gStartX = parseFloat(getComputedStyle(hero).paddingLeft) || ((W % SPACING) + SPACING) / 2;
+      else gStartX = ((W % SPACING) + SPACING) / 2;
       gEndX = gStartX; while (gEndX + SPACING < W) gEndX += SPACING;
       gEndY = gStartY; while (gEndY + SPACING < H) gEndY += SPACING;
       parts = []; var i = 0;
@@ -270,25 +278,10 @@
 
     if (reduce) { mod.classList.add('mode-static'); setStep(N - 1); return; }
 
-    var small = window.matchMedia('(max-width: 900px)').matches;
-
-    if (small) {
-      // B — auto-run: hold on the raw sample, then play the steps
-      mod.classList.add('mode-auto');
-      setStep(0);
-      var timer = null;
-      function run() {
-        clearInterval(timer); setStep(0);
-        var i = 0;
-        timer = setInterval(function () { i++; setStep(i); if (i >= N - 1) clearInterval(timer); }, 760);
-      }
-      if (btn) btn.addEventListener('click', run);
-      var io = new IntersectionObserver(function (es) {
-        es.forEach(function (e) { if (e.isIntersecting) { setTimeout(run, 650); io.disconnect(); } });
-      }, { threshold: 0.4 });
-      io.observe(mod);
-    } else if (scroll) {
-      // A — scroll-scrub: the reaction advances as you scroll through the pinned section
+    if (scroll) {
+      // Scroll-scrub: the reaction advances as you scroll through the section.
+      // Desktop pins the whole section; mobile pins just the reaction (CSS
+      // sticky) so the steps stay in view while you scroll past them.
       mod.classList.add('mode-scrub');
       setStep(0);
       var ticking = false;
@@ -306,7 +299,23 @@
         });
       }
       window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
       onScroll();
+    } else {
+      // Fallback (no scroll container): auto-run once when it enters view.
+      mod.classList.add('mode-auto');
+      setStep(0);
+      var timer = null;
+      function run() {
+        clearInterval(timer); setStep(0);
+        var i = 0;
+        timer = setInterval(function () { i++; setStep(i); if (i >= N - 1) clearInterval(timer); }, 760);
+      }
+      if (btn) btn.addEventListener('click', run);
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { setTimeout(run, 650); io.disconnect(); } });
+      }, { threshold: 0.4 });
+      io.observe(mod);
     }
   })();
 

@@ -527,14 +527,17 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
   .nav { padding: 13px 22px; }
   .nav-menu a, .nav-status { display: none; }
   .nav-toggle { display: inline-block; }
-  .nav.open .nav-menu { display: flex; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0; background: inherit; border-bottom: 1px solid var(--hair-dark); padding: 10px 22px 18px; }
-  .nav--light.open .nav-menu { border-bottom-color: var(--hair-light); }
+  .nav.open .nav-menu { display: flex; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0; background: rgba(18,18,20,0.95); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--hair-dark); padding: 10px 22px 18px; }
+  .nav--light.open .nav-menu { background: rgba(248,248,249,0.97); border-bottom-color: var(--hair-light); }
   .nav.open .nav-menu a { display: block; padding: 12px 0; opacity: .9; }
   .hero { padding: 120px 22px 80px; }
   .hero-readout { display: none; }
   .cons-grid, .fiche-grid, .acc-grid { grid-template-columns: 1fr; gap: 40px; }
+  .cons-photo { max-width: none; }
   .fiche-scroll { height: auto; }
-  .fiche-sticky { position: static; min-height: 0; padding: 90px 22px; }
+  .fiche-sticky { position: static; min-height: 0; padding: 90px 22px; overflow: visible; }
+  /* pin just the reaction so its steps stay in view while you scroll past */
+  .fiche-grid .reaction { position: sticky; top: 72px; z-index: 2; }
   .class-grid { grid-template-columns: 1fr; }
   .spec-grid { grid-template-columns: repeat(2, 1fr); }
   .assay-grid { grid-template-columns: repeat(2, 1fr); }
