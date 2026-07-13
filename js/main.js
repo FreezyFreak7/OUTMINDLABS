@@ -333,6 +333,27 @@
     }
   })();
 
+  /* ── Floating contact CTA ──────────────────────── */
+  // Fades in once you're past the hero; tucks away when you reach contact.
+  (function () {
+    var cta = document.getElementById('ctaFloat');
+    if (!cta) return;
+    var hero = document.getElementById('vitrine');
+    var contact = document.getElementById('demande');
+    var ticking = false;
+    function apply() {
+      ticking = false;
+      var vh = window.innerHeight;
+      var pastHero = hero ? hero.getBoundingClientRect().bottom < vh * 0.5 : true;
+      var reachedContact = contact ? contact.getBoundingClientRect().top < vh * 0.85 : false;
+      cta.classList.toggle('show', pastHero && !reachedContact);
+    }
+    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(apply); } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    apply();
+  })();
+
   /* ── Access form (Web3Forms) ───────────────────── */
   (function () {
     var form = document.getElementById('accForm');
