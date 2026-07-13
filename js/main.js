@@ -49,7 +49,7 @@
 
     var SPACING = 62, CONNECT = SPACING * 1.6, CONNECT2 = CONNECT * CONNECT, RADIUS = 190;
     var W = 0, H = 0, parts = [], rect = null, dirty = true;
-    var gStartX = 0, gStartY = 0, gEndX = 0, gEndY = 0;
+    var gStartX = 0, gStartY = 0, gEndX = 0, gEndY = 0, stepX = SPACING;
     var buckets = new Map();
 
     function P(x, y, i) { this.x = this.bx = x; this.y = this.by = y; this.i = i; this.sp = Math.random() * 18 + 6; }
@@ -65,15 +65,26 @@
       var navH = navEl ? navEl.offsetHeight : 0;
       var availH = H - navH;
       gStartY = navH + ((availH % SPACING) + SPACING) / 2;
-      // On mobile, start the grid at the content's side padding so a line
-      // sits on the hero content's left edge; centred margins on desktop.
-      if (W <= 900) gStartX = parseFloat(getComputedStyle(hero).paddingLeft) || ((W % SPACING) + SPACING) / 2;
-      else gStartX = ((W % SPACING) + SPACING) / 2;
-      gEndX = gStartX; while (gEndX + SPACING < W) gEndX += SPACING;
+      stepX = SPACING;
+      // On mobile, fit the columns to the content so a grid line sits on BOTH
+      // the left and right edges of the hero content (symmetric border);
+      // centred margins on desktop.
+      if (W <= 900) {
+        var cs = getComputedStyle(hero);
+        var padL = parseFloat(cs.paddingLeft) || 0;
+        var padR = parseFloat(cs.paddingRight) || padL;
+        var contentW = W - padL - padR;
+        var n = Math.max(2, Math.round(contentW / SPACING));
+        stepX = contentW / n;
+        gStartX = padL;
+      } else {
+        gStartX = ((W % SPACING) + SPACING) / 2;
+      }
+      gEndX = gStartX; while (gEndX + stepX < W) gEndX += stepX;
       gEndY = gStartY; while (gEndY + SPACING < H) gEndY += SPACING;
       parts = []; var i = 0;
       for (var y = gStartY; y <= gEndY + 0.5; y += SPACING)
-        for (var x = gStartX; x <= gEndX + 0.5; x += SPACING) parts.push(new P(x, y, i++));
+        for (var x = gStartX; x <= gEndX + 0.5; x += stepX) parts.push(new P(x, y, i++));
       dirty = true;
     }
 
@@ -107,8 +118,8 @@
       ctx.strokeStyle = 'rgba(17,17,17,0.05)';
       ctx.lineWidth = 1;
       ctx.beginPath();
-      var phaseX = gStartX % SPACING, phaseY = gStartY % SPACING;
-      for (var x = phaseX; x < W; x += SPACING) { var px = Math.round(x) + 0.5; ctx.moveTo(px, 0); ctx.lineTo(px, H); }
+      var phaseX = ((gStartX % stepX) + stepX) % stepX, phaseY = gStartY % SPACING;
+      for (var x = phaseX; x < W; x += stepX) { var px = Math.round(x) + 0.5; ctx.moveTo(px, 0); ctx.lineTo(px, H); }
       for (var y = phaseY; y < H; y += SPACING) { var py = Math.round(y) + 0.5; ctx.moveTo(0, py); ctx.lineTo(W, py); }
       ctx.stroke();
     }
