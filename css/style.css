@@ -267,7 +267,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 #classification .discipline { padding: 30px; }
 #classification .discipline h3 { margin-bottom: 16px; }
 #classification .taxo { margin-bottom: 16px; }
-#classification .taxo li { padding: 7px 0; }
+#classification .taxo summary { padding: 8px 0; }
 .class-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 .discipline {
   background: #fff;
@@ -285,8 +285,24 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 }
 .discipline h3 { font-family: var(--font-display); font-weight: 800; font-size: clamp(24px, 2.6vw, 34px); letter-spacing: -0.03em; text-transform: uppercase; color: var(--ink); margin-bottom: 22px; line-height: 1; }
 .taxo { list-style: none; margin-bottom: 22px; }
-.taxo li { font-family: var(--font-body); font-size: 15px; color: #333; padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.08); }
-.taxo li::before { content: '+ '; font-family: var(--font-mono); color: var(--accent-ink); font-weight: 700; }
+.taxo li { border-bottom: 1px solid rgba(0,0,0,0.08); }
+.taxo summary {
+  list-style: none; cursor: pointer; user-select: none;
+  font-family: var(--font-body); font-size: 15px; color: #333;
+  padding: 10px 0; display: flex; align-items: baseline; gap: 9px;
+  transition: color .2s var(--ease);
+}
+.taxo summary::-webkit-details-marker { display: none; }
+.taxo summary::before {
+  content: '+'; font-family: var(--font-mono); color: var(--accent-ink);
+  font-weight: 700; width: 10px; flex: none;
+}
+.taxo details[open] summary::before { content: '\2212'; }
+.taxo summary:hover { color: var(--accent-ink); }
+.taxo details p {
+  font-family: var(--font-body); font-size: 13.5px; color: var(--muted);
+  line-height: 1.5; padding: 0 0 12px 19px; margin: 0; max-width: 40ch;
+}
 .discipline .one { font-size: 15px; color: var(--muted); font-style: italic; }
 
 /* ═══════════════ 003 · LA COLLECTION ═══════════════ */
