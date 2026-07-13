@@ -113,7 +113,7 @@ body.cur-hover #cur-ring { width: 54px; height: 54px; opacity: .9; }
   text-transform: uppercase;
   line-height: 0.94;
 }
-.h-xl { font-size: clamp(44px, 7vw, 104px); line-height: 0.9; }
+.h-xl { font-size: clamp(44px, 7vw, 104px); line-height: 0.95; }
 .h-lg { font-size: clamp(32px, 4.6vw, 60px); text-wrap: balance; }
 .h-md { font-size: clamp(22px, 2.4vw, 30px); font-weight: 700; text-wrap: balance; }
 .lead { font-family: var(--font-body); font-weight: 300; font-size: clamp(16px, 1.5vw, 19px); line-height: 1.65; color: var(--muted); }
@@ -546,7 +546,6 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
   .nav.open .nav-menu a { display: block; padding: 12px 0; opacity: .9; }
   .hero { padding: 120px 22px 80px; }
   .hero-readout { display: none; }
-  .hero .h-xl .line { white-space: nowrap; }   /* keep the title on 3 lines */
   .cons-grid, .fiche-grid, .acc-grid { grid-template-columns: 1fr; gap: 40px; }
   .cons-photo { max-width: none; }
   .fiche-scroll { height: auto; }
@@ -572,7 +571,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
   .spec-grid { grid-template-columns: 1fr; }
   .assay-grid { grid-template-columns: 1fr; }
   .hero { padding: 110px 18px 70px; }
-  .hero .h-xl { font-size: clamp(30px, 12.5vw, 50px); }   /* fit 'ON MÉLANGE.' on one line */
+  .hero .h-xl { font-size: clamp(28px, 11.5vw, 46px); }   /* smaller, with margin so 'ON MÉLANGE.' never clips */
   .cta-float { right: 16px; bottom: 16px; padding: 12px 18px; font-size: 11px; }
   .hero-cta { gap: 16px; flex-direction: column; align-items: flex-start; }
   .hero-cta .btn { width: 100%; justify-content: center; }
