@@ -430,19 +430,21 @@
         headers: { 'Accept': 'application/json' },
         body: new FormData(form)
       })
-        .then(function (r) { return r.json(); })
+        .then(function (r) { return r.json().catch(function () { return { success: false, message: 'HTTP ' + r.status }; }); })
         .then(function (j) {
+          console.log('[form] Web3Forms response:', j);
           if (j && j.success) { success(); }
-          else { fail(btn, label); }
+          else { fail(btn, label, j && j.message); }
         })
-        .catch(function () { fail(btn, label); });
+        .catch(function (e) { console.log('[form] network error:', e); fail(btn, label, 'Erreur réseau'); });
     });
 
-    function fail(btn, label) {
+    function fail(btn, label, detail) {
       if (btn) { btn.disabled = false; btn.textContent = label || 'Envoyer'; }
       var p = document.createElement('p');
       p.className = 'form-error';
-      p.textContent = 'Échec de l’envoi. Réessayez, ou écrivez-moi à noah@outmindlabs.com.';
+      p.textContent = 'Échec de l’envoi. Réessayez, ou écrivez-moi à noah@outmindlabs.com.'
+        + (detail ? ' (' + detail + ')' : '');
       form.appendChild(p);
     }
   })();
