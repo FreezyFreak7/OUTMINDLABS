@@ -42,9 +42,9 @@
     var curxEl = document.getElementById('curx');
     var curyEl = document.getElementById('cury');
 
-    var CELL = 40, SPACING = 80, CONNECT = SPACING * 1.5, CONNECT2 = CONNECT * CONNECT, RADIUS = 200;
+    var SPACING = 62, CONNECT = SPACING * 1.6, CONNECT2 = CONNECT * CONNECT, RADIUS = 190;
     var W = 0, H = 0, parts = [], rect = null, dirty = true;
-    var gStartX = 0, gStartY = 0, gEndX = 0, gEndY = 0, gPhaseX = 0, gPhaseY = 0;
+    var gStartX = 0, gStartY = 0, gEndX = 0, gEndY = 0;
     var buckets = new Map();
 
     function P(x, y, i) { this.x = this.bx = x; this.y = this.by = y; this.i = i; this.sp = Math.random() * 18 + 6; }
@@ -58,14 +58,9 @@
       // Equal margins on all four edges, with the top starting below the header
       var navEl = document.getElementById('nav');
       var navH = navEl ? navEl.offsetHeight : 0;
-      // grey 40px grid, anchored so a line sits on the content's left edge
-      var contentLeft = Math.max(40, (W - 1400) / 2);
-      gPhaseX = ((contentLeft % CELL) + CELL) % CELL;
-      gPhaseY = 0;
-      // dots on every other grid line (80px), below the header
-      gStartX = contentLeft;
-      while (gStartX - SPACING >= 0) gStartX -= SPACING;
-      gStartY = Math.ceil((navH + CELL) / SPACING) * SPACING;
+      var availH = H - navH;
+      gStartX = ((W % SPACING) + SPACING) / 2;
+      gStartY = navH + ((availH % SPACING) + SPACING) / 2;
       gEndX = gStartX; while (gEndX + SPACING < W) gEndX += SPACING;
       gEndY = gStartY; while (gEndY + SPACING < H) gEndY += SPACING;
       parts = []; var i = 0;
@@ -104,8 +99,9 @@
       ctx.strokeStyle = 'rgba(17,17,17,0.05)';
       ctx.lineWidth = 1;
       ctx.beginPath();
-      for (var x = gPhaseX; x < W; x += CELL) { var px = Math.round(x) + 0.5; ctx.moveTo(px, 0); ctx.lineTo(px, H); }
-      for (var y = gPhaseY; y < H; y += CELL) { var py = Math.round(y) + 0.5; ctx.moveTo(0, py); ctx.lineTo(W, py); }
+      var phaseX = gStartX % SPACING, phaseY = gStartY % SPACING;
+      for (var x = phaseX; x < W; x += SPACING) { var px = Math.round(x) + 0.5; ctx.moveTo(px, 0); ctx.lineTo(px, H); }
+      for (var y = phaseY; y < H; y += SPACING) { var py = Math.round(y) + 0.5; ctx.moveTo(0, py); ctx.lineTo(W, py); }
       ctx.stroke();
     }
 
