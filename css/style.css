@@ -525,7 +525,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 /* ── floating contact CTA ── */
 .cta-float {
   position: fixed; z-index: 950; right: 26px; bottom: 26px;
-  display: inline-flex; align-items: center; gap: 10px;
+  display: inline-flex; align-items: center;
   font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
   color: #fff; background: #111; padding: 14px 22px; border-radius: 100px;
   box-shadow: 0 0 0 1px rgba(0,196,154,0.55), 0 18px 38px -14px rgba(0,0,0,0.6);
@@ -534,13 +534,6 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 }
 .cta-float.show { opacity: 1; transform: none; pointer-events: auto; }
 .cta-float:hover { background: var(--accent); color: var(--void); box-shadow: 0 0 0 1px var(--accent), 0 18px 38px -12px rgba(0,196,154,0.45); }
-.cta-float .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: ctaPulse 2.4s var(--ease) infinite; }
-.cta-float:hover .dot { background: var(--void); animation: none; }
-@keyframes ctaPulse {
-  0%   { box-shadow: 0 0 0 0 rgba(0,196,154,0.5); }
-  70%  { box-shadow: 0 0 0 7px rgba(0,196,154,0); }
-  100% { box-shadow: 0 0 0 0 rgba(0,196,154,0); }
-}
 
 /* ═══════════════ RESPONSIVE ═══════════════ */
 @media (max-width: 900px) {
@@ -595,7 +588,6 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
   .reveal { opacity: 1; transform: none; transition: none; }
   .r-word, .sw, .grid-underlay, .r-stamp,
   .metatable li, .fiche-note, .typekit .row, .typekit .chip { transition: none; }
-  .cta-float .dot { animation: none; }
   .fiche-scroll { height: auto; }
   .fiche-sticky { position: static; min-height: 0; }
   * { scroll-behavior: auto !important; }
