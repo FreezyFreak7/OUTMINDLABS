@@ -377,7 +377,7 @@
         if (busy) return;
         busy = true;
         el.classList.add('glitch');
-        var ticks = 7, i = 0;
+        var ticks = 16, i = 0;
         var iv = setInterval(function () {
           el.textContent = scramble();
           if (++i >= ticks) {
@@ -392,7 +392,7 @@
       if (reduce) return;              // stays a static censored bar
       el.addEventListener('mouseenter', burst);
       (function loop() {
-        setTimeout(function () { burst(); loop(); }, 2600 + Math.random() * 4200);
+        setTimeout(function () { burst(); loop(); }, 1300 + Math.random() * 2000);
       })();
     });
   })();

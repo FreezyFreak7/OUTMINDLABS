@@ -301,7 +301,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .taxo summary:hover { color: var(--accent-ink); }
 .taxo details p {
   font-family: var(--font-body); font-size: 13.5px; color: var(--muted);
-  line-height: 1.5; padding: 0 0 12px 19px; margin: 0; max-width: 40ch;
+  line-height: 1.5; padding: 0 6px 12px 19px; margin: 0;
 }
 .discipline .one { font-size: 15px; color: var(--muted); font-style: italic; }
 
@@ -458,7 +458,6 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .assay li { font-family: var(--font-body); font-size: 14px; color: var(--muted); padding: 8px 0; border-bottom: 1px solid var(--hair-light); }
 .assay li::before { content: '+ '; font-family: var(--font-mono); color: var(--accent-ink); font-weight: 700; }
 .assay .delai { font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); }
-.assay.feature { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
 
 /* ═══════════════ 006 · RAPPORTS ═══════════════ */
 .rap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
