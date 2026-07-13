@@ -348,6 +348,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .fiche-grid > * { min-width: 0; }   /* stop the big Syne word from widening its track */
 
 /* ── reaction module ── */
+.reaction-pin { display: contents; }   /* desktop: reaction is a direct grid child */
 .reaction { position: relative; border: 1px solid var(--line-dark); background: #0d0d0d; padding: 34px; }
 .rtop { display: flex; justify-content: space-between; align-items: baseline; gap: 6px 16px; flex-wrap: wrap; margin-bottom: 22px; }
 .rlabel, .rprog { font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
@@ -532,12 +533,15 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
   .nav.open .nav-menu a { display: block; padding: 12px 0; opacity: .9; }
   .hero { padding: 120px 22px 80px; }
   .hero-readout { display: none; }
+  .hero .h-xl .line { white-space: nowrap; }   /* keep the title on 3 lines */
   .cons-grid, .fiche-grid, .acc-grid { grid-template-columns: 1fr; gap: 40px; }
   .cons-photo { max-width: none; }
   .fiche-scroll { height: auto; }
   .fiche-sticky { position: static; min-height: 0; padding: 90px 22px; overflow: visible; }
-  /* pin just the reaction so its steps stay in view while you scroll past */
-  .fiche-grid .reaction { position: sticky; top: 72px; z-index: 2; }
+  /* pin the reaction inside its own spacer so it plays through its steps
+     before the meta, without ever scrolling on top of it */
+  .reaction-pin { display: block; min-height: 150vh; }
+  .fiche-grid .reaction { position: sticky; top: 72px; }
   .class-grid { grid-template-columns: 1fr; }
   .spec-grid { grid-template-columns: repeat(2, 1fr); }
   .assay-grid { grid-template-columns: repeat(2, 1fr); }
@@ -555,6 +559,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
   .spec-grid { grid-template-columns: 1fr; }
   .assay-grid { grid-template-columns: 1fr; }
   .hero { padding: 110px 18px 70px; }
+  .hero .h-xl { font-size: clamp(30px, 12.5vw, 50px); }   /* fit 'ON MÉLANGE.' on one line */
   .hero-cta { gap: 16px; flex-direction: column; align-items: flex-start; }
   .hero-cta .btn { width: 100%; justify-content: center; }
   .discipline, .reaction, .rap, .assay { padding: 24px; }

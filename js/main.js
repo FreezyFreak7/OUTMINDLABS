@@ -284,16 +284,30 @@
       // sticky) so the steps stay in view while you scroll past them.
       mod.classList.add('mode-scrub');
       setStep(0);
+      var STICKY_TOP = 72;   // matches the mobile sticky `top`
+      var pin = mod.parentElement && mod.parentElement.classList.contains('reaction-pin')
+        ? mod.parentElement : null;
       var ticking = false;
       function onScroll() {
         if (ticking) return;
         ticking = true;
         requestAnimationFrame(function () {
           ticking = false;
-          var r = scroll.getBoundingClientRect();
-          var total = r.height - window.innerHeight;
-          if (total <= 0) return;
-          var p = -r.top / total;
+          var p;
+          if (pin && window.innerWidth <= 900) {
+            // mobile: progress over the reaction's pinned range so all 5
+            // steps land while it is frozen (before the meta appears)
+            var wr = pin.getBoundingClientRect();
+            var span = wr.height - mod.offsetHeight;
+            if (span <= 0) return;
+            p = (STICKY_TOP - wr.top) / span;
+          } else {
+            // desktop: progress over the pinned section
+            var r = scroll.getBoundingClientRect();
+            var total = r.height - window.innerHeight;
+            if (total <= 0) return;
+            p = -r.top / total;
+          }
           p = p < 0 ? 0 : p > 1 ? 1 : p;
           setStep(Math.floor(p * N * 0.999));
         });
