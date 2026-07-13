@@ -165,6 +165,42 @@
     build(); loop();
   })();
 
+  /* ── Hero title: fit to width ──────────────────── */
+  // Lines are nowrap (so the title is always 3 lines). This shrinks the font
+  // just enough that the widest line fits — measured with the real font on
+  // the real device, so it can never overflow/clip regardless of rendering.
+  (function () {
+    var h1 = document.querySelector('.hero .h-xl');
+    if (!h1) return;
+    var lines = h1.querySelectorAll('.line');
+    if (!lines.length) return;
+    var rng = document.createRange();
+    function widest() {
+      var max = 0;
+      for (var i = 0; i < lines.length; i++) {
+        rng.selectNodeContents(lines[i]);
+        var w = rng.getBoundingClientRect().width;
+        if (w > max) max = w;
+      }
+      return max;
+    }
+    function fit() {
+      h1.style.fontSize = '';                    // reset to the CSS size
+      var avail = h1.clientWidth * 0.98;         // small safety margin
+      if (avail <= 0) return;
+      var w = widest();
+      if (w > avail) {
+        var cur = parseFloat(getComputedStyle(h1).fontSize) || 40;
+        h1.style.fontSize = (cur * avail / w) + 'px';
+      }
+    }
+    fit();
+    window.addEventListener('load', fit);
+    window.addEventListener('resize', fit, { passive: true });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+    setTimeout(fit, 300); setTimeout(fit, 1200);   // in case the font settles late
+  })();
+
   /* ── Scellé label tape ─────────────────────────── */
   (function () {
     var track = document.getElementById('scelle');

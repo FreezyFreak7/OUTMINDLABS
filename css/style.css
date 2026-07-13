@@ -226,7 +226,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 #mesh { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
 .hero-inner { position: relative; z-index: 2; max-width: 1440px; margin: 0 auto; width: 100%; }
 .hero h1 { color: var(--ink); margin-bottom: 26px; }
-.hero h1 .line { display: block; }
+.hero h1 .line { display: block; white-space: nowrap; }
 .hero .lead { color: var(--muted); }
 .hero-sub { max-width: 560px; margin-bottom: 40px; }
 .hero-cta { display: flex; align-items: center; gap: 26px; flex-wrap: wrap; }
