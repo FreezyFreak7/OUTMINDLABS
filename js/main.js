@@ -340,23 +340,30 @@
         ticking = true;
         requestAnimationFrame(function () {
           ticking = false;
-          var p;
+          var pp;
           if (pin && window.innerWidth <= 900) {
-            // mobile: progress over the reaction's pinned range so all 5
-            // steps land while it is frozen (before the meta appears)
+            // mobile: start the reaction as soon as it scrolls into the lower
+            // part of the screen and finish it just as it locks to the top —
+            // so it reads as interactive right away, not a static black panel.
             var wr = pin.getBoundingClientRect();
-            var span = wr.height - mod.offsetHeight;
-            if (span <= 0) return;
-            p = (STICKY_TOP - wr.top) / span;
+            var vh = window.innerHeight;
+            var from = vh * 0.72;               // pp = 0 (reaction entering view)
+            var to = STICKY_TOP - vh * 0.12;    // pp = 1 (just after it pins)
+            if (from - to <= 0) return;
+            pp = (from - wr.top) / (from - to);
           } else {
-            // desktop: progress over the pinned section
+            // desktop: progress over the pinned section, remapped to a tighter,
+            // earlier window so it responds to scroll sooner
             var r = scroll.getBoundingClientRect();
             var total = r.height - window.innerHeight;
             if (total <= 0) return;
-            p = -r.top / total;
+            var p = -r.top / total;
+            p = p < 0 ? 0 : p > 1 ? 1 : p;
+            var ACT_START = 0.03, ACT_END = 0.5;
+            pp = (p - ACT_START) / (ACT_END - ACT_START);
           }
-          p = p < 0 ? 0 : p > 1 ? 1 : p;
-          setStep(Math.floor(p * N * 0.999));
+          pp = pp < 0 ? 0 : pp > 1 ? 1 : pp;
+          setStep(Math.floor(pp * N * 0.999));
         });
       }
       window.addEventListener('scroll', onScroll, { passive: true });
@@ -386,7 +393,9 @@
     var cta = document.getElementById('ctaFloat');
     if (!cta) return;
     var hero = document.getElementById('vitrine');
-    var contact = document.getElementById('demande');
+    // On the home page hide once the contact section is reached; on case-study
+    // pages (no hero / no #demande) show throughout, hiding only at the footer.
+    var contact = document.getElementById('demande') || document.querySelector('.sub-foot');
     var ticking = false;
     function apply() {
       ticking = false;
