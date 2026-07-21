@@ -17,18 +17,20 @@
 <nav class="nav nav--light" id="nav">
   <a href="#vitrine" class="nav-brand"><span>OUTMIND</span><b>LABS</b></a>
   <div class="nav-menu" id="navMenu">
-    <a href="#conservateur">001 Studio</a>
-    <a href="#classification">002 Disciplines</a>
-    <a href="#collection">003 Projets</a>
-    <a href="#prelevements">005 Offres</a>
-    <a href="#demande">007 Contact</a>
+    <a href="#conservateur" data-en="001 Studio">001 Studio</a>
+    <a href="#classification" data-en="002 Disciplines">002 Disciplines</a>
+    <a href="#collection" data-en="003 Projects">003 Projets</a>
+    <a href="#prelevements" data-en="005 Offers">005 Offres</a>
+    <a href="#demande" data-en="007 Contact">007 Contact</a>
   </div>
-  <span class="nav-status"><span class="led"></span>Disponible</span>
-  <button class="nav-toggle" id="navToggle" aria-label="Menu">Index</button>
+  <div class="nav-actions">
+    <button class="lang-toggle" id="langToggle" aria-label="Switch language">EN</button>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">Index</button>
+  </div>
 </nav>
 
-<!-- floating contact CTA — follows you while you explore -->
-<a href="#demande" class="cta-float" id="ctaFloat">Parlons-en</a>
+<!-- floating contact CTA -->
+<a href="#demande" class="cta-float" id="ctaFloat" data-en="Let's talk">Parlons-en</a>
 
 <!-- ═══ 000 · LA PAILLASSE / HERO ═══ -->
 <header class="hero" id="vitrine" data-nav="light">
@@ -36,25 +38,25 @@
 
   <div class="hero-inner">
     <h1 class="h-xl">
-      <span class="line">ON TESTE.</span>
-      <span class="line">ON MÉLANGE.</span>
-      <span class="line">ON <span class="tg">SIGNE.</span></span>
+      <span class="line" data-en="WE TEST.">ON TESTE.</span>
+      <span class="line" data-en="WE MIX.">ON MÉLANGE.</span>
+      <span class="line" data-en="WE <span class='tg'>SIGN.</span>">ON <span class="tg">SIGNE.</span></span>
     </h1>
 
-    <p class="lead hero-sub">
+    <p class="lead hero-sub" data-en="The lab where your designs get tested. We mix ideas, measure what converts, keep what sticks. Code, AI and image, one workbench.">
       Le laboratoire où vos designs passent les tests. On mélange les idées, on mesure
-      ce qui convertit, on garde ce qui marque. Code, IA et image — une seule paillasse.
+      ce qui convertit, on garde ce qui marque. Code, IA et image, une seule paillasse.
     </p>
 
     <div class="hero-cta">
-      <a href="#collection" class="btn btn-solid">Voir les spécimens</a>
-      <a href="#demande" class="link-ghost">ou soumettre un échantillon →</a>
+      <a href="#collection" class="btn btn-solid" data-en="See the specimens">Voir les spécimens</a>
+      <a href="#demande" class="link-ghost" data-en="or submit a sample →">ou soumettre un échantillon →</a>
     </div>
   </div>
 
   <div class="hero-readout" id="readout">
-    ÉCHANTILLON 000 · TEINTE #00C49A<br>
-    CURSEUR X:<b id="curx">000</b> Y:<b id="cury">000</b> PX
+    <span data-en="SAMPLE 000 · HUE #00C49A">ÉCHANTILLON 000 · TEINTE #00C49A</span><br>
+    <span data-en="CURSOR">CURSEUR</span> X:<b id="curx">000</b> Y:<b id="cury">000</b> PX
   </div>
 </header>
 
@@ -68,25 +70,24 @@
 <!-- ═══ 001 · LE CONSERVATEUR ═══ -->
 <section class="section section--light" id="conservateur" data-nav="light">
   <div class="wrap">
-    <span class="module reveal">001 · LE STUDIO</span>
+    <span class="module reveal" data-en="001 · THE STUDIO">001 · LE STUDIO</span>
     <div class="cons-grid">
       <div class="cons-photo corner reveal">
-        <img loading="lazy" decoding="async" src="img/photo.jpg" onerror="this.onerror=null;this.src='https://media.licdn.com/dms/image/v2/D4E03AQHVdThLe8L96Q/profile-displayphoto-crop_800_800/B4EZ7VRCd4KAAI-/0/1781694475133?e=1784160000&v=beta&t=P5pzf5wjZxPUCnUIua4cOZd3Tu4Jrk9XcfYfxWUAHPQ'" alt="Noah, conservateur">
+        <img loading="lazy" decoding="async" src="img/photo.jpg" onerror="this.onerror=null;this.src='https://media.licdn.com/dms/image/v2/D4E03AQHVdThLe8L96Q/profile-displayphoto-crop_800_800/B4EZ7VRCd4KAAI-/0/1781694475133?e=1784160000&v=beta&t=P5pzf5wjZxPUCnUIua4cOZd3Tu4Jrk9XcfYfxWUAHPQ'" alt="Noah">
         <div class="cap">
           <span class="mono">Noah · Lead Scientist</span>
-          <span class="status"><span class="led"></span>Disponible</span>
         </div>
       </div>
       <div class="cons-body reveal">
-        <h2 class="h-md" style="margin-bottom:22px;">Un seul cerveau.<br>Deux <span class="tg">obsessions.</span></h2>
-        <p>Je code autant que je dessine : sites et applications web sur mesure, fonctionnalités IA, et l'IA en coulisses pour livrer vite — seul.</p>
-        <p>Je fais une obsession sur les pixels pour que vous n'ayez pas à le faire.<br>Studio solo, résultats de grand studio. Sans le grand studio, ni sa facture.</p>
-        <p>Ce n'est pas de la Science-Fiction. C'est de la Magie.<br>“Nous” ? Vous et moi, co-signataires du dossier.</p>
+        <h2 class="h-md" style="margin-bottom:22px;" data-en="One brain.<br>Two <span class='tg'>obsessions.</span>">Un seul cerveau.<br>Deux <span class="tg">obsessions.</span></h2>
+        <p data-en="I code as much as I design: custom sites and web apps, AI features, and AI behind the scenes to ship fast, solo.">Je code autant que je dessine : sites et applications web sur mesure, fonctionnalités IA, et l'IA en coulisses pour livrer vite, seul.</p>
+        <p data-en="I obsess over pixels so you don't have to.<br>Solo studio, big-studio results. Without the big studio, or its invoice.">Je fais une obsession sur les pixels pour que vous n'ayez pas à le faire.<br>Studio solo, résultats de grand studio. Sans le grand studio, ni sa facture.</p>
+        <p data-en="It's not Science-Fiction. It's Magic.<br>“We”? You and me, co-signers of the file.">Ce n'est pas de la Science-Fiction. C'est de la Magie.<br>“Nous” ? Vous et moi, co-signataires du dossier.</p>
         <ul class="field-list">
-          <li><span>Rôle</span><span>Développeur &amp; designer</span></li>
-          <li><span>Disciplines</span><span>Web, IA &amp; image</span></li>
-          <li><span>Basé à</span><span>Suisse · partout ailleurs</span></li>
-          <li><span>Réponse</span><span>sous 24 h</span></li>
+          <li><span data-en="Role">Rôle</span><span data-en="Developer &amp; designer">Développeur &amp; designer</span></li>
+          <li><span data-en="Disciplines">Disciplines</span><span data-en="Web, AI &amp; image">Web, IA &amp; image</span></li>
+          <li><span data-en="Based in">Basé à</span><span data-en="Switzerland · everywhere else">Suisse · partout ailleurs</span></li>
+          <li><span data-en="Response">Réponse</span><span data-en="within 24 h">sous 24 h</span></li>
         </ul>
       </div>
     </div>
@@ -97,33 +98,33 @@
 <section class="section section--mint" id="classification" data-nav="mint">
   <div class="wrap">
     <div class="class-head reveal">
-      <span class="module">002 · DISCIPLINES</span>
-      <h2 class="h-lg">Deux disciplines,<br>une seule <span class="hp">obsession.</span></h2>
+      <span class="module" data-en="002 · DISCIPLINES">002 · DISCIPLINES</span>
+      <h2 class="h-lg" data-en="Two disciplines,<br>one single <span class='hp'>obsession.</span>">Deux disciplines,<br>une seule <span class="hp">obsession.</span></h2>
     </div>
     <div class="class-grid reveal">
       <div class="discipline corner">
         <span class="tag">01 · Web</span>
-        <h3>Web &amp; Ingénierie</h3>
+        <h3 data-en="Web &amp; Engineering">Web &amp; Ingénierie</h3>
         <ul class="taxo">
-          <li><details><summary>Applications sur mesure</summary><p>Des interfaces et outils web taillés pour un besoin précis.</p></details></li>
-          <li><details><summary>E-commerce &amp; configurateurs</summary><p>Boutiques et configurateurs produit qui encaissent la complexité.</p></details></li>
-          <li><details><summary>Fonctionnalités IA</summary><p>Chatbots, recherche intelligente et fonctions propulsées par LLM.</p></details></li>
-          <li><details><summary>Intégrations &amp; API</summary><p>Connexions à vos outils, paiements et bases de données.</p></details></li>
-          <li><details><summary>Sites qui convertissent</summary><p>Vitrines et landing pages rapides, pensées pour l'action.</p></details></li>
+          <li><details><summary data-en="Custom applications">Applications sur mesure</summary><p data-en="Web interfaces and tools built for a specific need.">Des interfaces et outils web taillés pour un besoin précis.</p></details></li>
+          <li><details><summary data-en="E-commerce &amp; configurators">E-commerce &amp; configurateurs</summary><p data-en="Stores and product configurators that handle complexity.">Boutiques et configurateurs produit qui encaissent la complexité.</p></details></li>
+          <li><details><summary data-en="AI features">Fonctionnalités IA</summary><p data-en="Chatbots, smart search and LLM-powered functions.">Chatbots, recherche intelligente et fonctions propulsées par LLM.</p></details></li>
+          <li><details><summary data-en="Integrations &amp; APIs">Intégrations &amp; API</summary><p data-en="Connections to your tools, payments and databases.">Connexions à vos outils, paiements et bases de données.</p></details></li>
+          <li><details><summary data-en="Sites that convert">Sites qui convertissent</summary><p data-en="Fast showcase and landing pages, built for action.">Vitrines et landing pages rapides, pensées pour l'action.</p></details></li>
         </ul>
-        <p class="one">Du site vitrine à l'application sur mesure — construit pour tourner, pas juste pour décorer.</p>
+        <p class="one" data-en="From showcase site to custom app, built to run, not just to decorate.">Du site vitrine à l'application sur mesure, construit pour tourner, pas juste pour décorer.</p>
       </div>
       <div class="discipline corner">
         <span class="tag">02 · Image</span>
-        <h3>Image &amp; Design Graphique</h3>
+        <h3 data-en="Image &amp; Graphic Design">Image &amp; Design Graphique</h3>
         <ul class="taxo">
-          <li><details><summary>Logos &amp; logotypes</summary><p>Un logo simple et mémorable, décliné partout.</p></details></li>
-          <li><details><summary>Identité complète</summary><p>Couleurs, typographies et règles pour une marque cohérente.</p></details></li>
-          <li><details><summary>Réseaux sociaux</summary><p>Des visuels prêts à publier, fidèles à votre image.</p></details></li>
-          <li><details><summary>Print &amp; édition</summary><p>Cartes, brochures et supports imprimés soignés.</p></details></li>
-          <li><details><summary>Direction artistique</summary><p>Une direction visuelle claire pour guider tous vos projets.</p></details></li>
+          <li><details><summary data-en="Logos &amp; logotypes">Logos &amp; logotypes</summary><p data-en="A simple, memorable logo that works everywhere.">Un logo simple et mémorable, décliné partout.</p></details></li>
+          <li><details><summary data-en="Full identity">Identité complète</summary><p data-en="Colors, type and rules for a consistent brand.">Couleurs, typographies et règles pour une marque cohérente.</p></details></li>
+          <li><details><summary data-en="Social media">Réseaux sociaux</summary><p data-en="Ready-to-post visuals, true to your brand.">Des visuels prêts à publier, fidèles à votre image.</p></details></li>
+          <li><details><summary data-en="Print &amp; editorial">Print &amp; édition</summary><p data-en="Cards, brochures and polished printed materials.">Cartes, brochures et supports imprimés soignés.</p></details></li>
+          <li><details><summary data-en="Art direction">Direction artistique</summary><p data-en="A clear visual direction to guide every project.">Une direction visuelle claire pour guider tous vos projets.</p></details></li>
         </ul>
-        <p class="one">Une image qui marque avant qu'on lise un mot.</p>
+        <p class="one" data-en="An image that lands before a word is read.">Une image qui marque avant qu'on lise un mot.</p>
       </div>
     </div>
   </div>
@@ -134,13 +135,13 @@
   <div class="wrap">
     <div class="coll-top">
       <div class="reveal">
-        <span class="module">003 · PROJETS</span>
-        <h2 class="h-lg"><span class="tg">Spécimens.</span></h2>
+        <span class="module" data-en="003 · PROJECTS">003 · PROJETS</span>
+        <h2 class="h-lg"><span class="tg" data-en="Specimens.">Spécimens.</span></h2>
       </div>
       <div class="filters reveal" id="filters">
-        <button class="filter active" data-filter="all">Tout</button>
-        <button class="filter" data-filter="web">Web</button>
-        <button class="filter" data-filter="image">Image</button>
+        <button class="filter active" data-filter="all" data-en="All">Tout</button>
+        <button class="filter" data-filter="web" data-en="Web">Web</button>
+        <button class="filter" data-filter="image" data-en="Image">Image</button>
       </div>
     </div>
 
@@ -149,12 +150,12 @@
         <a class="spec-link" href="projet/green-poya.html">
           <div class="spec-img corner">
             <img loading="lazy" decoding="async" src="img/projects/green-poya/5.webp" alt="Green Poya">
-            <span class="spec-idx">001</span><span class="spec-tag">Identité</span>
+            <span class="spec-idx">001</span><span class="spec-tag" data-en="Identity">Identité</span>
           </div>
           <div class="spec-body">
             <h3>Green Poya</h3>
-            <p class="spec-find">Identité de marque pour un resort, restaurant et spa de luxe à Lombok.</p>
-            <div class="spec-more">Voir le projet →</div>
+            <p class="spec-find" data-en="Brand identity for a luxury resort, restaurant and spa in Lombok.">Identité de marque pour un resort, restaurant et spa de luxe à Lombok.</p>
+            <div class="spec-more" data-en="View project →">Voir le projet →</div>
           </div>
         </a>
       </article>
@@ -167,8 +168,8 @@
           </div>
           <div class="spec-body">
             <h3>Terra Home</h3>
-            <p class="spec-find">Refonte du site d'une marque de mobilier et de décoration.</p>
-            <div class="spec-more">Voir le projet →</div>
+            <p class="spec-find" data-en="Website redesign for a furniture and décor brand.">Refonte du site d'une marque de mobilier et de décoration.</p>
+            <div class="spec-more" data-en="View project →">Voir le projet →</div>
           </div>
         </a>
       </article>
@@ -181,8 +182,8 @@
           </div>
           <div class="spec-body">
             <h3>Amber</h3>
-            <p class="spec-find">Conception du logo d'une carte de crédit moderne et épurée.</p>
-            <div class="spec-more">Voir le projet →</div>
+            <p class="spec-find" data-en="Logo design for a modern, minimal credit card.">Conception du logo d'une carte de crédit moderne et épurée.</p>
+            <div class="spec-more" data-en="View project →">Voir le projet →</div>
           </div>
         </a>
       </article>
@@ -195,8 +196,8 @@
           </div>
           <div class="spec-body">
             <h3>Intel & BAB</h3>
-            <p class="spec-find">Boutique e-commerce pour la vente de mini-PC NUC et accessoires.</p>
-            <div class="spec-more">Voir le projet →</div>
+            <p class="spec-find" data-en="E-commerce store selling NUC mini-PCs and accessories.">Boutique e-commerce pour la vente de mini-PC NUC et accessoires.</p>
+            <div class="spec-more" data-en="View project →">Voir le projet →</div>
           </div>
         </a>
       </article>
@@ -209,8 +210,8 @@
           </div>
           <div class="spec-body">
             <h3>Hama</h3>
-            <p class="spec-find">Système de marque et palette flexible pour un géant de la tech.</p>
-            <div class="spec-more">Voir le projet →</div>
+            <p class="spec-find" data-en="Brand system and flexible palette for a tech giant.">Système de marque et palette flexible pour un géant de la tech.</p>
+            <div class="spec-more" data-en="View project →">Voir le projet →</div>
           </div>
         </a>
       </article>
@@ -219,12 +220,12 @@
         <a class="spec-link" href="projet/biotec.html">
           <div class="spec-img corner">
             <img loading="lazy" decoding="async" src="img/projects/biotec/1.webp" alt="Biotec">
-            <span class="spec-idx">006</span><span class="spec-tag">Rebranding</span>
+            <span class="spec-idx">006</span><span class="spec-tag" data-en="Rebranding">Rebranding</span>
           </div>
           <div class="spec-body">
             <h3>Biotec</h3>
-            <p class="spec-find">Rebranding et refonte de site pour une marque éco-responsable.</p>
-            <div class="spec-more">Voir le projet →</div>
+            <p class="spec-find" data-en="Rebrand and website redesign for an eco-friendly brand.">Rebranding et refonte de site pour une marque éco-responsable.</p>
+            <div class="spec-more" data-en="View project →">Voir le projet →</div>
           </div>
         </a>
       </article>
@@ -237,19 +238,19 @@
  <div class="fiche-scroll" id="ficheScroll">
   <div class="fiche-sticky">
    <div class="wrap">
-    <span class="module">004 · EXPÉRIMENTATION LIVE</span>
+    <span class="module" data-en="004 · LIVE EXPERIMENT">004 · EXPÉRIMENTATION LIVE</span>
     <div class="fiche-grid" data-step="0">
      <div class="reaction-pin">
       <div class="reaction corner" id="reaction">
         <div class="rtop">
-          <span class="rlabel">Exemple · identité de marque</span>
-          <span class="rprog">Étape <b id="rstep">01</b>/05</span>
+          <span class="rlabel" data-en="Example · brand identity">Exemple · identité de marque</span>
+          <span class="rprog"><span data-en="Step">Étape</span> <b id="rstep">01</b>/05</span>
         </div>
         <div class="reaction-stage">
           <div class="grid-underlay" aria-hidden="true"></div>
           <div class="r-word"><span class="wa">OUTMIND</span><span class="wb">LABS</span></div>
         </div>
-        <div class="r-stamp" aria-hidden="true">SIGNÉ</div>
+        <div class="r-stamp" aria-hidden="true" data-en="SIGNED">SIGNÉ</div>
         <div class="rlogline" id="rlog">Brouillon</div>
         <div class="swatches">
           <span class="sw" style="--sw:#00c49a"></span>
@@ -258,25 +259,25 @@
           <span class="sw" style="--sw:#ff0055"></span>
         </div>
         <div class="rfoot">
-          <span class="rhint">défilez pour lancer la réaction ↓</span>
-          <button class="btn btn-outline" id="reactBtn">Relancer la réaction</button>
+          <span class="rhint" data-en="scroll to start the reaction ↓">défilez pour lancer la réaction ↓</span>
+          <button class="btn btn-outline" id="reactBtn" data-en="Replay the reaction">Relancer la réaction</button>
         </div>
       </div>
      </div>
 
       <div class="fiche-meta">
         <ul class="metatable">
-          <li><span>Discipline</span><span>Image de marque</span></li>
-          <li><span>Année</span><span>2025</span></li>
-          <li><span>Livrables</span><span>Logo · Charte · Social · Papeterie</span></li>
-          <li><span>Outils</span><span>Grille + obsession</span></li>
-          <li><span>Résultat</span><span>Reconnaissable à 3 m</span></li>
+          <li><span data-en="Discipline">Discipline</span><span data-en="Brand identity">Image de marque</span></li>
+          <li><span data-en="Year">Année</span><span>2025</span></li>
+          <li><span data-en="Deliverables">Livrables</span><span data-en="Logo · Guidelines · Social · Stationery">Logo · Charte · Social · Papeterie</span></li>
+          <li><span data-en="Tools">Outils</span><span data-en="Grid + obsession">Grille + obsession</span></li>
+          <li><span data-en="Result">Résultat</span><span data-en="Recognizable at 3 m">Reconnaissable à 3 m</span></li>
         </ul>
-        <p class="fiche-note">« Je construis des systèmes de marque, pas des études de cas pour leurs concurrents. »</p>
+        <p class="fiche-note" data-en="“I build brand systems, not case studies for their competitors.”">« Je construis des systèmes de marque, pas des études de cas pour leurs concurrents. »</p>
         <div class="typekit">
-          <div class="row"><span class="name k1">Syne</span><span class="tag">Titrage</span></div>
-          <div class="row"><span class="name k2">Inter</span><span class="tag">Lecture</span></div>
-          <div class="row"><span class="name k3">Space Mono</span><span class="tag">Instrumentation</span></div>
+          <div class="row"><span class="name k1">Syne</span><span class="tag" data-en="Display">Titrage</span></div>
+          <div class="row"><span class="name k2">Inter</span><span class="tag" data-en="Reading">Lecture</span></div>
+          <div class="row"><span class="name k3">Space Mono</span><span class="tag" data-en="Instrumentation">Instrumentation</span></div>
           <div class="palette">
             <span class="chip" style="--cc:#00c49a;--ct:#04231c">#00C49A</span>
             <span class="chip" style="--cc:#99EFD1;--ct:#04231c">#99EFD1</span>
@@ -295,53 +296,46 @@
 <section class="section section--light" id="prelevements" data-nav="light">
   <div class="wrap">
     <div class="assay-intro reveal">
-      <span class="module">005 · OFFRES</span>
-      <h2 class="h-lg">Ce que je <span class="tg">propose.</span></h2>
-      <p class="lead" style="margin-top:18px;">Quatre formules simples, deux disciplines, une seule personne en face de vous.</p>
+      <span class="module" data-en="005 · OFFERS">005 · OFFRES</span>
+      <h2 class="h-lg" data-en="What I <span class='tg'>offer.</span>">Ce que je <span class="tg">propose.</span></h2>
+      <p class="lead" style="margin-top:18px;" data-en="Three simple options, two disciplines, one person across from you.">Trois formules simples, deux disciplines, une seule personne en face de vous.</p>
     </div>
     <div class="assay-grid">
       <div class="assay reveal">
-        <span class="code">01 · Landing</span>
-        <h3>Page qui convertit</h3>
+        <span class="code">01 · Web</span>
+        <h3 data-en="A site that converts">Un site qui convertit</h3>
         <ul>
-          <li>Page unique</li>
-          <li>Copie orientée conversion</li>
-          <li>Intégration</li>
+          <li data-en="Showcase or landing">Vitrine ou landing</li>
+          <li data-en="Custom design">Design sur mesure</li>
+          <li data-en="Fast &amp; optimized">Rapide &amp; optimisé</li>
+          <li data-en="Built to convert">Pensé pour convertir</li>
         </ul>
-        <span class="delai">Délai : court</span>
+        <span class="delai" data-en="Timeline: short to medium">Délai : court à moyen</span>
       </div>
       <div class="assay reveal">
-        <span class="code">02 · Identité &amp; Image de Marque</span>
-        <h3>Une marque entière</h3>
+        <span class="code" data-en="02 · Identity &amp; Branding">02 · Identité &amp; Image de Marque</span>
+        <h3 data-en="A whole brand">Une marque entière</h3>
         <ul>
-          <li>Logo + logotype</li>
-          <li>Charte complète</li>
-          <li>Templates social</li>
-          <li>Déclinaisons print</li>
+          <li data-en="Logo + logotype">Logo + logotype</li>
+          <li data-en="Full guidelines">Charte complète</li>
+          <li data-en="Social templates">Templates social</li>
+          <li data-en="Print variations">Déclinaisons print</li>
         </ul>
-        <span class="delai">Délai : moyen</span>
+        <span class="delai" data-en="Timeline: medium">Délai : moyen</span>
       </div>
-      <div class="assay reveal">
-        <span class="code">03 · Site Complet</span>
-        <h3>Le site total</h3>
+      <div class="assay assay--wide reveal">
+        <span class="code" data-en="03 · Web system">03 · Système web</span>
+        <h3 data-en="Custom &amp; technical">Sur mesure &amp; technique</h3>
+        <p class="assay-lead" data-en="When a showcase site isn't enough: applications, configurators, advanced e-commerce and AI features, built to last.">Quand un site vitrine ne suffit pas : applications, configurateurs, e-commerce avancé et fonctionnalités IA, construits pour durer.</p>
         <ul>
-          <li>Architecture</li>
-          <li>Design sur mesure</li>
-          <li>Dév + perf</li>
-          <li>SEO de base</li>
+          <li data-en="Product configurator">Configurateur produit</li>
+          <li data-en="Advanced e-commerce">E-commerce avancé</li>
+          <li data-en="AI features">Fonctionnalités IA</li>
+          <li data-en="Integrations &amp; APIs">Intégrations &amp; API</li>
+          <li data-en="App &amp; back-office">App &amp; back-office</li>
+          <li data-en="Automations">Automatisations</li>
         </ul>
-        <span class="delai">Délai : moyen</span>
-      </div>
-      <div class="assay reveal">
-        <span class="code">04 · Système web</span>
-        <h3>Sur mesure &amp; technique</h3>
-        <ul>
-          <li>Configurateur produit</li>
-          <li>E-commerce avancé</li>
-          <li>Fonctionnalités IA</li>
-          <li>Intégrations &amp; API</li>
-        </ul>
-        <span class="delai">Délai : sur devis</span>
+        <span class="delai" data-en="Timeline: on quote">Délai : sur devis</span>
       </div>
     </div>
   </div>
@@ -350,25 +344,25 @@
 <!-- ═══ 006 · RAPPORTS ═══ -->
 <section class="section section--dark" id="rapports" data-nav="dark">
   <div class="wrap">
-    <span class="module reveal">006 · AVIS</span>
-    <h2 class="h-lg reveal" style="color:#fff;margin-bottom:44px;">Ce qu'en disent<br>mes <span class="tg">clients.</span></h2>
+    <span class="module reveal" data-en="006 · REVIEWS">006 · AVIS</span>
+    <h2 class="h-lg reveal" style="color:#fff;margin-bottom:44px;" data-en="What my clients<br><span class='tg'>say.</span>">Ce qu'en disent<br>mes <span class="tg">clients.</span></h2>
     <div class="rap-grid">
       <div class="rap reveal">
-        <div class="rhead"><span>Avis vérifié</span><span>Web</span></div>
-        <p class="quote">« On a refait notre site avec Noah et honnêtement on aurait dû s'y mettre plus tôt. Il est sérieux, à l'écoute, et on reçoit nettement plus de demandes qu'avant. Je recommande. »</p>
-        <div class="attrib">Sophie, gérante de <span class="redact" aria-label="nom de l'entreprise masqué">███████</span></div>
+        <div class="rhead"><span data-en="Verified review">Avis vérifié</span><span>Web</span></div>
+        <p class="quote" data-en="“We rebuilt our site with Noah and honestly we should have done it sooner. He's serious, attentive, and we get noticeably more enquiries than before. Highly recommend.”">« On a refait notre site avec Noah et honnêtement on aurait dû s'y mettre plus tôt. Il est sérieux, à l'écoute, et on reçoit nettement plus de demandes qu'avant. Je recommande. »</p>
+        <div class="attrib" data-en="Sophie, manager at <span class='redact' aria-label='company name hidden'>███████</span>">Sophie, gérante de <span class="redact" aria-label="nom de l'entreprise masqué">███████</span></div>
         <div class="reading">5 / 5</div>
       </div>
       <div class="rap reveal">
-        <div class="rhead"><span>Avis vérifié</span><span>Image</span></div>
-        <p class="quote">« Très réactif et professionnel. Le logo et l'identité collent exactement à ce qu'on voulait, ça fait beaucoup plus pro. On repart avec lui pour les visuels des réseaux. »</p>
-        <div class="attrib">Karim, fondateur de <span class="redact" aria-label="nom de l'entreprise masqué">██████</span></div>
+        <div class="rhead"><span data-en="Verified review">Avis vérifié</span><span>Image</span></div>
+        <p class="quote" data-en="“Very responsive and professional. The logo and identity match exactly what we wanted, it looks far more pro. We're going back to him for our social visuals.”">« Très réactif et professionnel. Le logo et l'identité collent exactement à ce qu'on voulait, ça fait beaucoup plus pro. On repart avec lui pour les visuels des réseaux. »</p>
+        <div class="attrib" data-en="Karim, founder of <span class='redact' aria-label='company name hidden'>██████</span>">Karim, fondateur de <span class="redact" aria-label="nom de l'entreprise masqué">██████</span></div>
         <div class="reading">5 / 5</div>
       </div>
       <div class="rap reveal">
-        <div class="rhead"><span>Avis vérifié</span><span>Web</span></div>
-        <p class="quote">« Travail propre et livré dans les délais annoncés. Bon rapport qualité-prix pour un indépendant, rien à redire. »</p>
-        <div class="attrib">Thomas, gérant de <span class="redact" aria-label="nom de l'entreprise masqué">█████</span></div>
+        <div class="rhead"><span data-en="Verified review">Avis vérifié</span><span>Web</span></div>
+        <p class="quote" data-en="“Clean work, delivered on the promised deadline. Great value for a freelancer, nothing to fault.”">« Travail propre et livré dans les délais annoncés. Bon rapport qualité-prix pour un indépendant, rien à redire. »</p>
+        <div class="attrib" data-en="Thomas, manager at <span class='redact' aria-label='company name hidden'>█████</span>">Thomas, gérant de <span class="redact" aria-label="nom de l'entreprise masqué">█████</span></div>
         <div class="reading">5 / 5</div>
       </div>
     </div>
@@ -378,21 +372,21 @@
 <!-- ═══ 007 · DEMANDE D'ACCÈS ═══ -->
 <section class="section section--light" id="demande" data-nav="light">
   <div class="wrap">
-    <span class="module reveal">007 · CONTACT</span>
+    <span class="module reveal" data-en="007 · CONTACT">007 · CONTACT</span>
     <div class="acc-grid">
       <!-- Left: the pitch + how it works + direct contact -->
       <div class="acc-info reveal">
-        <h2 class="h-lg">Parlons de votre <span class="tg">projet.</span></h2>
-        <p class="acc-note">Un appel de 20 min. Pas de jargon, pas de pitch forcé.</p>
+        <h2 class="h-lg" data-en="Let's talk about your <span class='tg'>project.</span>">Parlons de votre <span class="tg">projet.</span></h2>
+        <p class="acc-note" data-en="A 20-min call. No jargon, no hard sell.">Un appel de 20 min. Pas de jargon, pas de pitch forcé.</p>
         <div class="acc-steps">
-          <div class="acc-step"><span class="n">01</span><div><b>On échange</b><span>20 min pour faire le point.</span></div></div>
-          <div class="acc-step"><span class="n">02</span><div><b>On cadre le projet</b><span>Objectifs, périmètre, délais.</span></div></div>
-          <div class="acc-step"><span class="n">03</span><div><b>Je passe en production</b><span>Vous suivez l'avancée.</span></div></div>
+          <div class="acc-step"><span class="n">01</span><div><b data-en="We talk">On échange</b><span data-en="20 min to take stock.">20 min pour faire le point.</span></div></div>
+          <div class="acc-step"><span class="n">02</span><div><b data-en="We frame the project">On cadre le projet</b><span data-en="Goals, scope, timeline.">Objectifs, périmètre, délais.</span></div></div>
+          <div class="acc-step"><span class="n">03</span><div><b data-en="I start building">Je passe en production</b><span data-en="You follow the progress.">Vous suivez l'avancée.</span></div></div>
         </div>
         <div class="acc-direct">
-          <p>Pas fan des formulaires ? Écrivez-moi, je réponds vite.</p>
+          <p data-en="Not a fan of forms? Email me, I reply fast.">Pas fan des formulaires ? Écrivez-moi, je réponds vite.</p>
           <a href="mailto:noah@outmindlabs.com">noah@outmindlabs.com</a>
-          <div class="mono">Réponse sous 24 h · Fribourg</div>
+          <div class="mono" data-en="Response within 24 h · Fribourg">Réponse sous 24 h · Fribourg</div>
         </div>
       </div>
 
@@ -404,26 +398,26 @@
           <input type="hidden" name="from_name" value="OutMindLabs">
           <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none !important;position:absolute;left:-9999px">
           <div class="form-row">
-            <label for="f-nom">Nom</label>
-            <input type="text" id="f-nom" name="nom" placeholder="Votre nom" required>
+            <label for="f-nom" data-en="Name">Nom</label>
+            <input type="text" id="f-nom" name="nom" placeholder="Votre nom" data-en-ph="Your name" required>
           </div>
           <div class="form-row">
-            <label for="f-email">Email</label>
-            <input type="email" id="f-email" name="email" placeholder="vous@exemple.com" required>
+            <label for="f-email" data-en="Email">Email</label>
+            <input type="email" id="f-email" name="email" placeholder="vous@exemple.com" data-en-ph="you@example.com" required>
           </div>
           <div class="form-row">
-            <label for="f-disc">Type de projet</label>
+            <label for="f-disc" data-en="Project type">Type de projet</label>
             <select id="f-disc" name="discipline">
-              <option>Site web</option>
-              <option>Identité &amp; design graphique</option>
-              <option>Les deux</option>
+              <option data-en="Website">Site web</option>
+              <option data-en="Identity &amp; graphic design">Identité &amp; design graphique</option>
+              <option data-en="Both">Les deux</option>
             </select>
           </div>
           <div class="form-row">
-            <label for="f-goal">Votre projet en deux mots</label>
-            <textarea id="f-goal" name="objectif" placeholder="Un site qui convertit, une identité, une refonte..."></textarea>
+            <label for="f-goal" data-en="Your project in a few words">Votre projet en deux mots</label>
+            <textarea id="f-goal" name="objectif" placeholder="Un site qui convertit, une identité, une refonte..." data-en-ph="A site that converts, an identity, a redesign..."></textarea>
           </div>
-          <button type="submit" class="btn btn-solid">Envoyer</button>
+          <button type="submit" class="btn btn-solid" data-en="Send">Envoyer</button>
         </form>
       </div>
     </div>
@@ -434,18 +428,18 @@
 <footer class="section section--dark cloture" id="cloture" data-nav="dark">
   <div class="cloture-glow"></div>
   <div class="wrap">
-    <h2 class="h-lg reveal">Ajoutons votre projet<br>au <span class="tg">corpus.</span></h2>
+    <h2 class="h-lg reveal" data-en="Let's add your project<br>to the <span class='tg'>corpus.</span>">Ajoutons votre projet<br>au <span class="tg">corpus.</span></h2>
     <div class="bigmark reveal"><span>OUTMIND</span><b>LABS</b></div>
     <div class="foot-hair"></div>
-    <p class="colophon reveal">
+    <p class="colophon reveal" data-en="OutMindLabs Archive · Web + Image · Ed. 2026 · Fribourg (CET)<br>Design lab &amp; archive<br><a href='mailto:noah@outmindlabs.com'>noah@outmindlabs.com</a> · © 2026 OutMindLabs">
       Fonds OutMindLabs · Web + Image · Éd. 2026 · Fribourg (CET)<br>
       Laboratoire &amp; archive de design<br>
       <a href="mailto:noah@outmindlabs.com">noah@outmindlabs.com</a> · © 2026 OutMindLabs
     </p>
     <nav class="foot-nav reveal">
-      <a href="#vitrine">Accueil</a>
-      <a href="legal/mentions-legales.html">Mentions légales</a>
-      <a href="legal/confidentialite.html">Confidentialité</a>
+      <a href="#vitrine" data-en="Home">Accueil</a>
+      <a href="legal/mentions-legales.html" data-en="Legal notice">Mentions légales</a>
+      <a href="legal/confidentialite.html" data-en="Privacy">Confidentialité</a>
       <a href="https://www.linkedin.com/in/noahthevoz" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://www.instagram.com/outmindlabs" target="_blank" rel="noopener">Instagram</a>
     </nav>

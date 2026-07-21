@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap');
 
 /* ═══════════════════════════════════════════════════════════
-   OUTMINDLABS — L'ARCHIVE
+   OUTMINDLABS - L'ARCHIVE
    A specimen archive. Black/white/grey base · mint signature ·
    pink used in exactly one place (redaction). Mono = data only.
    ═══════════════════════════════════════════════════════════ */
@@ -36,7 +36,7 @@
   --ease-io: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* overflow-x: clip (not hidden) — hidden creates a scroll container that
+/* overflow-x: clip (not hidden) - hidden creates a scroll container that
    breaks position: sticky in the fiche section */
 html { scroll-behavior: smooth; overflow-x: clip; }
 
@@ -67,7 +67,7 @@ a { text-decoration: none; color: inherit; }
 img { display: block; max-width: 100%; }
 button { font: inherit; cursor: pointer; }
 
-/* Keyboard focus — visible everywhere; dark ink on light/mint, mint on dark */
+/* Keyboard focus - visible everywhere; dark ink on light/mint, mint on dark */
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 1px; }
 .section--light :focus-visible,
 .section--mint :focus-visible,
@@ -102,7 +102,7 @@ body.cur-hover #cur-ring { width: 54px; height: 54px; opacity: .9; }
   display: inline-block;
   margin-bottom: 22px;
 }
-/* mint accent fails contrast on cream — darken mono labels on light */
+/* mint accent fails contrast on cream - darken mono labels on light */
 .section--light .module,
 .assay .code,
 .protocole .ptitle { color: var(--accent-ink); }
@@ -117,7 +117,7 @@ body.cur-hover #cur-ring { width: 54px; height: 54px; opacity: .9; }
 .h-lg { font-size: clamp(32px, 4.6vw, 60px); text-wrap: balance; }
 .h-md { font-size: clamp(22px, 2.4vw, 30px); font-weight: 700; text-wrap: balance; }
 .lead { font-family: var(--font-body); font-weight: 300; font-size: clamp(16px, 1.5vw, 19px); line-height: 1.65; color: var(--muted); }
-/* nicer body wrapping — avoids orphans and short last lines */
+/* nicer body wrapping - avoids orphans and short last lines */
 p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty; }
 .section--dark .lead { color: var(--dim); }
 .tg {
@@ -184,7 +184,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .link-ghost { font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); transition: color .3s; }
 .link-ghost:hover { color: var(--accent); }
 
-/* redaction — the ONLY pink */
+/* redaction - the ONLY pink */
 .redact {
   display: inline-block; background: var(--pink); color: var(--pink);
   font-family: var(--font-mono); font-weight: 700; font-size: 0.78em;
@@ -214,6 +214,11 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .nav-status { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
 .nav-status .led { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
 .nav-toggle { display: none; background: none; border: 1px solid currentColor; border-radius: 2px; padding: 7px 12px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: inherit; }
+.nav-actions { display: flex; align-items: center; gap: 12px; }
+.lang-toggle { background: none; border: 1px solid currentColor; border-radius: 2px; padding: 7px 11px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: inherit; opacity: .72; cursor: pointer; transition: opacity .25s, color .25s, border-color .25s; }
+.lang-toggle:hover { opacity: 1; color: var(--accent); border-color: var(--accent); }
+.nav--light .lang-toggle:hover { color: var(--accent-ink); border-color: var(--accent-ink); }
+.sub-nav .lang-toggle { color: var(--ink); }
 
 /* ═══════════════ 000 · LA PAILLASSE (design lab bench) ═══════════════ */
 .hero {
@@ -459,6 +464,11 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .assay li { font-family: var(--font-body); font-size: 14px; color: var(--muted); padding: 8px 0; border-bottom: 1px solid var(--hair-light); }
 .assay li::before { content: '+ '; font-family: var(--font-mono); color: var(--accent-ink); font-weight: 700; }
 .assay .delai { font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); }
+/* the technical offer spans two columns */
+.assay--wide { grid-column: span 2; }
+.assay--wide .assay-lead { font-family: var(--font-body); font-size: 15px; line-height: 1.55; color: var(--muted); margin-bottom: 20px; max-width: 46ch; }
+.assay--wide ul { column-count: 2; column-gap: 40px; }
+.assay--wide li { break-inside: avoid; }
 
 /* ═══════════════ 006 · RAPPORTS ═══════════════ */
 .rap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -570,6 +580,8 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
   .section { padding: 76px 18px; }
   .spec-grid { grid-template-columns: 1fr; }
   .assay-grid { grid-template-columns: 1fr; }
+  .assay--wide { grid-column: auto; }
+  .assay--wide ul { column-count: 1; }
   .hero { padding: 110px 18px 70px; }
   .hero .h-xl { font-size: clamp(28px, 11.5vw, 46px); }   /* smaller, with margin so 'ON MÉLANGE.' never clips */
   .cta-float { right: 16px; bottom: 16px; padding: 12px 18px; font-size: 11px; }

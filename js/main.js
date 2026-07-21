@@ -1,9 +1,40 @@
-/* OutMindLabs — L'Archive */
+/* OutMindLabs - L'Archive */
 (function () {
   'use strict';
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  /* ── Language toggle (FR / EN) ─────────────────── */
+  // Swaps [data-en] innerHTML and [data-en-ph] placeholders; captures the
+  // French original into data-fr the first time so it can toggle back.
+  var LANG = 'fr';
+  (function () {
+    try { LANG = localStorage.getItem('oml-lang') || 'fr'; } catch (e) { LANG = 'fr'; }
+    var toggle = document.getElementById('langToggle');
+    function apply(l) {
+      LANG = (l === 'en') ? 'en' : 'fr';
+      document.documentElement.setAttribute('lang', LANG);
+      var nodes = document.querySelectorAll('[data-en]');
+      for (var i = 0; i < nodes.length; i++) {
+        var el = nodes[i];
+        if (!el.hasAttribute('data-fr')) el.setAttribute('data-fr', el.innerHTML);
+        el.innerHTML = (LANG === 'en') ? el.getAttribute('data-en') : el.getAttribute('data-fr');
+      }
+      var ph = document.querySelectorAll('[data-en-ph]');
+      for (var j = 0; j < ph.length; j++) {
+        var pe = ph[j];
+        if (!pe.hasAttribute('data-fr-ph')) pe.setAttribute('data-fr-ph', pe.getAttribute('placeholder') || '');
+        pe.setAttribute('placeholder', (LANG === 'en') ? pe.getAttribute('data-en-ph') : pe.getAttribute('data-fr-ph'));
+      }
+      if (toggle) toggle.textContent = (LANG === 'en') ? 'FR' : 'EN';
+      try { localStorage.setItem('oml-lang', LANG); } catch (e) {}
+      window.dispatchEvent(new CustomEvent('oml:lang'));
+      window.dispatchEvent(new Event('resize'));   // let the hero title re-fit
+    }
+    if (toggle) toggle.addEventListener('click', function () { apply(LANG === 'en' ? 'fr' : 'en'); });
+    apply(LANG);
+  })();
 
   // Shared cursor position (viewport space)
   var CX = null, CY = null;
@@ -178,7 +209,7 @@
 
   /* ── Hero title: fit to width ──────────────────── */
   // Lines are nowrap (so the title is always 3 lines). This shrinks the font
-  // just enough that the widest line fits — measured with the real font on
+  // just enough that the widest line fits - measured with the real font on
   // the real device, so it can never overflow/clip regardless of rendering.
   (function () {
     var h1 = document.querySelector('.hero .h-xl');
@@ -216,11 +247,19 @@
   (function () {
     var track = document.getElementById('scelle');
     if (!track) return;
-    var items = ['PIÈCE À CONVICTION', 'FAIT PAR UN HUMAIN', "CTRL+Z C'EST POUR LES LÂCHES",
+    var FR = ['PIÈCE À CONVICTION', 'FAIT PAR UN HUMAIN', "CTRL+Z C'EST POUR LES LÂCHES",
       'CONSERVÉ SOUS VERRE', 'VOS CONCURRENTS SONT AU SOUS-SOL',
       'JE FAIS UNE OBSESSION SUR LES PIXELS', "CE N'EST PAS DE LA SCIENCE-FICTION"];
-    var set = items.map(function (t) { return '<span>' + t + '</span><span class="plus">+</span>'; }).join('');
-    track.innerHTML = set + set;
+    var EN = ['EXHIBIT A', 'MADE BY A HUMAN', 'CTRL+Z IS FOR COWARDS',
+      'KEPT UNDER GLASS', 'YOUR COMPETITORS ARE IN THE BASEMENT',
+      'I OBSESS OVER PIXELS', "IT'S NOT SCIENCE-FICTION"];
+    function build() {
+      var items = LANG === 'en' ? EN : FR;
+      var set = items.map(function (t) { return '<span>' + t + '</span><span class="plus">+</span>'; }).join('');
+      track.innerHTML = set + set;
+    }
+    build();
+    window.addEventListener('oml:lang', build);
   })();
 
   /* ── Nav: theme by section, scroll-spy, mobile ── */
@@ -310,9 +349,12 @@
     var stepEl = document.getElementById('rstep');
     var logEl = document.getElementById('rlog');
     var btn = document.getElementById('reactBtn');
-    var LOG = ['Brouillon', 'Grille', 'Mise en forme', 'Couleur', 'Signé'];
-    var N = LOG.length;
+    var LOG_FR = ['Brouillon', 'Grille', 'Mise en forme', 'Couleur', 'Signé'];
+    var LOG_EN = ['Draft', 'Grid', 'Layout', 'Color', 'Signed'];
+    var N = LOG_FR.length;
     var cur = -1;
+
+    function logText(n) { return (LANG === 'en' ? LOG_EN : LOG_FR)[n]; }
 
     function setStep(n) {
       n = n < 0 ? 0 : n > N - 1 ? N - 1 : n;
@@ -320,8 +362,11 @@
       cur = n;
       grid.dataset.step = n;
       if (stepEl) stepEl.textContent = ('0' + (n + 1)).slice(-2);
-      if (logEl) logEl.textContent = LOG[n];
+      if (logEl) logEl.textContent = logText(n);
     }
+
+    // re-render the current log line when the language changes
+    window.addEventListener('oml:lang', function () { if (cur >= 0 && logEl) logEl.textContent = logText(cur); });
 
     if (reduce) { mod.classList.add('mode-static'); setStep(N - 1); return; }
 
@@ -343,7 +388,7 @@
           var pp;
           if (pin && window.innerWidth <= 900) {
             // mobile: start the reaction as soon as it scrolls into the lower
-            // part of the screen and finish it just as it locks to the top —
+            // part of the screen and finish it just as it locks to the top -
             // so it reads as interactive right away, not a static black panel.
             var wr = pin.getBoundingClientRect();
             var vh = window.innerHeight;
@@ -417,19 +462,16 @@
     var wrap = document.getElementById('formWrap');
 
     function success() {
-      wrap.innerHTML =
-        '<div class="acc-success">' +
-        '<div class="mark">OK</div>' +
-        '<h3>Message reçu</h3>' +
-        '<p>Merci ! Je reviens vers vous sous 24 h.</p>' +
-        '</div>';
+      wrap.innerHTML = LANG === 'en'
+        ? '<div class="acc-success"><div class="mark">OK</div><h3>Message received</h3><p>Thanks! I get back to you within 24 h.</p></div>'
+        : '<div class="acc-success"><div class="mark">OK</div><h3>Message reçu</h3><p>Merci ! Je reviens vers vous sous 24 h.</p></div>';
     }
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var btn = form.querySelector('button[type="submit"]');
       var label = btn ? btn.textContent : '';
-      if (btn) { btn.disabled = true; btn.textContent = 'Envoi…'; }
+      if (btn) { btn.disabled = true; btn.textContent = LANG === 'en' ? 'Sending…' : 'Envoi…'; }
 
       var err = form.querySelector('.form-error');
       if (err) err.remove();
@@ -449,10 +491,12 @@
     });
 
     function fail(btn, label, detail) {
-      if (btn) { btn.disabled = false; btn.textContent = label || 'Envoyer'; }
+      if (btn) { btn.disabled = false; btn.textContent = label || (LANG === 'en' ? 'Send' : 'Envoyer'); }
       var p = document.createElement('p');
       p.className = 'form-error';
-      p.textContent = 'Échec de l’envoi. Réessayez, ou écrivez-moi à noah@outmindlabs.com.'
+      p.textContent = (LANG === 'en'
+        ? 'Send failed. Try again, or email me at noah@outmindlabs.com.'
+        : 'Échec de l’envoi. Réessayez, ou écrivez-moi à noah@outmindlabs.com.')
         + (detail ? ' (' + detail + ')' : '');
       form.appendChild(p);
     }
