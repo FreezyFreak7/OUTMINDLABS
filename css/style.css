@@ -219,6 +219,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 .lang-toggle:hover { opacity: 1; color: var(--accent); border-color: var(--accent); }
 .nav--light .lang-toggle:hover { color: var(--accent-ink); border-color: var(--accent-ink); }
 .sub-nav .lang-toggle { color: var(--ink); }
+.sub-nav-right { display: flex; align-items: center; gap: 14px; }
 
 /* ═══════════════ 000 · LA PAILLASSE (design lab bench) ═══════════════ */
 .hero {
