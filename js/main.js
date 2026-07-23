@@ -387,13 +387,14 @@
           ticking = false;
           var pp;
           if (pin && window.innerWidth <= 900) {
-            // mobile: start the reaction as soon as it scrolls into the lower
-            // part of the screen and finish it just as it locks to the top -
-            // so it reads as interactive right away, not a static black panel.
+            // mobile: start as the reaction scrolls into the lower screen and
+            // finish just before it unpins, so the animation spans the whole
+            // pinned stretch (no long "nothing happens" tail before exiting).
             var wr = pin.getBoundingClientRect();
             var vh = window.innerHeight;
+            var pinEnd = STICKY_TOP - (pin.offsetHeight - mod.offsetHeight);
             var from = vh * 0.72;               // pp = 0 (reaction entering view)
-            var to = STICKY_TOP - vh * 0.12;    // pp = 1 (just after it pins)
+            var to = pinEnd + vh * 0.10;        // pp = 1 (just before it unpins)
             if (from - to <= 0) return;
             pp = (from - wr.top) / (from - to);
           } else {
@@ -404,7 +405,7 @@
             if (total <= 0) return;
             var p = -r.top / total;
             p = p < 0 ? 0 : p > 1 ? 1 : p;
-            var ACT_START = 0.03, ACT_END = 0.5;
+            var ACT_START = 0.04, ACT_END = 0.9;
             pp = (p - ACT_START) / (ACT_END - ACT_START);
           }
           pp = pp < 0 ? 0 : pp > 1 ? 1 : pp;

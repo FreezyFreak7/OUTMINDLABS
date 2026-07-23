@@ -338,7 +338,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
 /* ── scroll-scrub shell ── */
 .fiche { padding: 0; }
 .fiche.section--dark::before { display: none; }         /* grid moves onto the pinned frame */
-.fiche-scroll { position: relative; height: 240vh; }
+.fiche-scroll { position: relative; height: 185vh; }
 .fiche-sticky { position: sticky; top: 0; min-height: 100vh; display: flex; align-items: center; padding: 92px 40px; overflow: hidden; }
 .fiche-sticky::before {
   content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
@@ -563,7 +563,7 @@ p, .lead, .spec-find, .fiche-note, .rap .quote, .cons-body p { text-wrap: pretty
   .fiche-sticky { position: static; min-height: 0; padding: 90px 22px; overflow: visible; }
   /* pin the reaction inside its own spacer so it plays through its steps
      before the meta, without ever scrolling on top of it */
-  .reaction-pin { display: block; min-height: 150vh; }
+  .reaction-pin { display: block; min-height: 120vh; }
   .fiche-grid .reaction { position: sticky; top: 72px; }
   .class-grid { grid-template-columns: 1fr; }
   .spec-grid { grid-template-columns: repeat(2, 1fr); }
